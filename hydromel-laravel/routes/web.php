@@ -12,5 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view("index");
 });
+
+Route::resource('equipe', 'EquipeCtrl');
+// Sinistre
+Route::resource('actualites', 'ActualiteCtrl');
+//Ligne de commande
+Route::resource('sponsors', 'SponsorCtrl');
+//Contrat
+Route::resource('editionprecedente', 'EditionPrecedenteCtrl');

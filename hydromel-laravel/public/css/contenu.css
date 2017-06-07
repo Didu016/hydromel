@@ -1,0 +1,115 @@
+.sectionPage{
+margin-left: 10%;
+}
+
+.sectionAccueil{
+	background-image: url("../img/HydroHEIGBateau.jpg"); 
+	height: 100vh;
+    width: 100%;
+    float: left;
+    position: relative;
+    opacity: 1;
+    display: block;
+    z-index: 2;
+    background-size: cover !important;
+}
+    @keyframes apparition {
+    0%   {opacity: 0}
+    100% {opacity: 1}
+}
+
+.blocDescription{
+    background: rgba(256, 256, 256, 1);
+    height: fit-content;
+    width: fit-content;
+    max-width: 500px;
+    max-height: 700px;
+    margin: 20px;
+    padding: 20px;
+    margin-left: 50%;
+    margin-top: 25%;
+    animation-name:apparition;
+    animation-duration: 1s;
+    color: #333333;
+}
+
+.sectionSponsor{
+    height: fit-content;
+    width: 100%;
+    float: left;
+    background-color: #f9f9f9;
+    z-index: 3;
+    position: relative;
+ 
+}
+.sectionSponsor img{
+    width: 100px;
+    margin: 20px;
+
+}
+.blocSponsor{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between; 
+}
+.blocSponsor article{
+background-color: #fff;
+}
+.sectionArticle{
+    height: 500px;
+    width: 100%;
+    float: left;
+    background-color: #333333;
+    z-index: 3;
+    position: relative;
+}
+#headerEquipe{
+    background-image: url(../img/equipeHydroHeig.jpg);
+    height: 60vh;
+    width: 100%;
+    float: left;
+    background-size: cover !important;
+}
+
+.sectionDescription{
+    width: fit-content;
+    height: fit-content;
+    background-color: #f9f9f9;
+    float: left;
+    padding: 30px;
+}
+
+.sectionMembre{
+    width:100%;
+    float: left;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;    
+}
+.sectionMembre article{
+    background-color: #333333;
+    width: 300px;
+    height: fit-content;
+    margin: 20px;
+    padding: 10px;
+     color:#fff;
+}
+.sectionMembre article p{
+        font-family:'open_bold';
+
+}
+
+.sectionMembre article:hover
+{
+
+    color: #1a3d7f;
+    transition: all 0.5s ease;
+}
+
+
+
+
+
