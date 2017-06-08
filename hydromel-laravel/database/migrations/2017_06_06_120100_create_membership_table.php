@@ -15,7 +15,6 @@ class CreateMembershipTable extends Migration {
         Schema::create('membership', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('group_id')->unsigned();
-            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('group_id')->references('id')->on('groups');
         });

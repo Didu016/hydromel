@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUseTable extends Migration
+class CreateUsageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUseTable extends Migration
      */
     public function up()
     {
-        Schema::create('use', function (Blueprint $table) {
+        Schema::create('usage', function (Blueprint $table) {
             $table->integer('media_id')->unsigned();
             $table->integer('edition_id')->unsigned();
             $table->foreign('media_id')->references('id')->on('medias');
@@ -29,6 +29,6 @@ class CreateUseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('use');
+        Schema::dropIfExists('usage');
     }
 }

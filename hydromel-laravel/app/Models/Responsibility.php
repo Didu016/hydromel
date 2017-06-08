@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Participation extends Model {
-
+class Responsibility extends Model
+{
     public $timestamps = false;
-    protected $table = 'participation';
-
+    protected $table = "responsibilities";
 }
