@@ -12,5 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view("index");
 });
+
+//Equipe
+Route::resource('equipe', 'EquipeCtrl');
+//Actualités
+Route::resource('actualites', 'ActualiteCtrl');
+//Sponsors
+Route::resource('sponsors', 'SponsorCtrl');
+//Edition précédente
+Route::resource('editionprecedente', 'EditionPrecedenteCtrl');
+
+//Authentification
+Route::get('/admin', 'AuthController@login');
+Route::post('/auth/check', 'AuthController@check');
+Route::get('/logout', 'AuthController@login');

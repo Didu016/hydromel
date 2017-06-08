@@ -1,0 +1,48 @@
+@charset "utf-8";
+nav{
+float: left;
+position: fixed;
+height: 100%;
+width: 10%;
+
+}	
+nav ul{ 
+	
+	margin : 0 0 0 0;
+	padding : 0;
+	list-style-type : none; 
+	font-family:'open_bold';
+	color:#F4F3F3;
+	text-transform: uppercase;
+	font-size: 0.8em;
+}
+ 
+nav ul li {
+	margin-top: 30px;
+	width : 100%;
+	text-align:center;
+	float : left;
+}
+
+nav ul a {
+	text-decoration : none;
+	text-align:center;
+	color:#444444;
+}
+
+nav ul a:hover 
+{
+	color:#1a3d7f;
+	transition:0.5s;
+}
+nav ul a:active a:link a:visited
+{
+	text-decoration:none;
+}
+
+#logoAccueil{
+	margin-top: 10px;
+	margin-left: 20%;
+	width: 60%;
+}
+
