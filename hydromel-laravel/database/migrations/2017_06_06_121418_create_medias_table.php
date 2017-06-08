@@ -15,11 +15,11 @@ class CreateMediasTable extends Migration {
         Schema::create('medias', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->text('link')->nullable();
+            $table->text('url')->nullable();
             $table->integer('mediatype_id')->unsigned();
             $table->string('title', 50)->nullable();
             $table->string('legend', 100)->nullable();
-            
+
             $table->foreign('mediatype_id')->references('id')->on('mediatypes');
         });
         DB::statement("ALTER TABLE medias ADD file LONGBLOB");

@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Participation extends Model {
-
+class Sponsoring extends Model
+{
     public $timestamps = false;
-    protected $table = 'participation';
-
+    protected $table = 'sponsoring';
 }
