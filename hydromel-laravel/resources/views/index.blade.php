@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Hydrocontest HEIG-VD</title>
-    <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="{{url("js/jquery-3.2.1.js")}}" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="{{url("css/style.css")}}">
 </head>
 <body>
-@include("menu");
+@include("menu")
 <section class="sectionPage">
     <section class="sectionAccueil">
         <div class="blocDescription">
