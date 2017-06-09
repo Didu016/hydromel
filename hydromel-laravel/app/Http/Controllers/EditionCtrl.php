@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Edition;
+use App\Models\Member;
 
-class EditionPrecedenteCtrl extends Controller
-{
+class EditionCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -21,8 +22,7 @@ class EditionPrecedenteCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -32,8 +32,7 @@ class EditionPrecedenteCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -43,9 +42,8 @@ class EditionPrecedenteCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id) {
+        Edition::exists($id);
     }
 
     /**
@@ -54,8 +52,7 @@ class EditionPrecedenteCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -66,8 +63,7 @@ class EditionPrecedenteCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -77,8 +73,15 @@ class EditionPrecedenteCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
+    public function getDataFromCurrentEdition() {
+        $currentEditionJson = Edition::getCurrentEdition();
+        $previousEditionsJson = Edition::getPreviousEditions();
+
+        return response()->json(['current_edition' => $currentEditionJson, 'previous_editions' => [$previousEditionsJson]]);
+    }
+
 }
