@@ -17,7 +17,8 @@ class Edition extends Model {
     }
 
     public function sponsors() {
-        return $this->belongsToMany('App\Models\Sponsor', 'sponsoring');
+        return $this->belongsToMany('App\Models\Sponsor', 'sponsoring', 'edition_id', 'sponsor_id')
+                        ->withPivot('rank_id');
     }
 
     public function members() {
@@ -36,14 +37,43 @@ class Edition extends Model {
 
     public static function getCurrentEdition() {
         $current_edition = self::all()->sortByDesc("year")->first();
-        $current_edition_members = $current_edition->members()->get();
-        $json = ['edition' => $current_edition, "members" => $current_edition_members];
+        $current_edition_members = Member::getMembersFormatted($current_edition->members()->get());
+        $current_edition_rewards = $current_edition->rewards()->get();
+        $current_edition_sponsors = Sponsor::getSponsorsFormatted($current_edition->sponsors()->get());
+        $current_edition_articles = Article::getArticlesFormatted($current_edition->articles()->get());
+        $medias = $current_edition->medias()->get();
+        
+        // Filter medias that are not associated with an article (because media already showed in the article)
+        for ($i = 0; $i < $medias->count(); $i++) {
+            $media = $medias->get($i);
+            foreach ($media->articles as $article) {
+                if ($article->pivot->media_id == $media->id) {
+                    $medias->forget($i);
+                }
+            }
+        }
+        
+        $current_edition_medias = Media::getMediasFormatted($medias);
+        $json = [
+            'edition' => $current_edition,
+            'members' => $current_edition_members,
+            'rewards' => $current_edition_rewards,
+            'sponsors' => $current_edition_sponsors,
+            'articles' => $current_edition_articles,
+            'medias' => $current_edition_medias
+        ];
         return $json;
     }
 
     public static function getPreviousEditions() {
         $id_current = self::all()->sortByDesc("year")->first()->id;
-        return self::all()->whereNotIn('id', $id_current)->sortByDesc("year");
+        $editions = self::all()->whereNotIn('id', $id_current)->sortByDesc("year")->toArray();
+        $editions_formatted = array();
+        for ($i = 0; $i < count($editions); $i++) {
+            $edition = $editions[$i];
+            array_push($editions_formatted, $edition);
+        }
+        return $editions_formatted;
     }
 
 }

@@ -77,11 +77,11 @@ class EditionCtrl extends Controller {
         //
     }
 
-    public function getDataFromCurrentEdition() {
+    public static function getDataFromCurrentEdition() {
         $currentEditionJson = Edition::getCurrentEdition();
         $previousEditionsJson = Edition::getPreviousEditions();
 
-        return response()->json(['current_edition' => $currentEditionJson, 'previous_editions' => [$previousEditionsJson]]);
+        return response()->json(['current_edition' => $currentEditionJson, 'previous_editions' => $previousEditionsJson]);
     }
 
 }
