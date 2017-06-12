@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model {
 
+    //////////// RELATIONSHIPS ////////////
+
     public function medias() {
         return $this->belongsToMany('App\Models\Media', 'integration');
     }
@@ -18,6 +20,13 @@ class Article extends Model {
         return $this->belongsTo('App\Models\Edition', 'edition_id');
     }
 
+    //////////// CLASS METHODS ////////////
+
+    /**
+     * Formats the article to display. 
+     * @param type $laravel_articles the articles as laravel displays it (with foreign keys)
+     * @return array formatted articles
+     */
     public static function getArticlesFormatted($laravel_articles) {
         $articles = array();
         for ($i = 0; $i < $laravel_articles->count(); $i++) {

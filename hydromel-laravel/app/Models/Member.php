@@ -15,17 +15,19 @@ class Member extends Model {
      */
     protected $hidden = array("pivot");
 
+    //////////// RELATIONSHIPS ////////////
+
     public function editions() {
         return $this->belongsToMany('App\Models\Edition', 'participation', 'member_id', 'edition_id')
                         ->withPivot('responsibility_id', 'media_id');
     }
 
+    //////////// CLASS METHODS ////////////
+
     /**
-     * Returns formatted members info. Instead of returning the ids 
-     * (as Laravel does with Member::find) of the foreign keys, this function 
-     * returns the name of the responsibility and the url or file 
-     * @param Collection $laravel_members
-     * @return array Members formatted.
+     * Formats the members to display. 
+     * @param type $laravel_members the members as laravel displays it (with foreign keys)
+     * @return array formatted members
      */
     public static function getMembersFormatted($laravel_members) {
         $members = array();

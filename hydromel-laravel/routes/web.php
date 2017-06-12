@@ -15,17 +15,20 @@ Route::get('/', function () {
     return view("index");
 });
 
-// 
+// Webservice returning JSON data of the editions
+// Used by frontend client to display datas
 Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
+Route::get('/getPreviousEditions', 'EditionCtrl@getDataFromPreviousEditions');
 
 //Equipe
 Route::resource('equipe', 'EquipeCtrl');
+
 //Actualités
 Route::resource('actualites', 'ActualiteCtrl');
 //Sponsors
 Route::resource('sponsors', 'SponsorCtrl');
 //Edition précédente
-Route::resource('editionprecedente', 'EditionPrecedenteCtrl');
+Route::resource('editions', 'EditionCtrl');
 
 //Authentification
 Route::get('/admin', 'AuthController@login');

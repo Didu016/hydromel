@@ -8,6 +8,8 @@ class Edition extends Model {
 
     public $timestamps = false;
 
+    
+    //////////// RELATIONSHIPS ////////////
     public function medias() {
         return $this->belongsToMany('App\Models\Media', 'usage');
     }
@@ -29,12 +31,23 @@ class Edition extends Model {
     public function articles() {
         return $this->hasMany('App\Models\Article');
     }
+    
+    //////////// CLASS METHODS ////////////
 
+    /**
+     * Check if an edition exists in the DB
+     * @param type $id
+     * @return type
+     */
     public static function exists($id) {
         // Commande à une clé simple, donc find() peut être utilisé
         return self::find($id) !== null;
     }
 
+    /**
+     * Retuns data from current edition with simplified info from previous editions
+     * @return array that will be converted to json
+     */
     public static function getCurrentEdition() {
         $current_edition = self::all()->sortByDesc("year")->first();
         $current_edition_members = Member::getMembersFormatted($current_edition->members()->get());
@@ -42,7 +55,7 @@ class Edition extends Model {
         $current_edition_sponsors = Sponsor::getSponsorsFormatted($current_edition->sponsors()->get());
         $current_edition_articles = Article::getArticlesFormatted($current_edition->articles()->get());
         $medias = $current_edition->medias()->get();
-        
+
         // Filter medias that are not associated with an article (because media already showed in the article)
         for ($i = 0; $i < $medias->count(); $i++) {
             $media = $medias->get($i);
@@ -52,7 +65,7 @@ class Edition extends Model {
                 }
             }
         }
-        
+
         $current_edition_medias = Media::getMediasFormatted($medias);
         $json = [
             'edition' => $current_edition,
@@ -65,7 +78,11 @@ class Edition extends Model {
         return $json;
     }
 
-    public static function getPreviousEditions() {
+    /**
+     * Returns simplified data of all editions. That means that it returns only the attributes of 'edition' without all its relations.
+     * @return array that will be converted to json
+     */
+    public static function getPreviousEditionsSimplified() {
         $id_current = self::all()->sortByDesc("year")->first()->id;
         $editions = self::all()->whereNotIn('id', $id_current)->sortByDesc("year")->toArray();
         $editions_formatted = array();
@@ -74,6 +91,40 @@ class Edition extends Model {
             array_push($editions_formatted, $edition);
         }
         return $editions_formatted;
+    }
+
+    /**
+     * Get the data of a specific edition.
+     * It is actually used to display a previous edition.
+     * @param int $id The id of the edition to retrieve.
+     * @return array that will be converted to json.
+     */
+    public static function getEdition($id) {
+        $edition = self::find($id);
+        $edition_members = Member::getMembersFormatted($edition->members()->get());
+        $edition_rewards = $edition->rewards()->get();
+        $edition_sponsors = Sponsor::getSponsorsFormatted($edition->sponsors()->get());
+        $edition_articles = Article::getArticlesFormatted($edition->articles()->get());
+        $edition_medias = $edition->medias()->get();
+
+        // Filter medias that are not associated with an article (because media already showed in the article)
+        for ($i = 0; $i < $edition_medias->count(); $i++) {
+            $media = $edition_medias->get($i);
+            foreach ($media->articles as $article) {
+                if ($article->pivot->media_id == $media->id) {
+                    $edition_medias->forget($i);
+                }
+            }
+        }
+        $edition_medias_formatted = Media::getMediasFormatted($edition_medias);
+        return [
+            'edition' => $edition,
+            'members' => $edition_members,
+            'rewards' => $edition_rewards,
+            'sponsors' => $edition_sponsors,
+            'articles' => $edition_articles,
+            'medias' => $edition_medias_formatted
+        ];
     }
 
 }

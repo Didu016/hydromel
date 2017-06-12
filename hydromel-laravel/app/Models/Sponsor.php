@@ -13,10 +13,12 @@ class Sponsor extends Model {
                         ->withPivot('rank_id');
     }
 
+    //////////// CLASS METHODS ////////////
+
     /**
-     * Returns formatted sponsors info. Instead of returning the id of the rank (as Laravel does with Sponsor::find), it returns the name of the rank as a rank_name field
-     * @param Collection $laravel_sponsors
-     * @return array Sponsors formatted.
+     * Formats the sponsors to display. 
+     * @param type $laravel_sponsors the sponsors as laravel displays it (with foreign keys)
+     * @return array formatted sponsors
      */
     public static function getSponsorsFormatted($laravel_sponsors) {
         $sponsors = array();
@@ -27,7 +29,7 @@ class Sponsor extends Model {
             $amount = $sponsor->amount;
             $mail_contact = $sponsor->mail_contact;
             $link = $sponsor->link;
-            $logo = $sponsor->logo;
+            $logo_url = $sponsor->logo_url;
 
             //get rank
             $rank_name = null;
@@ -41,7 +43,7 @@ class Sponsor extends Model {
             $sponsor_formatted['amount'] = $amount;
             $sponsor_formatted['mail_contact'] = $mail_contact;
             $sponsor_formatted['link'] = $link;
-            $sponsor_formatted['logo'] = $logo;
+            $sponsor_formatted['logo_url'] = $logo_url;
             $sponsor_formatted['rank_name'] = $rank_name;
             array_push($sponsors, $sponsor_formatted);
         }
