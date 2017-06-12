@@ -1,0 +1,248 @@
+/*.loader {
+position : fixed;
+z-index: 9999;
+background-color: #f9f9f9;
+background : url('') 50% 50% no-repeat;
+top : 0px;
+left : 0px;
+height : 100%;
+width : 100%;
+cursor : wait;
+}*/
+
+.sectionPage{
+margin-left: 10%;
+}
+
+.sectionAccueil{
+	height: 100vh;
+    width: 100%;
+    float: left;
+    position: relative;
+    opacity: 1;
+    display: flex;
+    z-index: 2;
+    background-size: cover !important;
+}
+    @keyframes apparition {
+    0%   {opacity: 0}
+    100% {opacity: 1}
+}
+
+.blocDescription{
+    animation-name:apparition;
+    animation-duration: 1s;
+    height: fit-content;
+    width: fit-content;
+    max-width: 500px;
+    max-height: 700px;
+    padding: 20px;
+    color: #fff;
+    position: absolute;
+    margin: auto;
+    left: 30%;
+    right: 0;
+    top: 40%;
+    bottom: 0;
+    text-align: right;
+}
+.blocDescription h1 span{
+     background-color: #1a3d7f;
+     padding-left: 20px;
+     padding-right: 20px;
+}
+.blocDescription p{
+
+    font-family: 'open_light';
+    font-size: 1.1em;
+    margin-top: 20px;
+    padding-left: 20px;
+     padding-right: 20px;
+}
+
+/* Slide right */
+.link-slideright {
+    background: rgba(149,165,166, 0.2);
+    position: relative;
+    z-index: 1; /* needed for setting pseudo-element z-index */
+}
+.link-slideright '' {
+    position: relative;
+    display: inline-block;
+    outline: none;
+    color: #404d5b;
+    vertical-align: bottom;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.link-slideright p {
+    overflow: hidden;
+    font-weight: 500;
+}
+
+.link-slideright p::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: rgba(19,42,110,0.7);
+    content: '';
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    -webkit-transform: scaleY(1) translateX(-100%);
+    transform: scaleY(1) translateX(-100%);
+}
+
+.link-slideright :hover::before,
+.link-slideright :focus::before {
+    -webkit-transform: scaleY(1) translateX(0);
+    transform: scaleY(1) translateX(0);
+    pointer-events: none;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+/*
+.blocDescription:hover{
+background-color: #fff;
+transition: all 0.5s;
+color: #333333;
+}*/
+
+
+.sectionSponsor{
+    height: fit-content;
+    width: 100%;
+    float: left;
+    background-color: #f9f9f9;
+    z-index: 3;
+    position: relative;
+}
+
+.sectionSponsor p{
+    width: 100%;
+		margin-top: 30px;
+
+}
+.sectionSponsor h1{
+  text-align: center;
+}
+
+.sectionSponsor img{
+    width: 100px;
+    margin: 20px;
+}
+.blocSponsor{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+.blocSponsor article{
+    background-color: #fff;
+}
+
+.sectionLieuDate{
+    height: 200px;
+    width: 100%;
+    float: left;
+    background-color: #1a3d7f;
+    display: flex;
+    border-style: solid;
+    border-width: 4px 0px 4px 0px;
+    border-color: #fff;
+}
+.sectionLieuDate::after {
+    content: "";
+    background: url(../img/stTropez.jpg);
+    background-position:left bottom;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+.blockLieuDate{
+    height: fit-content;
+    width: fit-content;
+    color: #fff;
+    text-align: center;
+    margin:auto;
+}
+.sectionArticle{
+    width: 100%;
+    float: left;
+    background-color: #fff;
+}
+
+
+/* EQUIPE */
+.titrePage{
+	float: left;
+	width: 100%;
+	height: 100px;
+	display: flex;
+
+}
+.titrePage h1{
+		margin: auto;
+}
+#headerEquipe{
+    background: #333333 url(../img/equipeHydroHeig.jpg);
+		background-position:50% 50%;
+    height: 60vh;
+    width: 100%;
+    float: left;
+    background-size: cover !important;
+}
+
+.sectionDescription{
+    width: fit-content;
+    height: fit-content;
+    background-color: #f9f9f9;
+    float: left;
+    padding: 30px;
+}
+
+.sectionMembre{
+    width:100%;
+    float: left;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+.sectionMembre article{
+    background-color: #333333;
+    width: 300px;
+    height: fit-content;
+    margin: 20px;
+    padding: 10px;
+     color:#fff;
+}
+.sectionMembre article p{
+        font-family:'open_bold';
+
+}
+
+.sectionMembre article:hover
+{
+
+    color: #1a3d7f;
+    transition: all 0.5s ease;
+}
+/* ACTUALITE */
+#headerActualite{
+    background: #333333 url(../img/actualiteHeroSection.jpg);
+		background-position:50% 50%;
+    height: 60vh;
+    width: 100%;
+    float: left;
+    background-size: cover !important;
+}

@@ -1,0 +1,72 @@
+@charset "utf-8";
+@import url(menu.css);
+@import url(contenu.css);
+@import url(article.css);
+@font-face {
+	font-family: 'open_regular';
+	src:url(../font/OpenSans/OpenSans-Regular.ttf);
+}
+@font-face {
+	font-family: 'open_bold';
+	src:url(../font/OpenSans/OpenSans-Bold.ttf);
+}
+@font-face {
+	font-family: 'open_light';
+	src:url(../font/OpenSans/OpenSans-Light.ttf);
+}
+
+body
+{
+	font-family:'open_regular';
+}
+	
+* {
+	position: relative;
+	padding: 0px;
+	margin: 0px;
+	z-index: 1;
+}
+h1
+{
+	font-family:'open_bold';
+	font-size:3em;
+	text-transform: uppercase; 
+}
+h2
+{
+	font-family:'open_bold';
+	font-size:1.5em;
+	text-transform: uppercase; 
+
+}
+h3
+{
+	font-family:'open_regular';
+	font-size:0.8em;
+	color:#333333;
+	text-transform: uppercase; 
+
+}
+h4
+{
+	font-family:'open_regular';
+	font-size:0.8em;
+	color:#fff;
+}
+a
+{
+	text-decoration:none;
+	color:#888888;
+}
+
+a:visited
+{
+	color:#666666;
+	text-decoration:none;	
+}
+
+img{
+	width: 100%;
+}
+
+
