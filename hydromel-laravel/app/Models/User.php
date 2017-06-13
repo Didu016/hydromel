@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable {
 
+    public $timestamps = false;
+
     use Notifiable;
 
     /**
@@ -17,6 +19,7 @@ class User extends Authenticatable {
     protected $fillable = [
         'email', 'password',
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
