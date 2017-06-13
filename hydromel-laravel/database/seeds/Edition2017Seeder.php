@@ -67,20 +67,29 @@ class Edition2017Seeder extends Seeder {
 
         $edition_sponsor1 = Sponsor::create([
                     'society' => 'Google',
-                    'amount_min' => 5000,
-                    'amount_max' => 5000,
+                    'amount' => 5000,
                     'mail_contact' => 'service@google.com',
                     'link' => 'http://www.google.com'
         ]);
 
-        $edition2k17_sponsor2 = Sponsor::create([
+        $edition_sponsor2 = Sponsor::create([
                     'society' => 'Cuendet',
-                    'amount_min' => 500,
-                    'amount_max' => 500,
+                    'amount' => 500,
                     'mail_contact' => 'info@cuendet.ch',
                     'link' => 'http://www.cuendetfreres.ch/'
         ]);
-        $edition->sponsors()->saveMany([$edition_sponsor1, $edition2k17_sponsor2]);
+        // Sponsoring
+        Sponsoring::create([
+            'edition_id' => $edition->id,
+            'sponsor_id' => $edition_sponsor1->id,
+            'rank_id' => DatabaseSeeder::$rank_argent->id
+        ]);
+
+        Sponsoring::create([
+            'edition_id' => $edition->id,
+            'sponsor_id' => $edition_sponsor2->id,
+            'rank_id' => null
+        ]);
         $edition->medias()->save($media_photo);
 
         $participation_spat = Participation::create([

@@ -19,6 +19,7 @@ use App\Models\Sponsor;
 use App\Models\Sponsoring;
 use App\Models\Usage;
 use App\Models\User;
+use App\Models\Rank;
 
 class DatabaseSeeder extends Seeder {
 
@@ -32,6 +33,9 @@ class DatabaseSeeder extends Seeder {
     public static $responsibility_team_manager = null;
     public static $article_type_presse = null;
     public static $article_type_news = null;
+    public static $rank_or = null;
+    public static $rank_argent = null;
+    public static $rank_bronze = null;
 
     public function run() {
 
@@ -50,6 +54,7 @@ class DatabaseSeeder extends Seeder {
         DB::table('resources')->truncate();
         DB::table('responsibilities')->truncate();
         DB::table('rewards')->truncate();
+        DB::table('ranks')->truncate();
         DB::table('sponsoring')->truncate();
         DB::table('sponsors')->truncate();
         DB::table('usage')->truncate();
@@ -96,6 +101,21 @@ class DatabaseSeeder extends Seeder {
         $this::$article_type_news = ArticleType::create([
                     'name' => 'news'
         ]);
+
+        $this::$rank_or = Rank::create([
+                    'name' => 'or'
+        ]);
+
+        $this::$rank_argent = Rank::create([
+                    'name' => 'argent'
+        ]);
+
+        $this::$rank_bronze = Rank::create([
+                    'name' => 'bronze'
+        ]);
+
+
+
 
         $this->call(Edition2015Seeder::class);
         $this->call(Edition2016Seeder::class);
