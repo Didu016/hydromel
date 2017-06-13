@@ -1,0 +1,99 @@
+.article{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.imageArticle{
+	background-position:50% 50%;
+	background-size: 100%;
+	width: 50%;
+	height: 100%;
+}
+.articleNews:nth-child(odd) .imageArticle{
+	float: left;
+	background-image: url("../img/joncoel.jpg");
+}
+.articleNews:nth-child(even) .imageArticle{
+	float: right;
+	background-image: url("../img/HydroHEIGBateau2016.jpg");
+}
+.articleNews{
+	width: 100%;
+	height:  200px;
+	float: left;
+	margin-right: auto;
+	margin-left: auto;
+}
+.articleNews:nth-child(even){
+	background-color: #f9f9f9;
+}
+.articleNews:nth-child(even) img{
+	float: left;
+	width: 50%;
+	height: auto;
+
+}
+.articleNews:nth-child(odd) img{
+	float: right;
+	width: 40%;
+}
+.blocArticleNewsTexte{
+	float: left;
+	width: 40%;
+	margin: 10px;
+	height: fit-content;
+}
+.articleNews p{
+
+}
+
+.articlePresse{
+	width: 100%;
+	height: fit-content;
+	float: left;
+	margin-right: auto;
+	margin-left: auto;
+	color: #333333;
+}
+.blocArticlePresseTexte{
+	float: left;
+	width: 80%;
+	margin: 10px;
+	height: fit-content;
+}
+
+button{
+	cursor: default;
+    color: none;
+    background-color: inherit;
+    box-sizing: border-box;
+    padding: 0px 0px 0px;
+    border-width: 0px;
+    border-top-width: 0px;
+    border-right-width:0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+}
+button a
+{
+	display: block;
+	padding: 15px;
+	border: 2px solid #333333;
+	color: #1a3d7f;
+	text-align: center;
+	vertical-align:middle;
+	padding: 5px;
+	font-family:'open_bold';
+	font-size:1em;
+	text-transform: uppercase;
+	margin-right: auto;
+	margin-left: auto;
+
+}
+
+button a:hover
+{
+	background-color: #333333;
+    color: #fff;
+    transition: background 0.3s;
+    border: 2px solid #fff;
+}
