@@ -15,32 +15,44 @@ Route::get('/', function () {
     return view("index");
 });
 
-Route::get('adminhydromelpanel', function () {
-    return view("backoffice/hydromelpanel");
-});
+// Webservice returning JSON data of the editions
+// Used by frontend client to display datas
+Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
+Route::get('/editions/{id}', 'EditionCtrl@show');
+Route::get('/hydromeladminpanel', 'AuthController@login');
+Route::post('/auth/check', 'AuthController@check');
 
-Route::get('adminhydromelpanel/accueil', function () {
-    return view("backoffice/accueil");
-});
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('adminhydromelpanel/equipe', function () {
-    return view("backoffice/equipe");
-});
+    //Equipe
+    Route::resource('/auth/equipes', 'EquipeCtrl');
 
-Route::get('adminhydromelpanel/actualite', function () {
-    return view("backoffice/actualite");
-});
+    //Actualités
+    Route::resource('/auth/actualites', 'ActualiteCtrl');
 
-Route::get('adminhydromelpanel/sponsor', function () {
-    return view("backoffice/sponsor");
-});
+    //Sponsors
+    Route::resource('/auth/sponsors', 'SponsorCtrl');
 
-Route::get('adminhydromelpanel/previousedition', function () {
-    return view("backoffice/editionP");
-});
+    //Editions
+    Route::resource('/auth/editions', 'EditionCtrl');
 
-Route::get('adminhydromelpanel/changeedition', function () {
-    return view("backoffice/newedition/accueil");
-});
+    //Authentification
+    Route::get('/auth/logout', 'AuthController@logout');
+    Route::get('/auth/home', function() {
+        return view('backoffice/hydromelpanel');
+    });
 
-//AJOUTER MIDDLEWARE
+    // Backoffice routes
+    Route::get('/auth/news', function() {
+        return "news";
+    });
+
+    Route::get('/auth/sponsors', function() {
+        return "sponsors";
+    });
+
+    Route::get('/auth/previouseditions', function() {
+        return "previouseditions";
+    });
+}
+);

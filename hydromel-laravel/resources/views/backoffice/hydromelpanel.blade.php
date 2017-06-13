@@ -82,6 +82,6 @@
     </main>
 
 </div>
-    <script src="css/style/material.min.js"></script>
+    <script src="{{url('css/style/material.min.js')}}"></script>
 </body>
 </html>
