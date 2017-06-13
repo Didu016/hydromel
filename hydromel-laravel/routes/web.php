@@ -1,36 +1,46 @@
 <?php
 
 /*
-  |--------------------------------------------------------------------------
-  | Web Routes
-  |--------------------------------------------------------------------------
-  |
-  | Here is where you can register web routes for your application. These
-  | routes are loaded by the RouteServiceProvider within a group which
-  | contains the "web" middleware group. Now create something great!
-  |
- */
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
 Route::get('/', function () {
     return view("index");
 });
 
-// Webservice returning JSON data of the editions
-// Used by frontend client to display datas
-Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
-Route::get('/getPreviousEditions', 'EditionCtrl@getDataFromPreviousEditions');
+Route::get('adminhydromelpanel', function () {
+    return view("backoffice/hydromelpanel");
+});
 
-//Equipe
-Route::resource('equipe', 'EquipeCtrl');
+Route::get('adminhydromelpanel/accueil', function () {
+    return view("backoffice/accueil");
+});
 
-//Actualités
-Route::resource('actualites', 'ActualiteCtrl');
-//Sponsors
-Route::resource('sponsors', 'SponsorCtrl');
-//Edition précédente
-Route::resource('editions', 'EditionCtrl');
+Route::get('adminhydromelpanel/equipe', function () {
+    return view("backoffice/equipe");
+});
 
-//Authentification
-Route::get('/admin', 'AuthController@login');
-Route::post('/auth/check', 'AuthController@check');
-Route::get('/logout', 'AuthController@login');
+Route::get('adminhydromelpanel/actualite', function () {
+    return view("backoffice/actualite");
+});
+
+Route::get('adminhydromelpanel/sponsor', function () {
+    return view("backoffice/sponsor");
+});
+
+Route::get('adminhydromelpanel/previousedition', function () {
+    return view("backoffice/editionP");
+});
+
+Route::get('adminhydromelpanel/changeedition', function () {
+    return view("backoffice/newedition/accueil");
+});
+
+//AJOUTER MIDDLEWARE

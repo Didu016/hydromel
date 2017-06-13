@@ -10,6 +10,26 @@ width : 100%;
 cursor : wait;
 }*/
 
+/* COMMUN */
+.sectionDescription{
+    width: 100%;
+    height: fit-content;
+    background-color: #f9f9f9;
+    float: left;
+
+}
+.sectionDescription p{
+	margin : 30px;
+}
+.titrePage{
+	float: left;
+	width: 100%;
+	height: 100px;
+	display: flex;
+}
+.titrePage h1{
+		margin: auto;
+}
 .sectionPage{
 margin-left: 10%;
 }
@@ -113,7 +133,7 @@ color: #333333;
 }*/
 
 
-.sectionSponsor{
+.sectionPreviewSponsor{
     height: fit-content;
     width: 100%;
     float: left;
@@ -122,16 +142,16 @@ color: #333333;
     position: relative;
 }
 
-.sectionSponsor p{
+.sectionPreviewSponsor p{
     width: 100%;
 		margin-top: 30px;
 
 }
-.sectionSponsor h1{
+.sectionPreviewSponsor h1{
   text-align: center;
 }
 
-.sectionSponsor img{
+.sectionPreviewSponsor img{
     width: 100px;
     margin: 20px;
 }
@@ -184,16 +204,6 @@ color: #333333;
 
 
 /* EQUIPE */
-.titrePage{
-	float: left;
-	width: 100%;
-	height: 100px;
-	display: flex;
-
-}
-.titrePage h1{
-		margin: auto;
-}
 #headerEquipe{
     background: #333333 url(../img/equipeHydroHeig.jpg);
 		background-position:50% 50%;
@@ -203,13 +213,7 @@ color: #333333;
     background-size: cover !important;
 }
 
-.sectionDescription{
-    width: fit-content;
-    height: fit-content;
-    background-color: #f9f9f9;
-    float: left;
-    padding: 30px;
-}
+
 
 .sectionMembre{
     width:100%;
@@ -245,4 +249,100 @@ color: #333333;
     width: 100%;
     float: left;
     background-size: cover !important;
+}
+.sliderImage{
+ float: left;
+ height: 100px;
+	width: 100%;
+
+}
+#navArticle
+{
+	width: 100%;
+	height: 50px;
+	background-color: #f9f9f9;
+	text-align: center;
+	float: left;
+	margin-bottom: 20px;
+}
+#navArticle li
+{
+		float: left;
+		margin: 10px;
+		list-style:none;
+		text-decoration: none;
+
+}
+#navArticle ul
+{
+	height: auto;
+	width: fit-content;
+
+}
+
+#navArticle li a
+{
+display: block;
+padding: 15px;
+border: 2px solid #333333;
+color: #1a3d7f;
+text-align: center;
+vertical-align:middle;
+padding: 5px;
+font-family:'open_bold';
+font-size:1em;
+text-transform: uppercase;
+margin-right: auto;
+margin-left: auto;
+}
+
+#navArticle li a:hover
+{
+	background-color: #333333;
+    color: #fff;
+    transition: background 0.3s;
+    border: 2px solid #fff;
+}
+.sectionMedia{
+	height: fit-content;
+	width: 100%;
+	float:left;
+
+}
+
+/*SPONSORS*/
+
+#headerSponsor{
+    background: #333333 url(../img/sponsorHeroSection.jpg);
+		background-position:50% 50%;
+    height: 60vh;
+    width: 100%;
+    float: left;
+    background-size: cover !important;
+}
+
+
+.sectionSponsor{
+    width:100%;
+    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.sectionSponsor article{
+    background-color: #333333;
+    width: 200px;
+    height: fit-content;
+    margin: 20px;
+    padding: 10px;
+     color:#fff;
+}
+.sectionSponsor article p{
+        font-family:'open_bold';
+}
+
+.sectionSponsor article:hover
+{
+    color: #1a3d7f;
+    transition: all 0.5s ease;
 }
