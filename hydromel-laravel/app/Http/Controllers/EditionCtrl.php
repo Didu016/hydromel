@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Edition;
-use App\Models\Member;
+use App\Lib\Message;
 
 class EditionCtrl extends Controller {
 
@@ -43,7 +43,12 @@ class EditionCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        return self::jsend(Edition::getEdition($id));
+        \Illuminate\Support\Facades\App::setLocale('fr');
+        $edition = Edition::getEdition($id);
+        if ($edition == null) {
+            return self::jsend(Message::error('edition.missing'), 'error');
+        }
+        return self::jsend($edition);
     }
 
     /**
@@ -83,8 +88,15 @@ class EditionCtrl extends Controller {
      * only basics infos from previous editions
      */
     public static function getDataFromCurrentEdition() {
+        \Illuminate\Support\Facades\App::setLocale('fr');
         $currentEditionJson = Edition::getCurrentEdition();
+        if ($currentEditionJson == null) {
+            return self::jsend(Message::error('edition.current.missing'), 'error');
+        }
         $previousEditionsJson = Edition::getPreviousEditionsSimplified();
+        if ($previousEditionsJson == null) {
+            return self::jsend(Message::error('edition.previous.missing'), 'error');
+        }
         return self::jsend(['current_edition' => $currentEditionJson, 'previous_editions' => $previousEditionsJson]);
     }
 

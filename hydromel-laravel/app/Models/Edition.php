@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Lib\Message;
 
 class Edition extends Model {
 
     public $timestamps = false;
 
-    
     //////////// RELATIONSHIPS ////////////
     public function medias() {
         return $this->belongsToMany('App\Models\Media', 'usage');
@@ -31,7 +31,7 @@ class Edition extends Model {
     public function articles() {
         return $this->hasMany('App\Models\Article');
     }
-    
+
     //////////// CLASS METHODS ////////////
 
     /**
@@ -50,6 +50,9 @@ class Edition extends Model {
      */
     public static function getCurrentEdition() {
         $current_edition = self::all()->sortByDesc("year")->first();
+        if ($current_edition == null) {
+            
+        }
         $current_edition_members = Member::getMembersFormatted($current_edition->members()->get());
         $current_edition_rewards = $current_edition->rewards()->get();
         $current_edition_sponsors = Sponsor::getSponsorsFormatted($current_edition->sponsors()->get());
@@ -101,6 +104,9 @@ class Edition extends Model {
      */
     public static function getEdition($id) {
         $edition = self::find($id);
+        if ($edition == null) {
+            return null;
+        }
         $edition_members = Member::getMembersFormatted($edition->members()->get());
         $edition_rewards = $edition->rewards()->get();
         $edition_sponsors = Sponsor::getSponsorsFormatted($edition->sponsors()->get());

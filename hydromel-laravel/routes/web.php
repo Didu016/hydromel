@@ -12,13 +12,15 @@
  */
 
 Route::get('/', function () {
-    return view("index");
+    
 });
 
 // Webservice returning JSON data of the editions
 // Used by frontend client to display datas
 Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
-Route::get('/getPreviousEditions', 'EditionCtrl@getDataFromPreviousEditions');
+Route::get('/msg', function() {
+    return App\Http\Controllers\Controller::jsend(\App\Lib\Message::error('article.missing'), 'error');
+});
 
 //Equipe
 Route::resource('equipe', 'EquipeCtrl');
@@ -27,10 +29,11 @@ Route::resource('equipe', 'EquipeCtrl');
 Route::resource('actualites', 'ActualiteCtrl');
 //Sponsors
 Route::resource('sponsors', 'SponsorCtrl');
-//Edition précédente
+
+//Editions
 Route::resource('editions', 'EditionCtrl');
 
 //Authentification
-Route::get('/admin', 'AuthController@login');
+Route::get('/hydromeladminpanel', 'AuthController@login');
 Route::post('/auth/check', 'AuthController@check');
 Route::get('/logout', 'AuthController@login');
