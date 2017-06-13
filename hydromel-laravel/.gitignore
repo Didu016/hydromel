@@ -11,3 +11,4 @@ npm-debug.log
 .env
 .env.example
 /nbproject
+.DS_Store

@@ -15,13 +15,11 @@ class CreateSponsorsTable extends Migration {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('society', 50);
-            $table->integer('amount_min');
-            $table->integer('amount_max');
+            $table->integer('amount');
             $table->string('mail_contact', 100);
             $table->text('link')->nullable();
+            $table->text('logo_url')->nullable();
         });
-
-        DB::statement("ALTER TABLE sponsors ADD logo MEDIUMBLOB");
     }
 
     /**

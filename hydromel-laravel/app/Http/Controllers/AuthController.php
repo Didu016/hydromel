@@ -2,33 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
-use App\User;
 use Request;
 use Auth;
 use Session;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
 
+    /**
+     * Display login view
+     * @return login view
+     */
     public function login() {
         return view('auth/login');
     }
 
+    /**
+     * Check username and password and log the user in Laravel.
+     * @return login view if user could not be authenticated, home view else. 
+     */
     public function check() {
-        $email = Request::input('email', '');
+        $username = Request::input('username', '');
         $password = Request::input('password', '');
-        if (!Auth::attempt(['email' => $email, 'password' => $password], false)) {
+        if (!Auth::attempt(['username' => $username, 'password' => $password], false)) {
             return redirect()->action('AuthController@login')->with('error', true);
         }
-        //si le middleware est passé il redirige vers le deuxième paramêtre
-        return redirect(Session::get('oldUrl', '/'));
+        return redirect(Session::get('oldUrl', '/auth/home'));
     }
 
-
+    /**
+     * Logout the user
+     * @return login view
+     */
     public function logout() {
         //Auth::logout();
         Session::flush();
         return redirect()->action('AuthController@login');
     }
+
 }

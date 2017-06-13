@@ -15,8 +15,10 @@ class CreateSponsoringTable extends Migration {
         Schema::create('sponsoring', function (Blueprint $table) {
             $table->integer('edition_id')->unsigned();
             $table->integer('sponsor_id')->unsigned();
+            $table->integer('rank_id')->unsigned()->nullable();
             $table->foreign('edition_id')->references('id')->on('editions');
             $table->foreign('sponsor_id')->references('id')->on('sponsors');
+            $table->foreign('rank_id')->references('id')->on('ranks');
         });
     }
 

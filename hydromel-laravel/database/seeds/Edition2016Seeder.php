@@ -62,20 +62,31 @@ class Edition2016Seeder extends Seeder {
 
         $edition_sponsor1 = Sponsor::create([
                     'society' => 'Le CERN',
-                    'amount_min' => 10000,
-                    'amount_max' => 10000,
+                    'amount' => 10000,
                     'mail_contact' => 'infos@cern.ch',
                     'link' => 'https://home.cern/fr/about'
         ]);
 
         $edition_sponsor2 = Sponsor::create([
                     'society' => 'Romande Energie',
-                    'amount_min' => 800,
-                    'amount_max' => 800,
+                    'amount' => 800,
                     'mail_contact' => 'info@romande-energie.ch',
                     'link' => 'https://www.romande-energie.ch/'
         ]);
-        $edition->sponsors()->saveMany([$edition_sponsor1, $edition_sponsor2]);
+
+        // Sponsoring
+        Sponsoring::create([
+            'edition_id' => $edition->id,
+            'sponsor_id' => $edition_sponsor1->id,
+            'rank_id' => DatabaseSeeder::$rank_or->id
+        ]);
+
+        Sponsoring::create([
+            'edition_id' => $edition->id,
+            'sponsor_id' => $edition_sponsor2->id,
+            'rank_id' => null
+        ]);
+
         $edition->medias()->save($media_photo);
 
         $participation_josephine = Participation::create([

@@ -62,20 +62,31 @@ class Edition2015Seeder extends Seeder {
 
         $edition_sponsor1 = Sponsor::create([
                     'society' => 'Etat de Vaud',
-                    'amount_min' => 3000,
-                    'amount_max' => 3000,
+                    'amount' => 3000,
                     'mail_contact' => 'infos@vd.ch',
                     'link' => 'http://www.vd.ch/'
         ]);
 
         $edition_sponsor2 = Sponsor::create([
                     'society' => 'Yverdon Sport',
-                    'amount_min' => 500,
-                    'amount_max' => 500,
+                    'amount' => 500,
                     'mail_contact' => 'info@yverdonsport.ch',
                     'link' => 'http://www.yverdonsport.ch/'
         ]);
-        $edition->sponsors()->saveMany([$edition_sponsor1, $edition_sponsor2]);
+
+        // Sponsoring
+        Sponsoring::create([
+            'edition_id' => $edition->id,
+            'sponsor_id' => $edition_sponsor1->id,
+            'rank_id' => DatabaseSeeder::$rank_bronze->id
+        ]);
+
+        Sponsoring::create([
+            'edition_id' => $edition->id,
+            'sponsor_id' => $edition_sponsor2->id,
+            'rank_id' => null
+        ]);
+
         $edition->medias()->save($media_photo);
 
         $participation_pierre = Participation::create([
