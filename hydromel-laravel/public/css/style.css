@@ -2,6 +2,10 @@
 @import url(menu.css);
 @import url(contenu.css);
 @import url(article.css);
+@import url(slick.css);
+@import url(slick-theme.css);
+
+
 @font-face {
 	font-family: 'open_regular';
 	src:url(../font/OpenSans/OpenSans-Regular.ttf);
@@ -19,7 +23,7 @@ body
 {
 	font-family:'open_regular';
 }
-	
+
 * {
 	position: relative;
 	padding: 0px;
@@ -30,22 +34,20 @@ h1
 {
 	font-family:'open_bold';
 	font-size:3em;
-	text-transform: uppercase; 
+	text-transform: uppercase;
 }
 h2
 {
 	font-family:'open_bold';
 	font-size:1.5em;
-	text-transform: uppercase; 
-
+	text-transform: uppercase;
 }
 h3
 {
 	font-family:'open_regular';
 	font-size:0.8em;
 	color:#333333;
-	text-transform: uppercase; 
-
+	text-transform: uppercase;
 }
 h4
 {
@@ -62,11 +64,14 @@ a
 a:visited
 {
 	color:#666666;
-	text-decoration:none;	
+	text-decoration:none;
 }
 
 img{
 	width: 100%;
 }
 
-
+.center{
+	margin-left: auto;
+	margin-right: auto;
+}

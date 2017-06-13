@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable {
-
-    public $timestamps = false;
-
+class User extends Authenticatable
+{
     use Notifiable;
 
     /**
@@ -28,9 +26,4 @@ class User extends Authenticatable {
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function groups() {
-        return $this->belongsToMany('App\Models\Group', 'membership');
-    }
-
 }

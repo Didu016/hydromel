@@ -11,3 +11,7 @@ npm-debug.log
 .env
 .env.example
 /nbproject
+.DS_Store
+hydromel-laravel/.DS_Store
+public/.DS_Store
+public/css/.DS_Store

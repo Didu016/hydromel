@@ -1,12 +1,26 @@
 var DEFAULT_PAGE = 'accueil';
 
 $(function(){
+  console.log("hello");
+  $('.sliderImage').slick({
+
+    centerMode: true,
+    arrows: true,
+    centerPadding: '60px',
+    slidesToShow: 3,
+    dots: true,
+    infinite: true,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    variableWidth: true
+  });
   /*$(".blocDescription").animate({
       left: '50%',
       opacity: '1',
   });*/
   menuHandler();
-  
+
   //black de la page d'accueil
 
 });

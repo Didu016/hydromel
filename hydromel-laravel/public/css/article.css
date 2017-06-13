@@ -1,31 +1,49 @@
 .article{
-	margin-top: 20px;
-	margin-bottom: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.imageArticle{
+	background-position:50% 50%;
+	background-size: 100%;
+	width: 50%;
+	height: 100%;
+}
+.articleNews:nth-child(odd) .imageArticle{
+	float: left;
+	background-image: url("../img/joncoel.jpg");
+}
+.articleNews:nth-child(even) .imageArticle{
+	float: right;
+	background-image: url("../img/HydroHEIGBateau2016.jpg");
 }
 .articleNews{
 	width: 100%;
-	height: fit-content;
+	height:  200px;
 	float: left;
 	margin-right: auto;
 	margin-left: auto;
+}
+.articleNews:nth-child(even){
+	background-color: #f9f9f9;
 }
 .articleNews:nth-child(even) img{
 	float: left;
 	width: 50%;
 	height: auto;
-}
-.blocArticleNewsTexte{
-	float: left;
-	width: 40%;
-	margin: 30px;
-	height: fit-content;
-}
-.articleNews p{
 
 }
 .articleNews:nth-child(odd) img{
 	float: right;
 	width: 40%;
+}
+.blocArticleNewsTexte{
+	float: left;
+	width: 40%;
+	margin: 10px;
+	height: fit-content;
+}
+.articleNews p{
+
 }
 
 .articlePresse{
@@ -39,7 +57,7 @@
 .blocArticlePresseTexte{
 	float: left;
 	width: 80%;
-	margin: 30px;
+	margin: 10px;
 	height: fit-content;
 }
 
