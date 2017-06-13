@@ -12,28 +12,53 @@
  */
 
 Route::get('/', function () {
-    
+    return 'welcome';
 });
 
 // Webservice returning JSON data of the editions
 // Used by frontend client to display datas
 Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
-Route::get('/msg', function() {
-    return App\Http\Controllers\Controller::jsend(\App\Lib\Message::error('article.missing'), 'error');
-});
-
-//Equipe
-Route::resource('equipe', 'EquipeCtrl');
-
-//Actualités
-Route::resource('actualites', 'ActualiteCtrl');
-//Sponsors
-Route::resource('sponsors', 'SponsorCtrl');
-
-//Editions
-Route::resource('editions', 'EditionCtrl');
-
-//Authentification
+Route::get('/editions/{id}', 'EditionCtrl@show');
 Route::get('/hydromeladminpanel', 'AuthController@login');
 Route::post('/auth/check', 'AuthController@check');
-Route::get('/logout', 'AuthController@login');
+
+Route::group(['middleware' => ['auth']], function () {
+
+    //Equipe
+    Route::resource('/auth/equipes', 'EquipeCtrl');
+
+    //Actualités
+    Route::resource('/auth/actualites', 'ActualiteCtrl');
+
+    //Sponsors
+    Route::resource('/auth/sponsors', 'SponsorCtrl');
+
+    //Editions
+    Route::resource('/auth/editions', 'EditionCtrl');
+
+    //Authentification
+    Route::get('/auth/logout', 'AuthController@logout');
+    Route::get('/auth/home', function() {
+        return "home";
+    });
+
+    // Backoffice routes
+    Route::get('/auth/news', function() {
+        return "news";
+    });
+
+    Route::get('/auth/sponsors', function() {
+        return "sponsors";
+    });
+
+    Route::get('/auth/previouseditions', function() {
+        return "previouseditions";
+    });
+}
+);
+
+
+
+
+
+

@@ -43,10 +43,9 @@ class EditionCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        \Illuminate\Support\Facades\App::setLocale('fr');
         $edition = Edition::getEdition($id);
         if ($edition == null) {
-            return self::jsend(Message::error('edition.missing'), 'error');
+            return self::jsend(Message::error('edition.missing'), Message::$ERROR_KEY);
         }
         return self::jsend($edition);
     }
@@ -88,14 +87,13 @@ class EditionCtrl extends Controller {
      * only basics infos from previous editions
      */
     public static function getDataFromCurrentEdition() {
-        \Illuminate\Support\Facades\App::setLocale('fr');
         $currentEditionJson = Edition::getCurrentEdition();
         if ($currentEditionJson == null) {
-            return self::jsend(Message::error('edition.current.missing'), 'error');
+            return self::jsend(Message::error('edition.current.missing'), Message::$ERROR_KEY);
         }
         $previousEditionsJson = Edition::getPreviousEditionsSimplified();
         if ($previousEditionsJson == null) {
-            return self::jsend(Message::error('edition.previous.missing'), 'error');
+            return self::jsend(Message::error('edition.previous.missing'), Message::$ERROR_KEY);
         }
         return self::jsend(['current_edition' => $currentEditionJson, 'previous_editions' => $previousEditionsJson]);
     }
