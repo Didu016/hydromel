@@ -12,7 +12,7 @@ class EquipeCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('equipe');
+        return view('backoffice/equipe');
     }
 
     /**

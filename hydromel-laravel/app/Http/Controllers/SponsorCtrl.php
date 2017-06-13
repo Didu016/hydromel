@@ -13,7 +13,7 @@ class SponsorCtrl extends Controller
      */
     public function index()
     {
-        return view('sponsor');
+        return view('backoffice/sponsor');
     }
 
     /**
