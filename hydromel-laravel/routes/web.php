@@ -15,10 +15,16 @@ Route::get('/', function () {
     return view("index");
 });
 
+//Equipe
 Route::resource('equipe', 'EquipeCtrl');
-// Sinistre
+//Actualités
 Route::resource('actualites', 'ActualiteCtrl');
-//Ligne de commande
+//Sponsors
 Route::resource('sponsors', 'SponsorCtrl');
-//Contrat
+//Edition précédente
 Route::resource('editionprecedente', 'EditionPrecedenteCtrl');
+
+//Authentification
+Route::get('/admin', 'AuthController@login');
+Route::post('/auth/check', 'AuthController@check');
+Route::get('/logout', 'AuthController@login');
