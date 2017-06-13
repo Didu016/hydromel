@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Article extends Model {
 
@@ -20,6 +21,16 @@ class Article extends Model {
         return $this->belongsTo('App\Models\Edition', 'edition_id');
     }
 
+<<<<<<< HEAD
+
+    public static function isValid($data){
+        // REGLES DE VALIDATION
+        return Validator::make($data, [
+            'title' => 'string|between:1,100|required', // on vérifie pas les chiffres et autres caractères
+            'description' => 'string|between:1,20000|nullable', // on vérifie pas les chiffres et autres caractères
+            'link' => 'URL|between:1,101|nullable',
+        ])->passes();
+=======
     //////////// CLASS METHODS ////////////
 
     /**
@@ -58,6 +69,7 @@ class Article extends Model {
             array_push($articles, $article_formatted);
         }
         return $articles;
+>>>>>>> 8087fe02f4a9cd9cd1e609726b6ca2a0d5ca3f29
     }
 
 }

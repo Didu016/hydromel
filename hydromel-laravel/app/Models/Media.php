@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Media extends Model {
 
-    protected $table = 'medias';
+    public $table = 'medias';
 
     //////////// RELATIONSHIPS ////////////
 
@@ -22,6 +22,26 @@ class Media extends Model {
         return $this->belongsToMany('App\Models\Edition', 'usage');
     }
 
+<<<<<<< HEAD
+    public static function isValid($data, $allowedTypes, $maxSize){
+        if($data != null) {
+            $typeMedia = $data->getClientOriginalExtension();
+            for ($i = 0; $i < count($allowedTypes); $i++) {
+                if (in_array($typeMedia, $allowedTypes)) { // Si le media est de bon type
+                    if ($data->getClientSize() < $maxSize) {
+                        return true;
+                    } else {
+                        return false; // Media trop grand
+                    }
+                } else {
+                    return false; // Type du média non accepté
+                }
+            }
+        } else {
+            return false; // Pas de média reçu
+        }
+    }
+=======
     //////////// CLASS METHODS ////////////
 
     /**
@@ -55,4 +75,5 @@ class Media extends Model {
         return $medias;
     }
 
+>>>>>>> 8087fe02f4a9cd9cd1e609726b6ca2a0d5ca3f29
 }
