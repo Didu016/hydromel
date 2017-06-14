@@ -21,43 +21,6 @@ Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
 Route::get('/editions/{id}', 'EditionCtrl@show');
 Route::get('/hydromeladminpanel', 'AuthController@login');
 Route::post('/auth/check', 'AuthController@check');
-<<<<<<< HEAD
-Route::get('/logout', 'AuthController@login');
-
-//BackOffice
-    //Accueil
-   /* Route::get('/admin/backoffice', function(){
-        return view("backoffice");
-    });*/
-    //Modification de l'accueil du site
-Route::post('/admin/accueil', 'AccueilCtrl@update');
-Route::get('/admin/accueil', function(){
-   return view("formulaireAccueil");
-});
-
-Route::post('/admin/ModifierMembre', 'MembreCtrl@store');
-Route::get('/admin/ModifierMembre', function(){
-    return view("formulaireModifierMembreTest");
-});
-
-Route::post('/admin/ModifierPreviousEdition', 'PreviousEditionCtrl@update');
-Route::get('/admin/ModifierPreviousEdition', function(){
-    return view("formulaireModifierPreviousEdition");
-});
-
-Route::post('/admin/ModifierArticle', 'ArticleCtrl@update');
-Route::get('/admin/ModifierArticle', function(){
-    return view("formulaireModifierArticleTest");
-});
-
-   /* //Modification de la page équipe du site
-    Route::post('/admin/equipe', 'ctrl@qqch');
-    //Modification de la page sponsors du site
-    Route::post('/admin/sponsors', 'ctrl@qqch');
-    //Modification des pages éditions précédentes du site
-    Route::post('/admin/editionPrecedente', 'ctrl@qqch');*/
-
-=======
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -100,4 +63,3 @@ Route::group(['middleware' => ['auth']], function () {
     });
 }
 );
->>>>>>> 8087fe02f4a9cd9cd1e609726b6ca2a0d5ca3f29

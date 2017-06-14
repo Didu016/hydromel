@@ -14,7 +14,7 @@ class ArticleType extends Model {
         return $this->hasMany('App\Models\Article', 'articletype_id');
     }
 
-    public static function exists($typeName){
+     public static function exists($typeName){
         $aType = Self::where('name', $typeName)->get();
         if($aType->isEmpty()){
             return false;

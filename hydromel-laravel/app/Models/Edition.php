@@ -3,11 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-<<<<<<< HEAD
-use Validator;
-=======
 use App\Lib\Message;
->>>>>>> 8087fe02f4a9cd9cd1e609726b6ca2a0d5ca3f29
 
 class Edition extends Model {
 

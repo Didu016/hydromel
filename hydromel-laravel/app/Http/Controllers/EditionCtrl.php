@@ -81,14 +81,11 @@ class EditionCtrl extends Controller {
         //
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Get all the datas from the current edition.
      * @return json Json containing all the datas from the current edition and 
      * only basics infos from previous editions
      */
->>>>>>> 8087fe02f4a9cd9cd1e609726b6ca2a0d5ca3f29
     public static function getDataFromCurrentEdition() {
         $currentEditionJson = Edition::getCurrentEdition();
         if ($currentEditionJson == null) {
