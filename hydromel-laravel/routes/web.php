@@ -47,13 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     //Changer Edition
-    Route::get('/auth/changeedition/home', function () {
-        return view("backoffice/newedition/accueil");
-    });
-
-    //Changer Edition
-    Route::get('/auth/changeedition/team', function () {
-        return view("backoffice/newedition/equipe");
+    Route::get('/auth/changeedition', function () {
+        return view("backoffice/changeedition");
     });
 
     //Authentification
