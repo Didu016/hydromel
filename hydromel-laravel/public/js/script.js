@@ -1,19 +1,33 @@
 var DEFAULT_PAGE = 'accueil';
 var CURRENT_EDITION = "http://pingouin.heig-vd.ch/hydromel/getCurrentEdition";
+var PREVIOUS_EDITION = "http://pingouin.heig-vd.ch/hydromel/editions/";
 var template;
 var template2;
 var template3;
 var template4;
+var template5;
+var template6;
+var template7;
+var template8;
 $(function(){
+
   template = $("#articleNews").clone();
   template2 = $("#articlePresse").clone();
   template3 = $("#articlePreviewSponsor").clone();
   template4 = $("#articleMembre").clone();
+  template5 = $(".navArticleBoutton").clone();
+  template6 = $("#sliderImageActualite div").clone();
+  template7 = $("#articleSponsor").clone();
+  template8 = $("#choixEditionEdition button").clone();
   $("#articlesAccueil").empty();
   $("#sponsorsAccueil").empty();
   $("#membresEquipe").empty();
   $("#articlesActualite").empty();
-  sliderSetting();
+  $("#navArticle ul").empty();
+  $("#sliderImageActualite").empty();
+  $("#sponsorSponsor").empty();
+  $("#choixEditionEdition").empty();
+
   menuHandler();
   $.getJSON(CURRENT_EDITION, function (json) {
       console.log(json);
@@ -26,6 +40,8 @@ $(function(){
       var sponsors =json.data.current_edition.sponsors;
       var descriptionTeam=json.data.current_edition.edition.team_description;
       var members = json.data.current_edition.members;
+      var medias = json.data.current_edition.medias;
+      var previousEditions=json.data.previous_editions;
       $("#descriptionAccueil p").text(descriptionHome);
       if(place.length!==null){
         $("#lieuAccueil h2").text(place);
@@ -95,9 +111,11 @@ $(function(){
       $.each(articles, function(i, article) {
       if(i % 3 ==0){
           numPage++;
-          $("<section></section>").attr('id','articlesActualitePage'+ numPage).appendTo('#articlesActualite');
-          $("<li></li>").appendTo('#navArticle ul');
-          $("<a></a>").attr('href','articlesActualitePage'+ numPage).appendTo('#navArticle ul li');
+          $("<section></section>").attr('id','articlesActualitePage'+ numPage ).addClass("articlesActualitePage").appendTo('#articlesActualite');
+          var template5Clone = template5.clone();
+          $('li', template5Clone);
+          $('a', template5Clone).attr('data','#articlesActualitePage'+ numPage).text(numPage);
+          $('#navArticle ul').append(template5Clone);
           if(article.articletype_name == "news"){
               var templateClone = template.clone();
               $('h2', templateClone).text(article.title);
@@ -155,9 +173,85 @@ $(function(){
               $("#articlesActualitePage"+ numPage).append(template2Clone);
           }
       }
-
       });
+      $.each(medias, function(i, media) {
+        if(i>=100){return}
+          var template6Clone = template6.clone();
+          $('img', template6Clone).attr('src', media.url);
+          $("#sliderImageActualite").append(template6Clone);
+      });
+    sliderSetting();
+    navArticle();
+    var boutton = $(".navArticleBoutton:first-child")
+    $('a', boutton).attr('selected','selected');
+    $(".navArticleBoutton").on("click", function (){
+        $('body').animate({
+            scrollTop: $("#titrePageActualite").offset().top
+        }, 1000);
+        $(".navArticleBoutton a").removeAttr("selected");
+        $(".articlesActualitePage").hide();
+        var attr=$('a', this).attr("data");
 
+        $('a', this).attr('selected','selected');
+        navArticleShow(attr);
+    });
+    //Page SPONSORS
+    $.each(sponsors, function(i, sponsor) {
+      if(i>=50){return}
+        var template7Clone = template7.clone();
+        $('img', template7Clone).attr('src', sponsor.logo_url);
+        $('p', template7Clone).text(sponsor.society);
+        $("#sponsorSponsor").append(template7Clone);
+        console.log(sponsor.logo_url);
+    });
+    //PAGE EDITION
+    var fixmeTop = $('.sectionChoixEdition').offset().top;
+    $(window).scroll(function() {                  // assign scroll event listener
+      var currentScroll = $(window).scrollTop(); // get current position
+      if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+          $('.sectionChoixEdition').css({                      // scroll to that element or below it
+              position: 'fixed',
+              top: '100',
+              width:'90%',
+              float:'left',
+              background:'#f9f9f9'
+
+          });
+      } else {                                   // apply position: static
+          $('.sectionChoixEdition').css({                      // if you scroll above it
+              position: 'static',
+              width:'100%',
+              background:'#fff',
+              border:'0'
+          });
+      }
+
+  });
+    $.each(previousEditions, function(i, edition) {
+      if(i>=50){return}
+      var template8Clone = template8.clone();
+      $('button', template8Clone);
+      $('a', template8Clone).attr('data', edition.id).text(edition.year);
+      $('#choixEditionEdition').append(template8Clone);
+    });
+    $(".navChoixEdition").on("click", function (){
+      var id_edition = $('a', this).attr("data");
+      console.log(id_edition);
+      /*
+        $.getJSON(PREVIOUS_EDITION, {postalcode: cp, country: 'CH'}, function (data) {
+
+          }
+          $("#localite").trigger("change");
+        });
+        $('body').animate({
+            scrollTop: $("#titrePageActualite").offset().top
+        }, 1000);
+        $(".navArticleBoutton a").removeAttr("selected");
+        $(".articlesActualitePage").hide();
+        var attr=$('a', this).attr("data");
+        $('a', this).attr('selected','selected');
+        navArticleShow(attr);*/
+    });
   });
 });
 function menuHandler() {
@@ -173,20 +267,6 @@ function menuHandler() {
         switchPage(idPage);
     });
     $(window).trigger("popstate");
-    // Responsive !
-    /*$(window).on("resize", function () {
-        if (Modernizr.mq(MQ_SMARTPHONE)) {
-            $(".container > nav").off("click");
-            $(".container > nav").on("click", function () {
-                $(".container > nav ul").toggle();
-            })
-        } else {
-            $(".container > nav").off("click");
-            $(".container > nav ul").show();
-        }
-    })
-
-    $(window).trigger("resize");*/
 }
 
 function switchPageWithHistory(pageId) {
@@ -221,4 +301,12 @@ function sliderSetting() {
     autoplaySpeed: 3000,
     variableWidth: true
   });
+}
+
+function navArticle() {
+    $(".articlesActualitePage").hide();
+    $("#articlesActualitePage1").show();
+}
+function navArticleShow(pageShow) {
+    $(pageShow).show();
 }

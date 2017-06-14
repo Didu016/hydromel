@@ -80,28 +80,19 @@
     <!--PAGE ACTUALITE-->
     <section class="sectionPage" id="page_actualite">
         <header id="headerActualite"></header>
-        <section class="titrePage" id=""><h1>Actualités</h1></section>
+        <section class="titrePage" id="titrePageActualite"><h1>Actualités</h1></section>
         <div id="articlesActualite">
         </div>
         <section id="navArticle">
           <ul class="center">
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
+              <li class="navArticleBoutton">
+                <a></a>
+              </li>
           </ul>
         </section>
         <section class="sectionMedia">
           <section class="titrePage"><h1>Médias</h1></section>
-          <div class="sliderImage">
-            <div>
-              <img src="img/HydroHEIGBateau2016.jpg">
-            </div>
-            <div>
-              <img src="img/stTropez.jpg">
-            </div>
-            <div>
-              <img src="img/joncoel.jpg">
-            </div>
+          <div class="sliderImage" id="sliderImageActualite">
             <div>
               <img src="img/HydroHEIGBateau2016.jpg">
             </div>
@@ -112,30 +103,10 @@
     <section class="sectionPage" id="page_sponsor">
         <header id="headerSponsor"></header>
         <section class="titrePage"><h1>SPONSORS</h1></section>
-        <section class="sectionSponsor">
-            <article>
+        <section class="sectionSponsor" id="sponsorSponsor">
+            <article id="articleSponsor">
                 <img src="img/johnaesch.jpg">
-                <p>Philippe Spat</p>
-            </article>
-            <article>
-                <img src="img/joncoel.jpg">
-                <p>Philippe Spat</p>
-            </article>
-            <article>
-            <img src="img/mathfa.jpg">
-                <p>Philippe Spat</p>
-            </article>
-            <article>
-                <img src="img/johnaesch.jpg">
-                <p>Philippe Spat</p>
-            </article>
-            <article>
-                <img src="img/joncoel.jpg">
-                <p>Philippe Spat</p>
-            </article>
-            <article>
-            <img src="img/mathfa.jpg">
-                <p>Philippe Spat</p>
+                <p></p>
             </article>
         </section>
         <section class="sectionDescription">
@@ -151,11 +122,8 @@
 
         </section>
         <section class="sectionChoixEdition">
-          <div class="center">
-            <button><a href="#">2015</a></button>
-            <button><a href="#">2016</a></button>
-            <button><a href="#">2017</a></button>
-            <button><a href="#">2018</a></button>
+          <div class="center" id="choixEditionEdition">
+            <button class=".navChoixEdition"><a>2015</a></button>
           </div>
         </section>
         <section class="sectionResumeEdition">
