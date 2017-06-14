@@ -93,7 +93,7 @@
         <section class="sectionMedia">
           <section class="titrePage"><h1>Médias</h1></section>
           <div class="sliderImage" id="sliderImageActualite">
-            <div>
+          <div>
               <img src="img/HydroHEIGBateau2016.jpg">
             </div>
           </div>
@@ -123,64 +123,25 @@
         </section>
         <section class="sectionChoixEdition">
           <div class="center" id="choixEditionEdition">
-            <button class=".navChoixEdition"><a>2015</a></button>
+            <button class="navChoixEdition"><a>2015</a></button>
           </div>
         </section>
-        <section class="sectionResumeEdition">
+        <section class="sectionResumeEdition" id="descriptionEdition">
           <h2>Résumé</h2>
           <p>Lorem ipsum dolor sit amet,
             consectetur adipiscing elit. $
             Vivamus massa magna, venenatis id commodo at,
-             ultricies sit amet tortor. Lorem ipsum dolor sit amet,
-               consectetur adipis
-               Vivamus massa magna, venenatis id commodo at,
-                ultricies sit amet tortor.</p>
+            ultricies sit amet tortor. Lorem ipsum dolor sit amet,
+            consectetur adipis
+            Vivamus massa magna, venenatis id commodo at,
+              ultricies sit amet tortor.</p>
         </section>
         <section class="sectionMedia">
           <section class="titrePage"><h2>Membres</h2></section>
-          <div class="sliderImage">
-            <div>
-              <img src="img/joncoel.jpg">
-            </div>
-            <div>
-              <img src="img/joncoel.jpg">
-            </div>
-            <div>
-              <img src="img/joncoel.jpg">
-            </div>
-            <div>
-              <img src="img/joncoel.jpg">
-            </div>
+          <div  class="sliderMembre" id="sliderImageEdition">
           </div>
         </section>
-        <section class="sectionArticle">
-            <article class="article articleNews">
-                <div class="imageArticle"></div>
-                <div class="blocArticleNewsTexte">
-                    <h2>Titre</h2>
-                    <p>Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
-                    <button><a href="#">Lire plus</a></button>
-                </div>
-            </article>
-            <article class="article articleNews">
-                <div class="imageArticle"></div>
-                <div class="blocArticleNewsTexte">
-                    <h2>Titre</h2>
-                    <p>Vivamus massa magna, venenatis id commodo at, ultricies sit amet tortor. Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
-                    <button><a href="#">Lire plus</a></button>
-                </div>
-            </article>
-            <article class="article articlePresse">
-                <div class="blocArticlePresseTexte">
-                    <h2>Titre</h2>
-
-                    <p>Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit. $
-                      Vivamus massa magna, venenatis id commodo at,
-                       ultricies sit amet tortor. </p>
-                    <button><a href="#">Lire plus</a></button>
-                </div>
-            </article>
+        <section class="sectionArticle" id="articlesEdition">
         </section>
     </section>
 </body>

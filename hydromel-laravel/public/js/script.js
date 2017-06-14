@@ -10,7 +10,6 @@ var template6;
 var template7;
 var template8;
 $(function(){
-
   template = $("#articleNews").clone();
   template2 = $("#articlePresse").clone();
   template3 = $("#articlePreviewSponsor").clone();
@@ -27,6 +26,7 @@ $(function(){
   $("#sliderImageActualite").empty();
   $("#sponsorSponsor").empty();
   $("#choixEditionEdition").empty();
+
 
   menuHandler();
   $.getJSON(CURRENT_EDITION, function (json) {
@@ -91,12 +91,14 @@ $(function(){
           $('img', template3Clone).attr('src', sponsor.logo_url)
           $("#sponsorsAccueil").append(template3Clone);
       });
+      //PAGE MEMBRE
       if(descriptionTeam.length!==null){
         $("#descriptionTeam p").text(descriptionTeam);
       }
       else{
         $("#descriptionTeam p").addClass(displayNone);
       }
+
       $.each(members, function(i, member) {
           if(i>=50){return}
           var template4Clone = template4.clone();
@@ -235,22 +237,65 @@ $(function(){
       $('#choixEditionEdition').append(template8Clone);
     });
     $(".navChoixEdition").on("click", function (){
-      var id_edition = $('a', this).attr("data");
-      console.log(id_edition);
-      /*
-        $.getJSON(PREVIOUS_EDITION, {postalcode: cp, country: 'CH'}, function (data) {
+        $("#articlesEdition").empty();
+        var id_edition = $('a', this).attr("data");
+        $.getJSON(PREVIOUS_EDITION+id_edition, function (json) {
 
+          var descriptionEdition = json.data.edition.description;
+          var articlesEdition = json.data.articles;
+          var membre = json.data.members;
+          if(descriptionEdition.length!==null){
+            $("#descriptionEdition p").text(descriptionEdition);
           }
-          $("#localite").trigger("change");
-        });
-        $('body').animate({
-            scrollTop: $("#titrePageActualite").offset().top
-        }, 1000);
-        $(".navArticleBoutton a").removeAttr("selected");
+          else{
+            $("#descriptionEdition p").addClass(displayNone);
+          }
+          $.each(articlesEdition, function(i, article) {
+            if(i>=3){return}
+            if(article.articletype_name == "news"){
+              var templateClone = template.clone();
+              $('h2', templateClone).text(article.title);
+              if(article.description.length>=150){
+                $('p', templateClone).text(article.description.substring(0, 150)+"...");
+              }
+              else{
+                  $('p', templateClone).text(article.description);
+              }
+              $('date', templateClone).text(article.created_at.date.substring(0, 10));
+              if(article.medias[0]==null){
+                $(".imageArticle", templateClone).css('background-image','url(http://hydro.heig-vd.ch/wp-content/uploads/2017/03/cropped-DSC_0173.jpg)');
+              }
+              else{
+                var media = article.medias[0];
+                var url= media.url;
+                $(".imageArticle", templateClone).css('background-image','url('+url+')');
+              }
+              $("#articlesEdition").append(templateClone);
+            }
+            else {
+              var template9Clone = template2.clone();
+              $('h2', template9Clone).text(article.title);
+              $('p', template9Clone).text(article.description);
+              $('date', template9Clone).text(article.created_at.date.substring(0, 10));
+              $("#articlesEdition").append(template9Clone);
+            }
+          });
+          sliderMembreSetting();
+          $.each(members, function(i, member) {
+            if(i>=50){return}
+              var template10Clone = template6.clone();
+              $('img', template10Clone).attr('src', member.media_url);
+              $("#sliderImageEdition").append(template10Clone);
+
+          });
+          });
+
+        $(".navChoixEdition a").removeAttr("selected");
         $(".articlesActualitePage").hide();
         var attr=$('a', this).attr("data");
         $('a', this).attr('selected','selected');
-        navArticleShow(attr);*/
+        navArticleShow(attr);
+
     });
   });
 });
@@ -290,6 +335,20 @@ function switchPageArticle(pageId) {
 }
 function sliderSetting() {
   $('.sliderImage').slick({
+    centerMode: true,
+    arrows: true,
+    centerPadding: '60px',
+    slidesToShow: 3,
+    dots: true,
+    infinite: true,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    variableWidth: true
+  });
+}
+function sliderMembreSetting() {
+  $('.sliderMembre').slick({
     centerMode: true,
     arrows: true,
     centerPadding: '60px',
