@@ -13,7 +13,7 @@ class ActualiteCtrl extends Controller
      */
     public function index()
     {
-        return view('actualite');
+        return view('backoffice/actualite');
     }
 
     /**

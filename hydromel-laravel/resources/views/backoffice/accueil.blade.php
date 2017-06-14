@@ -1,7 +1,7 @@
 @include('backoffice/header')
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--teal-300">
-        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        <div class=" mdl-layout__header-row">
         </div>
         <div class="mdl-layout">
             <h3 class="titrePage">Accueil</h3>
@@ -16,7 +16,9 @@
             <section class=" mdl-grid ">
                 <div class="pages_blocs mdl-card mdl-shadow--2dp mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
                     <div class="mdl-card__supporting-text mdl-cell--12-col-desktop ">
-                        <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description">
+                        <form method="POST" action="" enctype="">
+                            <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description">
+
                             <h4>Description</h4>
                             <textarea required id="accueil_description" rows="10"></textarea>
 
@@ -26,7 +28,8 @@
                             </div>
                             <p class="p-normal">Image ou vidéo 2 </p>
                             <input type="file" accept="video/" accept="image" id="accueil_media2">
-                        </div>
+                            </div>
+
                         <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description1">
                             <div class="espacement">
                                 <p class="p-normal">Lieu</p>
@@ -41,27 +44,24 @@
                                 <input type="date">
                             </div>
                         </div>
-
-
+                        <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                        </form>
                     </div>
-                    <input type="submit" name="valider"
-                           class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-
                 </div>
-
-                <div class="btn_footer mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
-                    <a href="/adminhydromelpanel"
-                       class="mdl-button  mdl-color--accent mdl-color-text--accent-contrast">Accueil</a>
-                </div>
+            </section>
 
         </div>
 
-        </section>
-
+                <div class="btn_footer mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
+                    <a href="/auth/home" class="mdl-button  mdl-color--accent mdl-color-text--accent-contrast">Accueil</a>
+                </div>
 
     </div>
+
+
+
+
+
 </div>
 
-</main>
-</div>
 @include('backoffice/footer')

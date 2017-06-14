@@ -60,4 +60,12 @@ class Article extends Model {
         return $articles;
     }
 
+    public static function isValid($data){
+        // REGLES DE VALIDATION
+        return Validator::make($data, [
+            'title' => 'string|between:1,100|required', // on vérifie pas les chiffres et autres caractères
+            'description' => 'string|between:1,20000|nullable', // on vérifie pas les chiffres et autres caractères
+            'link' => 'URL|between:1,101|nullable',
+        ])->passes();
+    }
 }

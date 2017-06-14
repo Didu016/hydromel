@@ -100,8 +100,17 @@ textarea{
 
 .p-normal{
     margin: 0;
-
 }
+.listes{
+    margin-top: 10%;
+    list-style-type: none;
+    border: thin;
+    border-color: lightblue;
+}
+.btn_ajout{
+    float: right;
+}
+
 #view-source {
     position: fixed;
     display: block;
@@ -305,9 +314,6 @@ _:-ms-input-placeholder, :root .demo-graph {
     margin-right: auto;
 }
 
-.btn_add{
-
-}
 .demo-cards ul {
   padding: 0;
 }

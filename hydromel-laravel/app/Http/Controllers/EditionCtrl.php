@@ -14,7 +14,7 @@ class EditionCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
+        return view('backoffice/accueil');
     }
 
     /**
@@ -87,7 +87,7 @@ class EditionCtrl extends Controller {
      * only basics infos from previous editions
      */
     public static function getDataFromCurrentEdition() {
-        $currentEditionJson = Edition::getCurrentEdition();
+        $currentEditionJson = Edition::getCurrentEditionJson();
         if ($currentEditionJson == null) {
             return self::jsend(Message::error('edition.current.missing'), Message::$ERROR_KEY);
         }

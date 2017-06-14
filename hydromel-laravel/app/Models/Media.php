@@ -55,4 +55,30 @@ class Media extends Model {
         return $medias;
     }
 
+    public static function isValid($data, $allowedTypes, $maxSize){
+        if($data != null) {
+            $typeMedia = $data->getClientOriginalExtension();
+            for ($i = 0; $i < count($allowedTypes); $i++) {
+                if (in_array($typeMedia, $allowedTypes)) { // Si le media est de bon type
+                    if ($data->getClientSize() < $maxSize) {
+                        return true;
+                    } else {
+                        return false; // Media trop grand
+                    }
+                } else {
+                    return false; // Type du média non accepté
+                }
+            }
+        } else {
+            return false; // Pas de média reçu
+        }
+    }
+
+    public static function isDataValid($data){
+        // validation du titre et de la légende
+        return Validator::make($data, [
+            'title' => 'string|between:1,50|nullable', // on vérifie pas les chiffres et autres caractères
+            'legend' => 'string|between:1,2000|nullable', // on vérifie pas les chiffres et autres caractères
+        ])->passes();
+    }
 }

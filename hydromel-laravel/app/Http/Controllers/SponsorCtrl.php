@@ -3,17 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Sponsor;
+use App\Models\Rank;
+use App\Models\Edition;
 
-class SponsorCtrl extends Controller
-{
+class SponsorCtrl extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('sponsor');
+  
+    public function index() {
+        $sponsors = Sponsor::getSponsorsFormatted(Edition::getCurrentEdition()->sponsors()->get());
+        $ranks = Rank::all();
+        return view('backoffice/sponsor', [
+            'sponsors' => $sponsors,
+            'ranks' => $ranks
+        ]);
     }
 
     /**
@@ -21,8 +28,7 @@ class SponsorCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -32,9 +38,8 @@ class SponsorCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        dd($request);
     }
 
     /**
@@ -43,8 +48,8 @@ class SponsorCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+  
+    public function show($id) {
         //
     }
 
@@ -54,8 +59,8 @@ class SponsorCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+  
+    public function edit($id) {
         //
     }
 
@@ -66,8 +71,8 @@ class SponsorCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+
+    public function update(Request $request, $id) {
         //
     }
 
@@ -77,8 +82,8 @@ class SponsorCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+
+    public function destroy($id) {
         //
     }
 }
