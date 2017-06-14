@@ -60,6 +60,7 @@ class Edition2017Seeder extends Seeder {
                     'team' => 'Hydromel',
                     'year' => 2017,
                     'description' => 'II s’agit d’une des problématiques actuelles et communes liées au développement industriel et technologique de notre ère. Avec 90% des échanges commerciaux opérés par la mer, le transport maritime est un enjeu économique et environnemental majeur. En effet, si le bateau reste le moyen de transport le plus écologique, en matière d’emissions de CO2 par tonne transportée, il représente tout de même la 5ème source de pollution mondiale.',
+                    'team_description' => 'Meilleure team de 2015 parce qu\'on est des membres de l\'HEIG-VD',
                     'start_date' => Carbon\Carbon::parse('2017-06-10'),
                     'end_date' => Carbon\Carbon::parse('2017-06-19'),
                     'place' => 'Yverdon-les-Bains',
@@ -108,20 +109,47 @@ class Edition2017Seeder extends Seeder {
 
 
 
-        $article_news = new Article();
-        $article_news->title = 'Lancement de l\'édition Hydrocontest 2017!';
-        $article_news->description = 'Nous sommes contents de vous retrouver cette année pour une nouvelle participation au concours hydrocontest. Cette année, notre nouvelle équipe se réjouit de donner son maximum pour remporter ce concours!';
-        $article_news->articletype_id = DatabaseSeeder::$article_type_news->id;
+        $article_news1 = new Article();
+        $article_news1->title = 'Lancement de l\'édition Hydrocontest 2017!';
+        $article_news1->description = 'Nous sommes contents de vous retrouver cette année pour une nouvelle participation au concours hydrocontest. Cette année, notre nouvelle équipe se réjouit de donner son maximum pour remporter ce concours!';
+        $article_news1->articletype_id = DatabaseSeeder::$article_type_news->id;
 
-        $article_presse = new Article();
-        $article_presse->title = 'Le 20 minutes parle de nous!';
-        $article_presse->link = 'http://www.20min.ch/ro/news/suisse/story/Pres-de-100-0000-cartes-doivent--tre-remplacees-19831939';
-        $article_presse->articletype_id = DatabaseSeeder::$article_type_presse->id;
 
-        $edition->articles()->save($article_news);
-        $edition->articles()->save($article_presse);
+        $article_news2 = new Article();
+        $article_news2->title = 'News 2';
+        $article_news2->description = 'Description news 2';
+        $article_news2->articletype_id = DatabaseSeeder::$article_type_news->id;
 
-        $article_news->medias()->save($media_photo);
+        $article_news3 = new Article();
+        $article_news3->title = 'News 3';
+        $article_news3->description = 'Description news 3';
+        $article_news3->articletype_id = DatabaseSeeder::$article_type_news->id;
+
+        $article_news4 = new Article();
+        $article_news4->title = 'News 4';
+        $article_news4->description = 'Description news 4';
+        $article_news4->articletype_id = DatabaseSeeder::$article_type_news->id;
+
+
+        $article_presse1 = new Article();
+        $article_presse1->title = 'Le 20 minutes parle de nous!';
+        $article_presse1->link = 'http://www.20min.ch/ro/news/suisse/story/Pres-de-100-0000-cartes-doivent--tre-remplacees-19831939';
+        $article_presse1->articletype_id = DatabaseSeeder::$article_type_presse->id;
+
+        $article_presse2 = new Article();
+        $article_presse2->title = 'Presse 2';
+        $article_presse2->link = 'http://www.20min.ch/ro/news/suisse/story/Pres-de-100-0000-cartes-doivent--tre-remplacees-19831939';
+        $article_presse2->articletype_id = DatabaseSeeder::$article_type_presse->id;
+
+        $article_presse3 = new Article();
+        $article_presse3->title = 'Presse 3';
+        $article_presse3->link = 'http://www.20min.ch/ro/news/suisse/story/Pres-de-100-0000-cartes-doivent--tre-remplacees-19831939';
+        $article_presse3->articletype_id = DatabaseSeeder::$article_type_presse->id;
+
+        $edition->articles()->saveMany([$article_news1, $article_news2, $article_news3, $article_news4]);
+        $edition->articles()->saveMany([$article_presse1, $article_presse2, $article_presse3]);
+
+        $article_news1->medias()->save($media_photo);
     }
 
 }

@@ -10,15 +10,14 @@ use App\Models\Responsibility;
 use Illuminate\Http\Request;
 use App\Models\Member;
 
-class MembreCtrl extends Controller
-{
+class MembreCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -27,8 +26,7 @@ class MembreCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -38,12 +36,11 @@ class MembreCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
 
         // RECUPERATIONS DES DONNEES RECUES
-        $dataMember['firstname']= $request->membre_modifier_prenom;
+        $dataMember['firstname'] = $request->membre_modifier_prenom;
         $dataMember['name'] = $request->membre_modifier_nom;
         $dataMember['email'] = $request->membre_modifier_mail;
         $dataResponsibility = $request->membre_modifier_respo;
@@ -52,7 +49,6 @@ class MembreCtrl extends Controller
         // Valider les champs du membre
         $alreadyExistingMember = Member::exists($dataMember);
         $validDataMember = Member::isValid($dataMember); // true si valid, false si non
-
         // Valider la responsability
         $validResponsibility = false;
         $validDataResponsibility = Responsibility::isValid($dataResponsibility);
@@ -67,8 +63,8 @@ class MembreCtrl extends Controller
         // Changer la responsibility
         // Changer le media
 
-        if($validDataMember != false && $validDataResponsibility != false && $validMedia != false && $alreadyExistingMember != true){
-            DB::transaction(function () use ($dataMedia, $dataMember, $dataResponsibility){
+        if ($validDataMember != false && $validDataResponsibility != false && $validMedia != false && $alreadyExistingMember != true) {
+            DB::transaction(function () use ($dataMedia, $dataMember, $dataResponsibility) {
 
                 // Creer le membre
                 $member = new Member();
@@ -83,30 +79,26 @@ class MembreCtrl extends Controller
                 $media->title = 'Photo' . $dataMember['firstname'];
                 $media->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
                 $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
-                if(in_array($dataMedia->getClientOriginalExtension(), $videoTypes)){ // Si le média reçu est une vidéo
+                if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                     $media->mediatype_id = 1; // Alors on set que c'est une photo
                 } else { // Si le média reçu est une photo
                     $media->mediatype_id = 2; // Alors on set que c'est une photo
                 }
                 $media->save();
                 $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
-
-
                 // Ajouter ce membre a l'edition
                 $actualEdition = Edition::all()->sortByDesc("year")->first();
                 $responsibilities = Responsibility::all();
                 $responsibilityId = 0;
 
-                for($i = 1 ; $i < count($responsibilities)+1 ; $i ++ )
-                {
+                for ($i = 1; $i < count($responsibilities) + 1; $i ++) {
                     $oneResponsibility = Responsibility::find($i);
-                    if($oneResponsibility['name'] == $dataResponsibility) {
+                    if ($oneResponsibility['name'] == $dataResponsibility) {
                         $responsibilityId = $oneResponsibility->id;
                     }
                 }
 
                 $actualEdition->medias()->save($media); // PK ON FAIT CA
-                //$actualEdition->members()->save($member); // ET ON FERAIT PAS çA
 
                 $participation = new Participation();
                 $participation->member_id = $member->id;
@@ -114,17 +106,6 @@ class MembreCtrl extends Controller
                 $participation->responsibility_id = $responsibilityId;
                 $participation->media_id = $media->id;
                 $participation->save();
-
-                /*
-                dd($member->id);
-                $test = Participation::create([
-                    'member_id' => $member->id,
-                    'edition_id' => $actualEdition->id,
-                    'responsibility_id' => $responsibilityId,
-                    'media_id' => $media->id
-                ]);
-                */
-
             }); // Fin de la transaction
             // REUSSITE
         } else { // SINON ERREUUUUUUUUUUUUUUR --------------------------------------------------------------------------
@@ -138,8 +119,7 @@ class MembreCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -149,8 +129,7 @@ class MembreCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -161,15 +140,14 @@ class MembreCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request/*,  $id */)
-    {
+    public function update(Request $request/* ,  $id */) {
         $memberId = 6;
 
         // RECUPERATION DU MEMBRE
         $member = Member::find($memberId);
 
         // RECUPERATIONS DES DONNEES RECUES
-        $dataMember['firstname']= $request->membre_modifier_prenom;
+        $dataMember['firstname'] = $request->membre_modifier_prenom;
         $dataMember['name'] = $request->membre_modifier_nom;
         $dataMember['email'] = $request->membre_modifier_mail;
         $dataResponsability = $request->membre_modifier_respo;
@@ -177,7 +155,6 @@ class MembreCtrl extends Controller
 
         // Valider la description
         $validDataMember = Member::isValid($dataMember); // true si valid, false si non
-
         // Valider la responsability
         $validResponsibility = false;
         $validDataResponsibility = Responsibility::isValid($dataResponsability);
@@ -192,41 +169,40 @@ class MembreCtrl extends Controller
         // Changer la responsibility
         // Changer le media
 
-        if($validDataMember != false && $validDataResponsibility != false && $validMedia != false){
-            DB::transaction(function () use ($dataMedia, $dataMember, $member, $memberId){
+        if ($validDataMember != false && $validDataResponsibility != false && $validMedia != false) {
+            DB::transaction(function () use ($dataMedia, $dataMember, $member, $memberId) {
 
-            // Update le membre
-            $member->firstname = $dataMember['firstname'];
-            $member->name = $dataMember['name'];
-            $member->email = $dataMember['email'];
+                // Update le membre
+                $member->firstname = $dataMember['firstname'];
+                $member->name = $dataMember['name'];
+                $member->email = $dataMember['email'];
 
-            $actualEdition = json_decode(EditionCtrl::getDataFromCurrentEdition()->content())->current_edition; // Récupération de la totalité des informations des éditions
-            $actualEditionYear = $actualEdition->edition->year;
-            $actualEditionMembers = $actualEdition->members;
+                $actualEdition = json_decode(EditionCtrl::getDataFromCurrentEdition()->content())->current_edition; // Récupération de la totalité des informations des éditions
+                $actualEditionYear = $actualEdition->edition->year;
+                $actualEditionMembers = $actualEdition->members;
 
-            $mediaDestination = "../../img/membersMedias";
-            for($i = 0 ; $i < count($actualEditionMembers); $i ++){
-                if($actualEditionMembers[$i]->id == $memberId){
-                    $hisMedia = Media::find($actualEditionMembers[$i]->pivot->media_id) ; // Recuperation de son media
-                    // On pourrait changer le nom du média aisément (reprendre le mail par exemple, comme ça il reste unique
-                    $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
-                    $hisMedia->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName(); // Sauvegarde du nouveau chemin
-
-                    // Regarde le lien avec MediaTypes
-                    $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
-                    if(in_array($dataMedia->getClientOriginalExtension(), $videoTypes)){ // Si le média reçu est une vidéo
-                        if($hisMedia->mediatype_id != 1){ // Si le média original n'est pas une vidéo
-                            $hisMedia->mediatype_id = 1; // Alors on set que c'est une photo
-                        }
-                    } else { // Si le média reçu est une photo
-                        if($hisMedia->mediatype_id != 2){ // Si le média orignal n'est pas une photo
-                            $hisMedia->mediatype_id = 2; // Alors on set que c'est une photo
+                $mediaDestination = "../../img/membersMedias";
+                for ($i = 0; $i < count($actualEditionMembers); $i ++) {
+                    if ($actualEditionMembers[$i]->id == $memberId) {
+                        $hisMedia = Media::find($actualEditionMembers[$i]->pivot->media_id); // Recuperation de son media
+                        // On pourrait changer le nom du média aisément (reprendre le mail par exemple, comme ça il reste unique
+                        $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
+                        $hisMedia->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName(); // Sauvegarde du nouveau chemin
+                        // Regarde le lien avec MediaTypes
+                        $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
+                        if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
+                            if ($hisMedia->mediatype_id != 1) { // Si le média original n'est pas une vidéo
+                                $hisMedia->mediatype_id = 1; // Alors on set que c'est une photo
+                            }
+                        } else { // Si le média reçu est une photo
+                            if ($hisMedia->mediatype_id != 2) { // Si le média orignal n'est pas une photo
+                                $hisMedia->mediatype_id = 2; // Alors on set que c'est une photo
+                            }
                         }
                     }
                 }
-            }
-            $member->save();
-            $hisMedia->save(); // Update du media
+                $member->save();
+                $hisMedia->save(); // Update du media
             }); // Fin de la transaction
             // REUSSITE
         } else { // SINON ERREUUUUUUUUUUUUUUR --------------------------------------------------------------------------
@@ -240,8 +216,8 @@ class MembreCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }

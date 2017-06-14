@@ -41,20 +41,20 @@
                                             <td class="article_news_image">Le media</td>
                                             <td>
                                                 <button id="btn_modifier_news" class="bouton_table"><i
-                                                            class="mdl-color-text--blue-grey-400 material-icons"
-                                                            role="button">create</i></button>
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="button">create</i></button>
                                             </td>
                                             <td>
                                                 <button id="btn_delete_news" class="bouton_table"><i
-                                                            class="mdl-color-text--blue-grey-400 material-icons"
-                                                            role="presentation">delete</i></button>
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="presentation">delete</i></button>
                                             </td>
                                         </tr>
                                     </table>
                                     <button id="btn_ajout_news" class="bouton_ajout bouton_table"><i
-                                                id="btn_ajout_membre"
-                                                class="bouton_table mdl-color-text--blue-grey-400 material-icons"
-                                                role="presentation">add_circle</i></button>
+                                            id="btn_ajout_membre"
+                                            class="bouton_table mdl-color-text--blue-grey-400 material-icons"
+                                            role="presentation">add_circle</i></button>
 
                                 </div>
                             </section>
@@ -98,20 +98,20 @@
                                             <td id="article_presse_image">Le media</td>
                                             <td>
                                                 <button id="btn_modifier_presse" class="bouton_table"><i
-                                                            class="mdl-color-text--blue-grey-400 material-icons"
-                                                            role="button">create</i></button>
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="button">create</i></button>
                                             </td>
                                             <td>
                                                 <button id="btn_delete_presse" class="bouton_table"><i
-                                                            class="mdl-color-text--blue-grey-400 material-icons"
-                                                            role="presentation">delete</i></button>
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="presentation">delete</i></button>
                                             </td>
                                         </tr>
                                     </table>
                                     <button id="btn_ajout_presse" class="bouton_ajout bouton_table"><i
-                                                id="btn_ajout_membre"
-                                                class="bouton_table mdl-color-text--blue-grey-400 material-icons"
-                                                role="presentation">add_circle</i></button>
+                                            id="btn_ajout_membre"
+                                            class="bouton_table mdl-color-text--blue-grey-400 material-icons"
+                                            role="presentation">add_circle</i></button>
 
                                 </div>
                             </section>
@@ -149,20 +149,20 @@
                                             <td id="media_image">Le media</td>
                                             <td>
                                                 <button id="btn_modifier_media" class="bouton_table"><i
-                                                            class="mdl-color-text--blue-grey-400 material-icons"
-                                                            role="button">create</i></button>
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="button">create</i></button>
                                             </td>
                                             <td>
                                                 <button id="btn_delete_media" class="bouton_table"><i
-                                                            class="mdl-color-text--blue-grey-400 material-icons"
-                                                            role="presentation">delete</i></button>
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="presentation">delete</i></button>
                                             </td>
                                         </tr>
                                     </table>
                                     <button id="btn_ajout_media" class="bouton_ajout bouton_table"><i
-                                                id="btn_ajout_membre"
-                                                class="bouton_table mdl-color-text--blue-grey-400 material-icons"
-                                                role="presentation">add_circle</i></button>
+                                            id="btn_ajout_membre"
+                                            class="bouton_table mdl-color-text--blue-grey-400 material-icons"
+                                            role="presentation">add_circle</i></button>
 
                                 </div>
                             </section>
