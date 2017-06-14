@@ -44,7 +44,7 @@
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
             <a id="changerEdition" class="mdl-navigation__link"
-               href="changeedition/home"><i
+               href="changeedition"><i
                         class="mdl-color-text--blue-grey-400 material-icons" role="presentation">compare_arrows</i>Changer
                 Edition</a>
             <a id="changerMdp" class="mdl-navigation__link" href="adminhydromelpanel/changepassword"><i

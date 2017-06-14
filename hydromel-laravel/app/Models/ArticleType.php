@@ -22,5 +22,4 @@ class ArticleType extends Model {
             return true;
         }
     }
-
 }
