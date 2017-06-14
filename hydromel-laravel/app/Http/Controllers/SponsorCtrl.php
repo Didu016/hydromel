@@ -11,12 +11,12 @@ use App\Models\Sponsoring;
 use Illuminate\Support\Facades\DB;
 
 class SponsorCtrl extends Controller {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+  
     public function index() {
         $sponsors = Sponsor::getSponsorsFormatted(Edition::getCurrentEdition()->sponsors()->get());
         $ranks = Rank::all();
@@ -119,6 +119,7 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+  
     public function show($id) {
         //
     }
@@ -129,6 +130,7 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+  
     public function edit($id) {
         //
     }
@@ -140,6 +142,7 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         /*---- RECUPERATIONS DES DONNEES RECUES ----*/
@@ -154,7 +157,7 @@ class SponsorCtrl extends Controller {
 
         /*---- VALIDATIONS ----*/
         $validMedia = true; // Par defaut la validation du media est a true, pour si jamais il n'y a pas de media
-        if($dataMedia != null) { // Si il y a un media
+        if ($dataMedia != null) { // Si il y a un media
             $mediaMaxSize = 20000000;
             $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
             $validMedia = Media::isValid($dataMedia, $allowedTypes, $mediaMaxSize);
@@ -164,14 +167,14 @@ class SponsorCtrl extends Controller {
         // Valider l'existence de ce sponsor
         $sponsor = Sponsor::find($idSponsor);
         // Valider l'existence de ce media
-        if($idOldMedia != null){
+        if ($idOldMedia != null) {
             $existingMedia = Media::find($idOldMedia);
         } else {
             $existingMedia = null;
         }
 
         /*---- MODIFICATION ----*/
-        if($validMedia != false && $validMedia != false && $validSponsor != false && $validRank != false){
+        if ($validMedia != false && $validMedia != false && $validSponsor != false && $validRank != false) {
             DB::transaction(function () use ($dataSponsor, $dataMedia, $rank, $sponsor, $existingMedia) {
 
                 // Modification du sponsor
@@ -184,7 +187,7 @@ class SponsorCtrl extends Controller {
                 // Modifier le media
 
                 // Modifier le media
-                if($dataMedia != null){
+                if ($dataMedia != null) {
                     $mediaDestination = "../../img/sponsorsMedias";
                     $existingMedia->title = 'logo_' . $dataSponsor['society'];
                     $existingMedia->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
@@ -217,17 +220,18 @@ class SponsorCtrl extends Controller {
                     ->where('edition_id', $currentEditionId)
                     ->where('sponsor_id', $sponsorId)
                     ->update(array('rank_id' => $rankId));
-/*
-                $sponsoring = Sponsoring::where([
-                    ['edition_id', '=', $currentEditionId],['sponsor_id', '=', $sponsorId],['rank_id', '=', 1]
-                ])->get()->first();
-                dd($sponsoring->getKeyName());
-                $sponsoring->rank_id = 0;
-                $sponsoring->save();
-*/
+                /*
+                                $sponsoring = Sponsoring::where([
+                                    ['edition_id', '=', $currentEditionId],['sponsor_id', '=', $sponsorId],['rank_id', '=', 1]
+                                ])->get()->first();
+                                dd($sponsoring->getKeyName());
+                                $sponsoring->rank_id = 0;
+                                $sponsoring->save();
+                */
             });
         }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -235,8 +239,8 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id) {
         //
     }
-
 }

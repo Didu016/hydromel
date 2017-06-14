@@ -19,32 +19,32 @@
                         <form method="POST" action="" enctype="">
                             <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description">
 
-                            <h4>Description</h4>
-                            <textarea required id="accueil_description" rows="10"></textarea>
+                                <h4>Description</h4>
+                                <textarea required id="accueil_description" rows="10"></textarea>
 
-                            <div class="espacement">
-                                <p class="p-normal">Image ou vidéo 1 </p>
-                                <input type="file" accept="video/" accept="image" id="accueil_media1">
-                            </div>
-                            <p class="p-normal">Image ou vidéo 2 </p>
-                            <input type="file" accept="video/" accept="image" id="accueil_media2">
+                                <div class="espacement">
+                                    <p class="p-normal">Image ou vidéo 1 </p>
+                                    <input type="file" accept="video/" accept="image" id="accueil_media1">
+                                </div>
+                                <p class="p-normal">Image ou vidéo 2 </p>
+                                <input type="file" accept="video/" accept="image" id="accueil_media2">
                             </div>
 
-                        <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description1">
-                            <div class="espacement">
-                                <p class="p-normal">Lieu</p>
-                                <input type="text" id="accueil_lieu">
+                            <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description1">
+                                <div class="espacement">
+                                    <p class="p-normal">Lieu</p>
+                                    <input type="text" id="accueil_lieu">
+                                </div>
+                                <div>
+                                    <p class="p-normal" id="date_debut">Date de début</p>
+                                    <input type="date" placeholder="">
+                                </div>
+                                <div>
+                                    <p class="p-normal" id="date_fin">Date de fin</p>
+                                    <input type="date">
+                                </div>
                             </div>
-                            <div>
-                                <p class="p-normal" id="date_debut">Date de début</p>
-                                <input type="date" placeholder="">
-                            </div>
-                            <div>
-                                <p class="p-normal" id="date_fin">Date de fin</p>
-                                <input type="date">
-                            </div>
-                        </div>
-                        <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                            <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                         </form>
                     </div>
                 </div>
@@ -52,9 +52,9 @@
 
         </div>
 
-                <div class="btn_footer mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
-                    <a href="/auth/home" class="mdl-button  mdl-color--accent mdl-color-text--accent-contrast">Accueil</a>
-                </div>
+        <div class="btn_footer mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
+            <a href="/auth/home" class="mdl-button  mdl-color--accent mdl-color-text--accent-contrast">Accueil</a>
+        </div>
 
     </div>
 
