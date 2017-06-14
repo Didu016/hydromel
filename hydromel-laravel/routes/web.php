@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/auth/article', 'ArticleCtrl');
 
+    Route::resource('/auth/media', 'MediaCtrl');
+
     //Actualités
     Route::resource('/auth/news', 'ActualiteCtrl');
 

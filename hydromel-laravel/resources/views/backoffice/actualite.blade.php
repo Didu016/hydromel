@@ -184,27 +184,28 @@
                                     <button id="btn_ajout_media" class="bouton_ajout bouton_table"><i
 
                                                 class="bouton_table mdl-color-text--blue-grey-400 material-icons"
-
+                                                role="presentation">add_circle</i></button>
 
                                 </div>
                             </section>
                             <section class="aCacher" id="ajout_media">
                                 <h5>Ajouter un media</h5>
-                                <form  method="POST" action="" enctype="">
-                                <p>Titre <input id="media_nouveau_titre" type="text"></p>
-                                Description <textarea id="media_nouveau_description"></textarea>
+                                <form  method="POST" action="{{url('/auth/media')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <p>Titre <input id="media_nouveau_titre" name="title" type="text"></p>
+                                Legend <textarea id="media_nouveau_description" name="legend"></textarea>
                                 <p>Audiovisuel <input id="media_nouveau_image" type="file" accept="image"
-                                                      accept="video"></p>
+                                                      accept="video" name="media"></p>
                                     <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                 </form>
                             </section>
                             <section class="aCacher" id="modifier_media">
                                 <h5>Modifier un media</h5>
                                 <form  method="POST" action="" enctype="">
-                                <p>Titre <input id="media_modifier_titre" type="text"></p>
-                                Description <textarea id="media_modifier_description"></textarea>
+                                <p>Titre <input id="media_modifier_titre" name="title" type="text"></p>
+                                Legend <textarea id="media_modifier_description" name="legend"></textarea>
                                 <p>Audiovisuel <input id="media_modifier_image" type="file" accept="image"
-                                                      accept="video"></p>
+                                                      accept="video" name="media"></p>
                                 <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                 </form>
                             </section>

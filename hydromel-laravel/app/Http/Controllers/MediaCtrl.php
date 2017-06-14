@@ -46,8 +46,7 @@ class MediaCtrl extends Controller
         $validMediaData = Media::isDataValid($dataMedia);
         $mediaMaxSize = 2000000;
         $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
-        $validMedia = Media::isValid($theNewMedia, $allowedTypes, $mediaMaxSize);
-
+        $validMedia = Media::isValid($theMedia, $allowedTypes, $mediaMaxSize);
 
         if($theMedia != null && $validMediaData != false && $validMedia != false){
             DB::transaction(function () use ($dataMedia, $theMedia) {
@@ -107,6 +106,7 @@ class MediaCtrl extends Controller
      */
     public function update(Request $request /*, $id*/)
     {
+
         /*---- RECUPERATIONS DES DONNEES RECUES ----*/
         $dataMedia['title']= $request->title;
         $dataMedia['legend'] = $request->legend;
