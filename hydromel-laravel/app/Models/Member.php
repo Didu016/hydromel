@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
+use Illuminate\Support\Facades\DB;
 
 class Member extends Model {
 
@@ -125,7 +127,7 @@ class Member extends Model {
                 // Creer le media
                 $mediaDestination = "../../img/membersMedias";
                 $media = new Media();
-                $media->title = 'Photo' . $dataMember['firstname'];
+                $media->title = 'Photo_' . $dataMember['firstname'];
                 $media->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
                 $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                 if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
@@ -157,9 +159,9 @@ class Member extends Model {
                 $participation->media_id = $media->id;
                 $participation->save();
             }); // Fin de la transaction
-            // REUSSITE
+            // REUSSITE REDIRECTION --------------------------------------
         } else { // SINON ERREUUUUUUUUUUUUUUR --------------------------------------------------------------------------
-            dd('un des champs est pas bon ou alors le type existe déjà');
+            dd('un des champs est pas bon ou alors le membre existe déjà');
         }
     }
 

@@ -63,15 +63,15 @@
                         </section>
                             <section class="aCacher" id="ajout_membre">
                                 <h5>Ajouter un nouveau membre</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="POST" action="{{url('/auth/member')}}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <input type="hidden" name="id" value="">
                                     <p>Nom <input name="membre_nom" type="text"></p>
                                     <p>Prenom <input name="membre_prenom" type="text"></p>
                                     <p>Mail <input name="membre_mail" type="email"></p>
                                     <input name="membre_image" type="file" accept="image">
                                 <div>
-                                   Responsabilité <select id="membre_nouveau_resp">
-                                        <option class="liste_resp">les differentes options ici</option>
+                                   Responsabilité<select id="membre_nouveau_resp" name="membre_responsibility"> <!-- ici il faut foreach -->
                                     </select>
                                 </div>
                                     <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
@@ -79,7 +79,7 @@
                             </section>
                             <section class="aCacher" id="modifier_membre">
                                 <h5>Modifier un membre</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="" action="" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="">
                                 <p>Nom <input name="membre_nom" type="text"></p>
                                 <p>Prenom <input name="membre_prenom" type="text"></p>

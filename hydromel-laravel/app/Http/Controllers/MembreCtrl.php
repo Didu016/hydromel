@@ -38,16 +38,14 @@ class MembreCtrl extends Controller {
      */
     public function store(Request $request) {
 
-
         // RECUPERATIONS DES DONNEES RECUES
-        $dataMember['firstname'] = $request->membre_modifier_prenom;
-        $dataMember['name'] = $request->membre_modifier_nom;
-        $dataMember['email'] = $request->membre_modifier_mail;
-        $dataResponsibility = $request->membre_modifier_respo;
-        $dataMedia = $request->files->get('membre_modifier_image');
+        $dataMember['firstname'] = $request->membre_prenom;
+        $dataMember['name'] = $request->membre_nom;
+        $dataMember['email'] = $request->membre_mail;
+        $dataResponsibility = $request->membre_responsibility;
+        $dataMedia = $request->files->get('membre_image');
 
         Member::createMember($dataMember, $dataResponsibility, $dataMedia);
-
     }
 
     /**
