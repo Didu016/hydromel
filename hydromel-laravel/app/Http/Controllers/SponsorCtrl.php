@@ -8,12 +8,12 @@ use App\Models\Rank;
 use App\Models\Edition;
 
 class SponsorCtrl extends Controller {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+  
     public function index() {
         $sponsors = Sponsor::getSponsorsFormatted(Edition::getCurrentEdition()->sponsors()->get());
         $ranks = Rank::all();
@@ -48,6 +48,7 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+  
     public function show($id) {
         //
     }
@@ -58,6 +59,7 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+  
     public function edit($id) {
         //
     }
@@ -69,6 +71,7 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id) {
         //
     }
@@ -79,8 +82,8 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id) {
         //
     }
-
 }

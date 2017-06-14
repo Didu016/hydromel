@@ -10,11 +10,11 @@
 }
 .articleNews:nth-child(odd) .imageArticle{
 	float: left;
-	background-image: url("../img/joncoel.jpg");
+	/*background-image: url("../img/joncoel.jpg");*/
 }
 .articleNews:nth-child(even) .imageArticle{
 	float: right;
-	background-image: url("../img/HydroHEIGBateau2016.jpg");
+	
 }
 .articleNews{
 	width: 100%;
@@ -39,7 +39,7 @@
 .blocArticleNewsTexte{
 	float: left;
 	width: 40%;
-	margin: 10px;
+	margin-left: 20px;
 	height: fit-content;
 }
 .articleNews p{
@@ -57,7 +57,7 @@
 .blocArticlePresseTexte{
 	float: left;
 	width: 80%;
-	margin: 10px;
+	margin-left: 20px;
 	height: fit-content;
 }
 
