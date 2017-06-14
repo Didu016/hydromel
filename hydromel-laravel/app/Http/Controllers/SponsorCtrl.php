@@ -20,6 +20,7 @@ class SponsorCtrl extends Controller {
     public function index() {
         $sponsors = Sponsor::getSponsorsFormatted(Edition::getCurrentEdition()->sponsors()->get());
         $ranks = Rank::all();
+        //dd($sponsors);
         return view('backoffice/sponsor', [
             'sponsors' => $sponsors,
             'ranks' => $ranks
@@ -43,12 +44,12 @@ class SponsorCtrl extends Controller {
      */
     public function store(Request $request) {
         /*---- RECUPERATIONS DES DONNEES RECUES ----*/
-        $dataSponsor['society'] = $request->sponsor_nom;
-        $dataSponsor['mail_contact'] = $request->sponsor_mail;
-        $dataSponsor['amount'] = $request->sponsor_amount;
-        $dataSponsor['link'] = $request->sponsor_link;
-        $rank = $request->sponsor_categorie;
-        $dataMedia = $request->files->get('sponsor_logo');
+        $dataSponsor['society'] = $request->society;
+        $dataSponsor['mail_contact'] = $request->mail_contact;
+        $dataSponsor['amount'] = $request->amount;
+        $dataSponsor['link'] = $request->link;
+        $rank = $request->rank;
+        $dataMedia = $request->files->get('logo_url');
 
         /*---- VALIDATIONS ----*/
         $validMedia = true; // Par defaut la validation du media est a true, pour si jamais il n'y a pas de media

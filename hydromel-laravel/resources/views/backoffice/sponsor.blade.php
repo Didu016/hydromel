@@ -50,7 +50,7 @@
                                             -
                                             @endif
                                         </td>
-                                        <td><button data-id="" id="btn_modifier_sponsor" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="button">create</i></button></td>
+                                        <td><button data-id="{{$sponsor['id']}}" id="btn_modifier_sponsor" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="button">create</i></button></td>
                                         <td><button id="btn_delete_sponsor" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i></button></td>
                                     </tr>
                                     @endforeach
@@ -73,6 +73,9 @@
                                         @endforeach
                                     </select>
                                 </p>
+                                <p>Mail de contact:<input id="sponsor_nouveau_mail" type="text" name="mail_contact"></p>
+                                <p>Quantité monétaire (justes les chiffres) (en chf):<input id="sponsor_nouveau_amount" type="text" name="amount"></p>
+                                <p>Lien du site web:<input id="sponsor_nouveau_link" type="text" name="link"></p>
                                 <p>Logo <input id="sponsor_nouveau_img" type="file" accept="image/png" name="logo_url"></p>
                                 <p><input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast"></p>
                             </form>
