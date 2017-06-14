@@ -7,16 +7,15 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Edition;
 use App\Models\Media;
 
-class AccueilCtrl extends Controller
-{
+class AccueilCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view('backoffice/accueil');
     }
 
     /**
@@ -24,8 +23,7 @@ class AccueilCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -35,8 +33,7 @@ class AccueilCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -46,8 +43,7 @@ class AccueilCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -57,8 +53,7 @@ class AccueilCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -69,13 +64,12 @@ class AccueilCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request) // IL FAUT REMETTRE LE $id QUAND ON AURA ACCES AU FORMULAIRE (ou pas, peut-être)
-    {
+    public function update(Request $request) { // IL FAUT REMETTRE LE $id QUAND ON AURA ACCES AU FORMULAIRE (ou pas, peut-être)
         $editionActuelle = json_decode(EditionCtrl::getDataFromCurrentEdition()->content())->current_edition; // Récupération de la totalité des informations des éditions
         $idEditionActuelle = $editionActuelle->edition->id;
 
         // RECUPERATIONS DES DONNEES RECUES
-        $dataEdition['description']= $request->description;
+        $dataEdition['description'] = $request->description;
         $dataEdition['place'] = $request->place;
         $dataEdition['beginningDate'] = $request->beginningDate;
         $dataEdition['finishingDate'] = $request->finishingDate;
@@ -84,21 +78,19 @@ class AccueilCtrl extends Controller
 
         // Validations des champs de l'édition
         $validDescription = Edition::isValidForUpdate($dataEdition); // true si valid, false si non
-
         // Validations des médias
         $validMedia = false;
         $target_dir = "files/";
         $mediaMaxSize = 2000000;
         $uploadOk = true;
         $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png'); // Types de fichiers autorisés
-        for($i = 0 ; $i < count($dataMedia) ; $i++) { // On va creer chacuns des médias
+        for ($i = 0; $i < count($dataMedia); $i++) { // On va creer chacuns des médias
             $uploadOk = Media::isValid($dataMedia[$i], $allowedTypes, $mediaMaxSize);
         }
         dd($uploadOk);
         // Fin des validations
-
         // UPLOAD - UPDATES
-        if($validDescription != false && $uploadOk != false) { // Si les donnees sont valides, on fait les mises a jour
+        if ($validDescription != false && $uploadOk != false) { // Si les donnees sont valides, on fait les mises a jour
             DB::transaction(function () use ($idEditionActuelle, $dataMedia) {
 
                 $edition = Edition::find($idEditionActuelle);
@@ -144,8 +136,7 @@ class AccueilCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 
