@@ -26,7 +26,7 @@ class AuthController extends Controller {
         if (!Auth::attempt(['username' => $username, 'password' => $password], false)) {
             return redirect()->action('AuthController@login')->with('error', true);
         }
-        return redirect(Session::get('oldUrl', '/auth/accueil'));
+        return redirect(Session::get('oldUrl', '/auth/home'));
     }
 
     /**
