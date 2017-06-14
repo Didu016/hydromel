@@ -3,12 +3,15 @@ var CURRENT_EDITION = "http://pingouin.heig-vd.ch/hydromel/getCurrentEdition";
 var template;
 var template2;
 var template3;
+var template4;
 $(function(){
   template = $("#articleNews").clone();
   template2 = $("#articlePresse").clone();
   template3 = $("#articlePreviewSponsor").clone();
+  template4 = $("#articleMembre").clone();
   $("#articlesAccueil").empty();
   $("#sponsorsAccueil").empty();
+  $("#membresEquipe").empty();
   sliderSetting();
   menuHandler();
   $.getJSON(CURRENT_EDITION, function (json) {
@@ -21,6 +24,7 @@ $(function(){
       var articles = json.data.current_edition.articles;
       var sponsors =json.data.current_edition.sponsors;
       var descriptionTeam=json.data.current_edition.edition.team_description;
+      var members = json.data.current_edition.members;
       $("#descriptionAccueil p").text(descriptionHome);
       if(place.length!==null){
         $("#lieuAccueil h2").text(place);
@@ -65,6 +69,16 @@ $(function(){
       else{
         $("#descriptionTeam p").addClass(displayNone);
       }*/
+      $.each(members, function(i, member) {
+          if(i>=50){return}
+          var template4Clone = template4.clone();
+          $('img', template4Clone).attr('src', member.media_url);
+          var prenomNom = member.firstname + ' ' + member.name;
+          $('.prenomNomMembre', template4Clone).text(prenomNom);
+          $('.prenomNomMembre', template4Clone).text(prenomNom);
+          $("#membresEquipe").append(template4Clone);
+      });
+
   });
 });
 function menuHandler() {
@@ -104,6 +118,9 @@ function switchPageWithHistory(pageId) {
 function switchPage(pageId) {
     $(".sectionPage").hide();
     $("#page_" + pageId).show();
+    if(pageId=="accueil") {
+      $("video").resize()
+    }
 }
 function sliderSetting() {
   $('.sliderImage').slick({

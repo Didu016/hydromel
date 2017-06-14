@@ -67,30 +67,11 @@
         <section class="sectionDescription" id="descriptionTeam">
             <p></p>
         </section>
-        <section class="sectionMembre">
-            <article>
+        <section class="sectionMembre" id="membresEquipe">
+            <article id="articleMembre">
                 <img src="img/johnaesch.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-                <img src="img/joncoel.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-            <img src="img/mathfa.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-                <img src="img/johnaesch.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-                <img src="img/joncoel.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-            <img src="img/mathfa.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
+                <div class="prenomNomMembre"></div>
+                <div>Responsabilité<div>
             </article>
         </section>
     </section>
