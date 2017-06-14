@@ -74,8 +74,8 @@ $(function(){
           var template4Clone = template4.clone();
           $('img', template4Clone).attr('src', member.media_url);
           var prenomNom = member.firstname + ' ' + member.name;
-          $('.prenomNomMembre', template4Clone).text(prenomNom);
-          $('.prenomNomMembre', template4Clone).text(prenomNom);
+          $('.prenomNomMembre', template4Clone).text(member.name);
+          $('.reponsabiliteMembre', template4Clone).text(member.responsibility_name);
           $("#membresEquipe").append(template4Clone);
       });
 

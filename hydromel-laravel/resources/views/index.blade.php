@@ -71,7 +71,7 @@
             <article id="articleMembre">
                 <img src="img/johnaesch.jpg">
                 <div class="prenomNomMembre"></div>
-                <div>Responsabilité<div>
+                <div class="reponsabiliteMembre">Responsabilité<div>
             </article>
         </section>
     </section>
