@@ -55,6 +55,11 @@ Route::group(['middleware' => ['auth']], function () {
         return view("backoffice/changeedition");
     });
 
+    //Changer mot de passe
+    Route::get('/auth/changepassword', function () {
+        return view("backoffice/changepassword");
+    });
+
     //Authentification
     Route::get('/auth/logout', 'AuthController@logout');
     Route::get('/auth/home', function() {

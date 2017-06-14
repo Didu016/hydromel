@@ -3,7 +3,7 @@
     <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--teal-300">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
-        <div class="mdl-layout titrePage mdl-layout__header-row">
+        <div class="mdl-layout titrePage">
             <h3>Login</h3>
         </div>
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
@@ -15,17 +15,13 @@
         <section class="pages_blocs mdl-grid ">
             <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                 <div class="mdl-card__supporting-text">
-                    <h4>Changer votre password</h4>
-                    @if (session('error'))
-                        <div> ERREUR: mauvais mot de passe ou nom blablabla </div>
-                    @endif
+                    <h4>Changer votre mot de passe</h4>
                     <form method="POST" action="{{ action('AuthController@check') }}">
                         {{ csrf_field() }}
-                        <input type="text" placeholder="username" name="username">
-                        Ancien mot de passe <input type="password" placeholder="mot de passe" name="password">
-                        Nouveau mot de passe <input type="password" placeholder="mot de passe" name="password">
-                        Confirmez votre nouveau mot de passe <input type="password" placeholder="mot de passe" name="password">
-                        <input type="submit" value="login">
+                               <p>Ancien mot de passe <input type="password" placeholder="mot de passe" name="password"></p>
+                                <p>Nouveau mot de passe <input type="password" placeholder="mot de passe" name="password">
+                                <p>Confirmez votre nouveau mot de passe <input type="password" placeholder="mot de passe" name="password">
+                        <input type="submit" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast" value="Valider">
                     </form>
                 </div>
             </div>
