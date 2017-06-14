@@ -10,11 +10,11 @@
 }
 .articleNews:nth-child(odd) .imageArticle{
 	float: left;
-	background-image: url("../img/joncoel.jpg");
+	/*background-image: url("../img/joncoel.jpg");*/
 }
 .articleNews:nth-child(even) .imageArticle{
 	float: right;
-	background-image: url("../img/HydroHEIGBateau2016.jpg");
+	
 }
 .articleNews{
 	width: 100%;
