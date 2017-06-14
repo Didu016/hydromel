@@ -22,21 +22,20 @@
             </div>
             <div class="blocDescription">
                 <h1><span>Accueil</span></h1>
+            <div class="link-slideright" id="descriptionAccueil">
                 <p></p>
-            <div class="link-slideright">
-                <p>Vivamus massa magna, venenatis id commodo at, ultricies sit amet tortor. Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
             </div>
             </div>
         </section>
         <section class="sectionLieuDate">
                 <div class="blockLieuDate">
-                    <!-- On aura ici, soit  un message d'e remplacement "lieu et date pas encore définit" soit le contenu-->
-                    <p><h2>Lieu</h2></p>
-                    <p><h2>Date début et date fin</h2></p>
+                    <!-- On aura ici, soit  un message de remplacement "lieu et date pas encore définit" soit le contenu-->
+                    <div id="lieuAccueil"><p><h2></h2></p></div>
+                    <div id="dateAccueil"><p><h2></h2></p>
                 </div>
         </section>
-        <section class="sectionArticle">
-            <article class="article articleNews">
+        <section class="sectionArticle" id="articlesAccueil">
+            <article class="article articleNews" id="articleNews">
                 <div class="imageArticle"></div>
                 <div class="blocArticleNewsTexte">
                     <h2>Titre</h2>
@@ -44,15 +43,7 @@
                     <button><a href="#">Lire plus</a></button>
                 </div>
             </article>
-            <article class="article articleNews">
-                <div class="imageArticle"></div>
-                <div class="blocArticleNewsTexte">
-                    <h2>Titre</h2>
-                    <p>Vivamus massa magna, venenatis id commodo at, ultricies sit amet tortor. Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
-                    <button><a href="#">Lire plus</a></button>
-                </div>
-            </article>
-            <article class="article articlePresse">
+            <article class="article articlePresse"  id="articlePresse">
                 <div class="blocArticlePresseTexte">
                     <h2>Titre</h2>
                     <p>LLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus massa magna, venenatis id commodo at, ultricies sit amet tortor. </p>
@@ -61,18 +52,9 @@
             </article>
         </section>
         <section class="sectionPreviewSponsor">
-            <p><h1>Sponsor</h1></p>
-            <div class="blocSponsor">
-                <article>
-                    <img src="img/logoHydro.png">
-                </article>
-                <article>
-                    <img src="img/logoHydro.png">
-                </article>
-                <article>
-                    <img src="img/logoHydro.png">
-                </article>
-                <article>
+            <p><h1>Sponsors</h1></p>
+            <div class="blocSponsor" id="sponsorsAccueil">
+                <article id="articlePreviewSponsor">
                     <img src="img/logoHydro.png">
                 </article>
             </div>
@@ -82,33 +64,14 @@
     <section class="sectionPage" id="page_equipe">
         <header id="headerEquipe"></header>
         <section class="titrePage"><h1>L'équipe</h1></section>
-        <section class="sectionDescription">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus massa magna, venenatis id commodo at, ultricies sit amet tortor. Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
+        <section class="sectionDescription" id="descriptionTeam">
+            <p></p>
         </section>
-        <section class="sectionMembre">
-            <article>
+        <section class="sectionMembre" id="membresEquipe">
+            <article id="articleMembre">
                 <img src="img/johnaesch.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-                <img src="img/joncoel.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-            <img src="img/mathfa.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-                <img src="img/johnaesch.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-                <img src="img/joncoel.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
-            </article>
-            <article>
-            <img src="img/mathfa.jpg">
-                <p>Philippe Spat</p><p>Responsabilité</p>
+                <div class="prenomNomMembre"></div>
+                <div class="reponsabiliteMembre">Responsabilité<div>
             </article>
         </section>
     </section>
@@ -208,13 +171,73 @@
     <!--PAGE EDITION PRECEDENTE-->
     <section class="sectionPage" id="page_edition">
         <header id="headerEdition"></header>
-        <section class="titrePage"><h1>SPONSORS</h1></section>
+        <section class="titrePage"><h1>Editions précédentes</h1></section>
         <section class="sectionEdition">
-            <select name="yearpicker" id="yearpicker"></select>
-        </section>
-        <section class="sectionDescription">
-            <p>Comment devenir sponsor ? <button><a href="#">Informations</a></button></p>
 
+        </section>
+        <section class="sectionChoixEdition">
+          <div class="center">
+            <button><a href="#">2015</a></button>
+            <button><a href="#">2016</a></button>
+            <button><a href="#">2017</a></button>
+            <button><a href="#">2018</a></button>
+          </div>
+        </section>
+        <section class="sectionResumeEdition">
+          <h2>Résumé</h2>
+          <p>Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. $
+            Vivamus massa magna, venenatis id commodo at,
+             ultricies sit amet tortor. Lorem ipsum dolor sit amet,
+               consectetur adipis
+               Vivamus massa magna, venenatis id commodo at,
+                ultricies sit amet tortor.</p>
+        </section>
+        <section class="sectionMedia">
+          <section class="titrePage"><h2>Membres</h2></section>
+          <div class="sliderImage">
+            <div>
+              <img src="img/joncoel.jpg">
+            </div>
+            <div>
+              <img src="img/joncoel.jpg">
+            </div>
+            <div>
+              <img src="img/joncoel.jpg">
+            </div>
+            <div>
+              <img src="img/joncoel.jpg">
+            </div>
+          </div>
+        </section>
+        <section class="sectionArticle">
+            <article class="article articleNews">
+                <div class="imageArticle"></div>
+                <div class="blocArticleNewsTexte">
+                    <h2>Titre</h2>
+                    <p>Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
+                    <button><a href="#">Lire plus</a></button>
+                </div>
+            </article>
+            <article class="article articleNews">
+                <div class="imageArticle"></div>
+                <div class="blocArticleNewsTexte">
+                    <h2>Titre</h2>
+                    <p>Vivamus massa magna, venenatis id commodo at, ultricies sit amet tortor. Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
+                    <button><a href="#">Lire plus</a></button>
+                </div>
+            </article>
+            <article class="article articlePresse">
+                <div class="blocArticlePresseTexte">
+                    <h2>Titre</h2>
+
+                    <p>Lorem ipsum dolor sit amet,
+                      consectetur adipiscing elit. $
+                      Vivamus massa magna, venenatis id commodo at,
+                       ultricies sit amet tortor. </p>
+                    <button><a href="#">Lire plus</a></button>
+                </div>
+            </article>
         </section>
     </section>
 </body>
