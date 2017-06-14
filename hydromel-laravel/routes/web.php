@@ -15,10 +15,32 @@ Route::get('/', function () {
     return view("index");
 });
 
-Route::resource('equipe', 'EquipeCtrl');
-// Sinistre
-Route::resource('actualites', 'ActualiteCtrl');
-//Ligne de commande
-Route::resource('sponsors', 'SponsorCtrl');
-//Contrat
-Route::resource('editionprecedente', 'EditionPrecedenteCtrl');
+Route::get('adminhydromelpanel', function () {
+    return view("backoffice/hydromelpanel");
+});
+
+Route::get('adminhydromelpanel/accueil', function () {
+    return view("backoffice/accueil");
+});
+
+Route::get('adminhydromelpanel/equipe', function () {
+    return view("backoffice/equipe");
+});
+
+Route::get('adminhydromelpanel/actualite', function () {
+    return view("backoffice/actualite");
+});
+
+Route::get('adminhydromelpanel/sponsor', function () {
+    return view("backoffice/sponsor");
+});
+
+Route::get('adminhydromelpanel/previousedition', function () {
+    return view("backoffice/editionP");
+});
+
+Route::get('adminhydromelpanel/changeedition', function () {
+    return view("backoffice/newedition/accueil");
+});
+
+//AJOUTER MIDDLEWARE
