@@ -12,6 +12,7 @@ $(function(){
   $("#articlesAccueil").empty();
   $("#sponsorsAccueil").empty();
   $("#membresEquipe").empty();
+  $("#articlesActualite").empty();
   sliderSetting();
   menuHandler();
   $.getJSON(CURRENT_EDITION, function (json) {
@@ -43,16 +44,28 @@ $(function(){
         if(article.articletype_name == "news"){
           var templateClone = template.clone();
           $('h2', templateClone).text(article.title);
-          $('p', templateClone).text(article.description);
-          var media = article.medias[0];
-          var url= media.url;
-          $(".imageArticle", templateClone).css('background-image','url('+url+')');
+          if(article.description.length>=150){
+            $('p', templateClone).text(article.description.substring(0, 150)+"...");
+          }
+          else{
+              $('p', templateClone).text(article.description);
+          }
+          $('date', templateClone).text(article.created_at.date.substring(0, 10));
+          if(article.medias[0]==null){
+            $(".imageArticle", templateClone).css('background-image','url(http://hydro.heig-vd.ch/wp-content/uploads/2017/03/cropped-DSC_0173.jpg)');
+          }
+          else{
+            var media = article.medias[0];
+            var url= media.url;
+            $(".imageArticle", templateClone).css('background-image','url('+url+')');
+          }
           $("#articlesAccueil").append(templateClone);
         }
         else {
           var template2Clone = template2.clone();
           $('h2', template2Clone).text(article.title);
           $('p', template2Clone).text(article.description);
+          $('date', template2Clone).text(article.created_at.date.substring(0, 10));
           $("#articlesAccueil").append(template2Clone);
         }
       });
@@ -62,13 +75,12 @@ $(function(){
           $('img', template3Clone).attr('src', sponsor.logo_url)
           $("#sponsorsAccueil").append(template3Clone);
       });
-      $("#descriptionTeam p").addClass("displayNone");
-      /*if(descriptionTeam.length!==null){
+      if(descriptionTeam.length!==null){
         $("#descriptionTeam p").text(descriptionTeam);
       }
       else{
         $("#descriptionTeam p").addClass(displayNone);
-      }*/
+      }
       $.each(members, function(i, member) {
           if(i>=50){return}
           var template4Clone = template4.clone();
@@ -77,6 +89,73 @@ $(function(){
           $('.prenomNomMembre', template4Clone).text(member.name);
           $('.reponsabiliteMembre', template4Clone).text(member.responsibility_name);
           $("#membresEquipe").append(template4Clone);
+      });
+      //Page actualité
+      var numPage = 0;
+      $.each(articles, function(i, article) {
+      if(i % 3 ==0){
+          numPage++;
+          $("<section></section>").attr('id','articlesActualitePage'+ numPage).appendTo('#articlesActualite');
+          $("<li></li>").appendTo('#navArticle ul');
+          $("<a></a>").attr('href','articlesActualitePage'+ numPage).appendTo('#navArticle ul li');
+          if(article.articletype_name == "news"){
+              var templateClone = template.clone();
+              $('h2', templateClone).text(article.title);
+              if(article.description.length>=150){
+                $('p', templateClone).text(article.description.substring(0, 150)+"...");
+              }
+              else{
+                  $('p', templateClone).text(article.description);
+              }
+              $('date', template2Clone).text(article.created_at.date.substring(0, 10));
+              if(article.medias[0]==null){
+                $(".imageArticle", templateClone).css('background-image','url(http://hydro.heig-vd.ch/wp-content/uploads/2017/03/cropped-DSC_0173.jpg)');
+              }
+              else{
+                var media = article.medias[0];
+                var url= media.url;
+                $(".imageArticle", templateClone).css('background-image','url('+url+')');
+              }
+              $("#articlesActualitePage"+ numPage).append(templateClone);
+          }
+          else {
+              var template2Clone = template2.clone();
+              $('h2', template2Clone).text(article.title);
+              $('p', template2Clone).text(article.description);
+              $('date', template2Clone).text(article.created_at.date.substring(0, 10));
+              $("#articlesActualitePage"+ numPage).append(template2Clone);
+          }
+      }
+      else{
+          if(article.articletype_name == "news"){
+              var templateClone = template.clone();
+              $('h2', templateClone).text(article.title);
+              if(article.description.length>=150){
+                $('p', templateClone).text(article.description.substring(0, 150)+"...");
+              }
+              else{
+                  $('p', templateClone).text(article.description);
+              }
+              $('date', templateClone).text(article.created_at.date.substring(0, 10));
+              if(article.medias[0]==null){
+                $(".imageArticle", templateClone).css('background-image','url(http://hydro.heig-vd.ch/wp-content/uploads/2017/03/cropped-DSC_0173.jpg)');
+              }
+              else{
+                var media = article.medias[0];
+                var url= media.url;
+                $(".imageArticle", templateClone).css('background-image','url('+url+')');
+              }
+              $("#articlesActualitePage"+ numPage).append(templateClone);
+          }
+          else {
+              var template2Clone = template2.clone();
+              $('h2', template2Clone).text(article.title);
+              $('p', template2Clone).text(article.description);
+              $('date', template2Clone).text(article.created_at.date.substring(0, 10));
+              $("#articlesActualitePage"+ numPage).append(template2Clone);
+          }
+      }
+
       });
 
   });
@@ -116,6 +195,13 @@ function switchPageWithHistory(pageId) {
 }
 
 function switchPage(pageId) {
+    $(".sectionPage").hide();
+    $("#page_" + pageId).show();
+    if(pageId=="accueil") {
+      $("video").resize()
+    }
+}
+function switchPageArticle(pageId) {
     $(".sectionPage").hide();
     $("#page_" + pageId).show();
     if(pageId=="accueil") {

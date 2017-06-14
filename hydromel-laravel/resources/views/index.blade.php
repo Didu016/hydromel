@@ -39,6 +39,7 @@
                 <div class="imageArticle"></div>
                 <div class="blocArticleNewsTexte">
                     <h2>Titre</h2>
+                    <date></date>
                     <p>Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
                     <button><a href="#">Lire plus</a></button>
                 </div>
@@ -46,6 +47,7 @@
             <article class="article articlePresse"  id="articlePresse">
                 <div class="blocArticlePresseTexte">
                     <h2>Titre</h2>
+                    <date></date>
                     <p>LLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus massa magna, venenatis id commodo at, ultricies sit amet tortor. </p>
                     <button><a href="#">Lire plus</a></button>
                 </div>
@@ -78,42 +80,15 @@
     <!--PAGE ACTUALITE-->
     <section class="sectionPage" id="page_actualite">
         <header id="headerActualite"></header>
-        <section class="titrePage"><h1>Actualités</h1></section>
-        <section class="sectionArticle">
-            <article class="article articleNews">
-                <div class="imageArticle"></div>
-                <div class="blocArticleNewsTexte">
-                    <h2>Titre</h2>
-                    <p>Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
-                    <button><a href="#">Lire plus</a></button>
-                </div>
-            </article>
-            <article class="article articleNews">
-                <div class="imageArticle"></div>
-                <div class="blocArticleNewsTexte">
-                    <h2>Titre</h2>
-                    <p>Vivamus massa magna, venenatis id commodo at, ultricies sit amet tortor. Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
-                    <button><a href="#">Lire plus</a></button>
-                </div>
-            </article>
-            <article class="article articlePresse">
-                <div class="blocArticlePresseTexte">
-                    <h2>Titre</h2>
-
-                    <p>Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit. $
-                      Vivamus massa magna, venenatis id commodo at,
-                       ultricies sit amet tortor. </p>
-                    <button><a href="#">Lire plus</a></button>
-                </div>
-            </article>
-            <section id="navArticle">
-              <ul class="center">
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-              </ul>
-            </section>
+        <section class="titrePage" id=""><h1>Actualités</h1></section>
+        <div id="articlesActualite">
+        </div>
+        <section id="navArticle">
+          <ul class="center">
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+          </ul>
         </section>
         <section class="sectionMedia">
           <section class="titrePage"><h1>Médias</h1></section>
