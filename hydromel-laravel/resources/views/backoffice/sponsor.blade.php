@@ -30,13 +30,19 @@
                                 <th class="large">Nom sponsor</th>
                                 <th>Categorie</th>
                                 <th>Logo</th>
+                                <th>Mail</th>
+                                <th>Amount</th>
+                                <th>Lien</th>
                                 <th> Mod</th>
                                 <th>Suppr</th>
                             </tr>
                             <tr id="sponsor_">
-                                <td id="sponsor_actif_nom">Le nom du sponsor</td>
-                                <td id="sponsor_actif_rank">Le rank</td>
-                                <td id="sponsor_actif_logo"></td>
+                                <td class="sponsor_nom">Le nom du sponsor</td>
+                                <td class="sponsor_rank">Le rank</td>
+                                <td class="sponsor_logo"></td>
+                                <td class="sponsor_mail">Le mail</td>
+                                <td class="sponsor_amount">30'000</td>
+                                <td class="sponsor_lien">le url</td>
                                 <td><button data-id="" id="btn_modifier_sponsor" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="button">create</i></button></td>
                                 <td><button id="btn_delete_sponsor" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i></button></td>
                             </tr>
@@ -51,14 +57,17 @@
                         <h5>Ajouter un nouveau sponsor</h5>
                         <form method="POST" action="{{url('/auth/sponsors')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <p>Entreprise <input id="sponsor_nouveau_nom"type="text" name="society"></p>
+                            <p>Entreprise <input name="sponsor_nom"type="text" name="society"></p>
 
                             <p>Rang
-                                <select id="sponsor_nouveau_categorie" name="rank">
+                                <select name="sponsor_categorie" name="rank">
 
                                 </select>
                             </p>
-                            <p>Logo <input id="sponsor_nouveau_img" type="file" accept="image/png" name="logo_url"></p>
+                            <p>Logo <input name="sponsor_logo" type="file" accept="image/png" name="logo_url"></p>
+                            <p>Mail <input type="email" name="sponsor_mail"></p>
+                            <p>Amount <input type="text" name="sponsor_amount"></p>
+                            <p>Lien <input type="url" name="sponsor_link"></p>
                             <p><input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast"></p>
                         </form>
 
@@ -66,13 +75,15 @@
                     <section class="aCacher" id="modifier_sponsor">
                         <h5>Modifier un sponsor</h5>
                         <form method="POST" action="" enctype="">
-                            <p>Entreprise <input id="sponsor_modifier_nom" type="text" name="society"></p>
-                            <p>Catégorie</p><select id="sponsor_modifier_categorie">
-                                <select id="sponsor_nouveau_categorie" name="rank">
+                            <p>Entreprise <input type="text" name="society"></p>
+                            <p>Catégorie</p><select class="sponsor_categorie">
+                                <select name="rank">
 
                                 </select>
-                                <p>Logo <input id="sponsor_modifier_img" type="file" accept="image/png"></p>
-
+                                <p>Logo <input name="sponsor_logo" type="file" accept="image/png"></p>
+                                <p>Mail <input type="email" name="sponsor_mail"></p>
+                                <p>Amount <input type="text" name="sponsor_amount"></p>
+                                <p>Lien <input type="url" name="sponsor_link"></p>
                                 <p><input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast"></p>
                         </form>
 
