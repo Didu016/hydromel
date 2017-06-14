@@ -8,7 +8,7 @@ use App\Models\Article;
 use App\Models\Media;
 use App\Models\Edition;
 use Illuminate\Support\Facades\DB;
-
+use Validator;
 
 class ArticleCtrl extends Controller
 {
@@ -44,7 +44,10 @@ class ArticleCtrl extends Controller
         $dataArticle['title'] = $request->title;
         $dataArticle['description'] = $request->description;
         $dataArticle['link'] = $request->link;
-        $articleType = $request->articleType;
+        $articleType = $request->type;
+        if($dataArticle['link'] == 'null'){ // si le champ est hidden, on recoit null en string
+            $dataArticle['link'] = null; // alors on set ici a la valeur null
+        }
         $dataMedia = $request->files->get('media');
 
         $error = false; // Set l'erreur à false
@@ -98,21 +101,24 @@ class ArticleCtrl extends Controller
                 // création du média
 
                 // Creer le media
-                $mediaDestination = "../../img/articlesMedias";
-                $media = new Media();
-                $media->title = 'Photo' . $dataArticle['title'];
-                $media->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
-                $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
-                if(in_array($dataMedia->getClientOriginalExtension(), $videoTypes)){ // Si le média reçu est une vidéo
-                    $media->mediatype_id = 1; // Alors on set que c'est une photo
-                } else { // Si le média reçu est une photo
-                    $media->mediatype_id = 2; // Alors on set que c'est une photo
+                if($dataMedia != null) {
+                    $mediaDestination = "../../img/articlesMedias";
+                    $media = new Media();
+                    $media->title = 'Photo_' . $dataArticle['title'];
+                    $media->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
+                    $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
+                    if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
+                        $media->mediatype_id = 1; // Alors on set que c'est une photo
+                    } else { // Si le média reçu est une photo
+                        $media->mediatype_id = 2; // Alors on set que c'est une photo
+                    }
+                    $media->save();
+                    $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
+                    $article->medias()->save($media);
                 }
-                $media->save();
-                $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
 
                 $currentEdition->articles()->save($article);
-                $article->medias()->save($media);
+
 
                 // IL FAUT RECUPERER LE MEDIA
                 // réupérer le média puis change le file de ce medias

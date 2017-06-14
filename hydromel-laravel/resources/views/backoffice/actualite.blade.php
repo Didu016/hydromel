@@ -65,24 +65,27 @@
 
                             <section class="aCacher" id="ajout_news">
                                 <h5>Ajouter un article news</h5>
-                                <form method="POST" action="" enctype="">
-                                <p>Titre <input id="article_news_nouveau_nom" type="text"></p>
-                                Description <textarea id="article_news_nouveau_description"></textarea>
-                                <p>Audiovisuel <input id="article_news_nouveau_media" type="file" accept="image"
-                                                      accept="video" file="media"></p>
+                                <form method="POST" action="{{url('/auth/article')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <p>Titre <input id="article_news_nouveau_nom" name="title" type="text"></p>
+                                Description <textarea id="article_news_nouveau_description" name="description"></textarea>
+                                <p>Audiovisuel <input id="article_news_nouveau_media" type="file" name="media" accept="image"
+                                                      accept="video" file="media">
+                                </p>
                                 <input type="hidden" name="type" value="news">
-                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                <input type="hidden" name="link" value=null>
+                                <input type="submit" name="btn" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                 </form>
                             </section>
                             <section class="aCacher" id="ajout_presse">
                                 <h5>Ajouter un article presse</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="POST" action="{{url('/auth/article')}}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <p>Titre <input name="title" type="text"></p>
                                 Description <textarea name="description"></textarea>
                                 <p>Lien <input name="link" type="url"></p>
-                                 <input type="hidden" name="type" value="presse">
-                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-
+                                <input type="hidden" name="type" value="presse">
+                                <input type="submit" name="btn" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                 </form>
                              </section>
 
