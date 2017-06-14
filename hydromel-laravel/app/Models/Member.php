@@ -93,4 +93,73 @@ class Member extends Model {
         }
     }
 
+    public static function createMember($dataMember, $dataResponsibility, $dataMedia){
+        // Valider les champs du membre
+        $alreadyExistingMember = Member::exists($dataMember);
+        $validDataMember = Member::isValid($dataMember); // true si valid, false si non
+        // Valider la responsability
+        $validResponsibility = false;
+        $validDataResponsibility = Responsibility::isValid($dataResponsibility);
+
+        // Valider le média
+        $validMedia = false;
+        $mediaMaxSize = 2000000;
+        $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
+        $validMedia = Media::isValid($dataMedia, $allowedTypes, $mediaMaxSize);
+
+        // Changer les data
+        // Changer la responsibility
+        // Changer le media
+
+        if ($validDataMember != false && $validDataResponsibility != false && $validMedia != false && $alreadyExistingMember != true) {
+            DB::transaction(function () use ($dataMedia, $dataMember, $dataResponsibility) {
+
+                // Creer le membre
+                $member = new Member();
+                $member->firstname = $dataMember['firstname'];
+                $member->name = $dataMember['name'];
+                $member->email = $dataMember['email'];
+                $member->save();
+
+                // Creer le media
+                $mediaDestination = "../../img/membersMedias";
+                $media = new Media();
+                $media->title = 'Photo' . $dataMember['firstname'];
+                $media->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
+                $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
+                if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
+                    $media->mediatype_id = 1; // Alors on set que c'est une photo
+                } else { // Si le média reçu est une photo
+                    $media->mediatype_id = 2; // Alors on set que c'est une photo
+                }
+                $media->save();
+                $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
+
+                // Ajouter ce membre a l'edition
+                $actualEdition = Edition::all()->sortByDesc("year")->first();
+                $responsibilities = Responsibility::all();
+                $responsibilityId = 0;
+
+                for ($i = 1; $i < count($responsibilities) + 1; $i ++) {
+                    $oneResponsibility = Responsibility::find($i);
+                    if ($oneResponsibility['name'] == $dataResponsibility) {
+                        $responsibilityId = $oneResponsibility->id;
+                    }
+                }
+
+                $actualEdition->medias()->save($media); // PK ON FAIT CA
+
+                $participation = new Participation();
+                $participation->member_id = $member->id;
+                $participation->edition_id = $actualEdition->id;
+                $participation->responsibility_id = $responsibilityId;
+                $participation->media_id = $media->id;
+                $participation->save();
+            }); // Fin de la transaction
+            // REUSSITE
+        } else { // SINON ERREUUUUUUUUUUUUUUR --------------------------------------------------------------------------
+            dd('un des champs est pas bon ou alors le type existe déjà');
+        }
+    }
+
 }

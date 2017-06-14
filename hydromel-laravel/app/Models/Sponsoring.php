@@ -8,4 +8,5 @@ class Sponsoring extends Model
 {
     public $timestamps = false;
     protected $table = 'sponsoring';
+
 }
