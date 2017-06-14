@@ -16,6 +16,13 @@
                 <section class=" mdl-grid ">
                     <div class="pages_blocs mdl-card mdl-shadow--2dp mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
                         <div class="mdl-card__supporting-text mdl-cell--12-col-desktop ">
+                            <header class="mdl-layout__header  mdl-color--teal-400">
+                                <div class="demo-navigation mdl-layout--large-screen-only mini_header mdl-layout__header-row">
+                                    <a class="mdl-navigation__link" href="#" id="lnk_description"><h4>Edition</h4></a>
+                                    <a class="mdl-navigation__link" href="#" id="lnk_membres"><h4>Superviseur</h4></a>
+                                </div>
+                            </header>
+                            <section class="aCacher section_default" id="description">
                             <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description">
                                 <h4>Description</h4>
                                 <textarea required id="accueil_description" rows="10" ></textarea>
@@ -41,14 +48,28 @@
                                     <input type="date">
                                 </div>
                             </div>
+                            </section>
+                            <section class="aCacher" id="membres">
 
+
+                                <h5>Ajouter un nouveau membre</h5>
+                                <form method="POST" action="" enctype="">
+                                    <input type="hidden" name="id" value="">
+                                    <p>Nom <input name="membre_nom" type="text"></p>
+                                    <p>Prenom <input name="membre_prenom" type="text"></p>
+                                    <p>Mail <input name="membre_mail" type="email"></p>
+                                    <input name="membre_image" type="file" accept="image">
+                                    <div>
+                                        Responsabilité <select id="membre_nouveau_resp">
+                                            <option class="liste_resp">les differentes options ici</option>
+                                        </select>
+                                    </div>
+                                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
+                            </section>
                         </div>
                     </div>
 
-                    <div class="btn_footer mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
-                        <a href="team"><input type="submit" value="next" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-                        </a>
-                    </div>
 
             </div>
 
