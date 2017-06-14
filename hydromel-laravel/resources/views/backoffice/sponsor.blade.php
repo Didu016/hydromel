@@ -23,6 +23,7 @@
                         </div>
                     </header>
                     <section class="aCacher section_default" id="sponsor">
+
                     <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                         <table class="mdl-data-table">
                             <tr>
@@ -43,12 +44,15 @@
                         <button id="btn_ajout_sponsor" class="bouton_ajout bouton_table"><i id="btn_ajout_membre" class="bouton_table mdl-color-text--blue-grey-400 material-icons" role="presentation">add_circle</i></button>
 
                     </div>
+
+
                     </section>
                     <section class="aCacher" id="ajout_sponsor">
                         <h5>Ajouter un nouveau sponsor</h5>
                         <form method="POST" action="{{url('/auth/sponsors')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <p>Entreprise <input id="sponsor_nouveau_nom"type="text" name="society"></p>
+
                             <p>Rang
                                 <select id="sponsor_nouveau_categorie" name="rank">
 
@@ -57,6 +61,7 @@
                             <p>Logo <input id="sponsor_nouveau_img" type="file" accept="image/png" name="logo_url"></p>
                             <p><input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast"></p>
                         </form>
+
                     </section>
                     <section class="aCacher" id="modifier_sponsor">
                         <h5>Modifier un sponsor</h5>
@@ -85,14 +90,16 @@
                     </div>
 
 
+
         </section>
             <div class="btn_footer mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
                 <a href="/auth/home" class="mdl-button  mdl-color--accent mdl-color-text--accent-contrast">Accueil</a>
 
+
             </div>
 
+        </div>
     </div>
-</div>
 
 </main>
 </div>

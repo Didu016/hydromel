@@ -55,6 +55,7 @@ class Edition2015Seeder extends Seeder {
                     'team' => 'hydroswag',
                     'year' => 2015,
                     'description' => 'II s’agit d’une des problématiques actuelles et communes liées au développement industriel et technologique de notre ère. Avec 90% des échanges commerciaux opérés par la mer, le transport maritime est un enjeu économique et environnemental majeur. En effet, si le bateau reste le moyen de transport le plus écologique, en matière d’emissions de CO2 par tonne transportée, il représente tout de même la 5ème source de pollution mondiale.',
+                    'team_description' => 'Meilleure team de 2015 parce qu\'on est des membres de l\'HEIG-VD',
                     'start_date' => Carbon\Carbon::parse('2015-06-10'),
                     'end_date' => Carbon\Carbon::parse('2015-06-19'),
                     'place' => 'Fribourg'
