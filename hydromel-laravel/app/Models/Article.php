@@ -68,5 +68,4 @@ class Article extends Model {
             'link' => 'URL|between:1,101|nullable',
         ])->passes();
     }
-
 }
