@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Lib\Message;
+use Validator;
 
 class Edition extends Model {
 

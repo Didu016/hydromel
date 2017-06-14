@@ -32,10 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Accueil
     Route::resource('/auth/accueil', 'AccueilCtrl');
-    
-    //Edition
-    
-    
+
     //Equipe
     Route::resource('/auth/team', 'EquipeCtrl');
 

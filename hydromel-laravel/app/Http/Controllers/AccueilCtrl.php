@@ -34,7 +34,7 @@ class AccueilCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        dd('methode store');
     }
 
     /**
@@ -65,8 +65,9 @@ class AccueilCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request) { // IL FAUT REMETTRE LE $id QUAND ON AURA ACCES AU FORMULAIRE (ou pas, peut-être)
-        $editionActuelle = json_decode(EditionCtrl::getDataFromCurrentEdition()->content())->current_edition; // Récupération de la totalité des informations des éditions
-        $idEditionActuelle = $editionActuelle->edition->id;
+
+        $editionActuelle = Edition::getCurrentEdition();
+        $idEditionActuelle = $editionActuelle->id;
 
         // RECUPERATIONS DES DONNEES RECUES
         $dataEdition['description'] = $request->description;
@@ -78,6 +79,7 @@ class AccueilCtrl extends Controller {
 
         // Validations des champs de l'édition
         $validDescription = Edition::isValidForUpdate($dataEdition); // true si valid, false si non
+
         // Validations des médias
         $validMedia = false;
         $target_dir = "files/";
@@ -87,11 +89,11 @@ class AccueilCtrl extends Controller {
         for ($i = 0; $i < count($dataMedia); $i++) { // On va creer chacuns des médias
             $uploadOk = Media::isValid($dataMedia[$i], $allowedTypes, $mediaMaxSize);
         }
-        dd($uploadOk);
+
         // Fin des validations
         // UPLOAD - UPDATES
         if ($validDescription != false && $uploadOk != false) { // Si les donnees sont valides, on fait les mises a jour
-            DB::transaction(function () use ($idEditionActuelle, $dataMedia) {
+            DB::transaction(function () use ($idEditionActuelle, $dataMedia, $dataEdition, $allowedTypes) {
 
                 $edition = Edition::find($idEditionActuelle);
                 $edition->description = $dataEdition['description'];
