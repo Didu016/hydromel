@@ -21,6 +21,7 @@ Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
 Route::get('/editions/{id}', 'EditionCtrl@show');
 Route::get('/hydromeladminpanel', 'AuthController@login');
 Route::post('/auth/check', 'AuthController@check');
+Route::resource('/auth/editions', 'EditionCtrl');
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -30,8 +31,11 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     //Accueil
-    Route::resource('/auth/accueil', 'EditionCtrl');
-
+    Route::resource('/auth/accueil', 'AccueilCtrl');
+    
+    //Edition
+    
+    
     //Equipe
     Route::resource('/auth/team', 'EquipeCtrl');
 
