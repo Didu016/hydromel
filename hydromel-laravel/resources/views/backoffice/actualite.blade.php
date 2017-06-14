@@ -35,7 +35,7 @@
                                             <th> Mod</th>
                                             <th>Suppr</th>
                                         </tr>
-                                        <tr>
+                                        <tr id="article_">
                                             <td class="article_news_titre">Titre Article</td>
                                             <td class="article_news_resume">Le resumé de l'article ici</td>
                                             <td class="article_news_image">Le media</td>
@@ -45,14 +45,14 @@
                                                             role="button">create</i></button>
                                             </td>
                                             <td>
-                                                <button id="btn_delete_news" class="bouton_table"><i
+                                                <button data-id="" id="btn_delete_news" class="bouton_table"><i
                                                             class="mdl-color-text--blue-grey-400 material-icons"
                                                             role="presentation">delete</i></button>
                                             </td>
+                                            <input type="hidden" name="id" value="">
                                         </tr>
                                     </table>
                                     <button id="btn_ajout_news" class="bouton_ajout bouton_table"><i
-                                                id="btn_ajout_membre"
                                                 class="bouton_table mdl-color-text--blue-grey-400 material-icons"
                                                 role="presentation">add_circle</i></button>
 
@@ -61,25 +61,26 @@
 
                             <section class="aCacher" id="ajout_news">
                                 <h5>Ajouter un article news</h5>
-
+                                <form method="POST" action="" enctype="">
                                 <p>Titre <input id="article_news_nouveau_nom" type="text"></p>
                                 Description <textarea id="article_news_nouveau_description"></textarea>
                                 <p>Audiovisuel <input id="article_news_nouveau_media" type="file" accept="image"
-                                                      accept="video"></p>
-                                <a methods="post" href="actualite.blade.php"
-                                   class="mdl-button btn_ajouter_article bouton_valider mdl-color--accent mdl-color-text--accent-contrast">Valider</a>
+                                                      accept="video" file="media"></p>
                                 <input type="hidden" name="type" value="news">
+                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </section>
                             <section class="aCacher" id="ajout_presse">
-
                                 <h5>Ajouter un article presse</h5>
+                                <form method="POST" action="" enctype="">
                                 <p>Titre <input name="title" type="text"></p>
                                 Description <textarea name="description"></textarea>
                                 <p>Lien <input name="link" type="url"></p>
-                                <a methods="post" href="actualite.blade.php"
-                                   class="mdl-button btn_ajouter_article bouton_valider mdl-color--accent mdl-color-text--accent-contrast">Valider</a>
-                                <input type="hidden" name="type" value="presse">
-                            </section>
+                                 <input type="hidden" name="type" value="presse">
+                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+
+                                </form>
+                             </section>
 
                             <section class="aCacher" id="presse">
                                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
@@ -92,7 +93,7 @@
                                             <th> Mod</th>
                                             <th>Suppr</th>
                                         </tr>
-                                        <tr>
+                                        <tr id="article_">
                                             <td id="article_presse_titre">Titre Article</td>
                                             <td id="article_presse_lien">Le lien de l'article ici</td>
                                             <td id="article_presse_image">Le media</td>
@@ -102,14 +103,14 @@
                                                             role="button">create</i></button>
                                             </td>
                                             <td>
-                                                <button id="btn_delete_presse" class="bouton_table"><i
+                                                <button data-id="" id="btn_delete_presse" class="bouton_table"><i
                                                             class="mdl-color-text--blue-grey-400 material-icons"
                                                             role="presentation">delete</i></button>
                                             </td>
+                                            <input type="hidden" name="id" value="">
                                         </tr>
                                     </table>
                                     <button id="btn_ajout_presse" class="bouton_ajout bouton_table"><i
-                                                id="btn_ajout_membre"
                                                 class="bouton_table mdl-color-text--blue-grey-400 material-icons"
                                                 role="presentation">add_circle</i></button>
 
@@ -117,20 +118,27 @@
                             </section>
                             <section class="aCacher" id="modifier_news">
                                 <h5>Modifier un article news</h5>
-                                <p>Titre <input id="article_news_modifier_nom" type="text"></p>
-                                Description <textarea id="article_news_modifier_description"></textarea>
+                                <form  method="POST" action="" enctype="">
+                                <input type="hidden" name="id" value="">
+                                <p>Titre <input id="article_news_modifier_nom" type="text" name="title"></p>
+                                Description <textarea id="article_news_modifier_description" name="description"></textarea>
                                 <p>Audiovisuel <input id="article_news_modifier_media" type="file" accept="image"
-                                                      accept="video"></p>
+                                                      accept="video" name="media"></p>
                                 <input type="hidden" name="id" value="">
                                 <input type="hidden" name="article_url" value="">
+                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </section>
                             <section class="aCacher" id="modifier_presse">
                                 <h5>Modifier un article de presse</h5>
+                                <form  method="POST" action="" enctype="">
                                 <p>Titre <input id="article_presse_modifier_nom" type="text"></p>
                                 Description <textarea id="article_presse_modifier_description"></textarea>
                                 <p>Lien <input type="url" id="article_url"></p>
                                 <input type="hidden" name="id" value="">
                                 <input type="hidden" name="article_media" value="">
+                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </section>
                             <section class="aCacher" id="media">
                                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
@@ -143,7 +151,7 @@
                                             <th> Mod</th>
                                             <th>Suppr</th>
                                         </tr>
-                                        <tr>
+                                        <tr id="media_">
                                             <td id="media_titre">Titre Média</td>
                                             <td id="media_description">Description de média</td>
                                             <td id="media_image">Le media</td>
@@ -153,14 +161,14 @@
                                                             role="button">create</i></button>
                                             </td>
                                             <td>
-                                                <button id="btn_delete_media" class="bouton_table"><i
+                                                <button data-id="" id="btn_delete_media" class="bouton_table"><i
                                                             class="mdl-color-text--blue-grey-400 material-icons"
                                                             role="presentation">delete</i></button>
                                             </td>
+                                            <input type="hidden" name="id" value="">
                                         </tr>
                                     </table>
                                     <button id="btn_ajout_media" class="bouton_ajout bouton_table"><i
-                                                id="btn_ajout_membre"
                                                 class="bouton_table mdl-color-text--blue-grey-400 material-icons"
                                                 role="presentation">add_circle</i></button>
 
@@ -168,17 +176,23 @@
                             </section>
                             <section class="aCacher" id="ajout_media">
                                 <h5>Ajouter un media</h5>
+                                <form  method="POST" action="" enctype="">
                                 <p>Titre <input id="media_nouveau_titre" type="text"></p>
                                 Description <textarea id="media_nouveau_description"></textarea>
                                 <p>Audiovisuel <input id="media_nouveau_image" type="file" accept="image"
                                                       accept="video"></p>
+                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </section>
                             <section class="aCacher" id="modifier_media">
                                 <h5>Modifier un media</h5>
+                                <form  method="POST" action="" enctype="">
                                 <p>Titre <input id="media_modifier_titre" type="text"></p>
                                 Description <textarea id="media_modifier_description"></textarea>
                                 <p>Audiovisuel <input id="media_modifier_image" type="file" accept="image"
                                                       accept="video"></p>
+                                <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </section>
 
                         </div>
