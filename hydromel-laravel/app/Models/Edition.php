@@ -44,12 +44,16 @@ class Edition extends Model {
         return self::find($id) !== null;
     }
 
+    public static function getCurrentEdition() {
+        return self::all()->sortByDesc("year")->first();
+    }
+
     /**
      * Retuns data from current edition with simplified info from previous editions
      * @return array that will be converted to json
      */
-    public static function getCurrentEdition() {
-        $current_edition = self::all()->sortByDesc("year")->first();
+    public static function getCurrentEditionJson() {
+        $current_edition = self::getCurrentEdition();
         if ($current_edition == null) {
             
         }
@@ -86,7 +90,7 @@ class Edition extends Model {
      * @return array that will be converted to json
      */
     public static function getPreviousEditionsSimplified() {
-        $id_current = self::all()->sortByDesc("year")->first()->id;
+        $id_current = self::getCurrentEdition()->id;
         $editions = self::all()->whereNotIn('id', $id_current)->sortByDesc("year")->toArray();
         $editions_formatted = array();
         for ($i = 0; $i < count($editions); $i++) {
@@ -133,44 +137,43 @@ class Edition extends Model {
         ];
     }
 
-    public static function isValidForUpdate($data)
-    {
+    public static function isValidForUpdate($data) {
         $erreur = false;
         // CHECK CONTRAINTES INTEGRITES
         if (($data['beginningDate'] != null) && ($data['finishingDate'] != null)) { // Si les deux champs sont remplis
             $year = mb_substr($data['beginningDate'], 0, 4); // on choppe juste l'annee
-            $yearEdition = self::getCurrentEdition()['edition']->original['year']; // on choppe l'annee de l'edition en cours
+            $yearEdition = self::getCurrentEditionJson()['edition']->original['year']; // on choppe l'annee de l'edition en cours
             if ($data['beginningDate'] != $yearEdition) { // L'année de début de l'édition doit être dans la même année que l'édition
                 $erreur = true;
             }
             if (!($data['beginningDate'] <= $data['finishingDate'])) { // La date de début doit être postérieure à la date de fin d'une édition
                 $erreur = true;
             }
-        } elseif( ($data['beginningDate'] != null) || ($data['finishingDate'] != null) ) { // Si un des deux champs est rempli
+        } elseif (($data['beginningDate'] != null) || ($data['finishingDate'] != null)) { // Si un des deux champs est rempli
             $erreur = true;
         }
 
         // REGLES DE VALIDATION
-        if($erreur != true) { // Si les contraintes d'integrites sont respectees
+        if ($erreur != true) { // Si les contraintes d'integrites sont respectees
             return Validator::make($data, [
-                'description' => 'string|between:1,20000|required',
-                'place' => 'string|between:1,50|required',
-                'beginningDate' => 'nullable|date',
-                'finishingDate' => 'nullable|date',
-            ])->passes();
-        }else{ // Si les contraintes n'ont pas etee respectees
+                        'description' => 'string|between:1,20000|required',
+                        'place' => 'string|between:1,50|required',
+                        'beginningDate' => 'nullable|date',
+                        'finishingDate' => 'nullable|date',
+                    ])->passes();
+        } else { // Si les contraintes n'ont pas etee respectees
             return !$erreur;
         }
     }
 
-    public static function isValid($parameters){
+    public static function isValid($parameters) {
         // validation here
         return Validator::make($parameters, [
-            'id'      => 'exists:news|sometimes|required',
-            'title'   => 'string|between:1,200|sometimes|required',
-            'body'    => 'string|between:1,10000|sometimes|required',
-            'user_id' => 'exists:users,id|sometimes|required',
-        ])->passes();
+                    'id' => 'exists:news|sometimes|required',
+                    'title' => 'string|between:1,200|sometimes|required',
+                    'body' => 'string|between:1,10000|sometimes|required',
+                    'user_id' => 'exists:users,id|sometimes|required',
+                ])->passes();
     }
 
 }

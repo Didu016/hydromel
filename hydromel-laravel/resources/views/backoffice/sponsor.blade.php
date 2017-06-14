@@ -22,34 +22,55 @@
                         </div>
                     </header>
                     <section class="aCacher section_default" id="sponsor">
-                    <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-                        <table class="mdl-data-table">
-                            <tr>
-                                <th class="large">Nom sponsor</th>
-                                <th>Categorie</th>
-                                <th>Logo</th>
-                                <th> Mod</th>
-                                <th>Suppr</th>
-                            </tr>
-                            <tr>
-                                <td id="sponsor_actif_nom">Le nom du sponsor</td>
-                                <td id="sponsor_actif_rank">Le rank</td>
-                                <td id="sponsor_actif_logo"></td>
-                                <td><button id="btn_modifier_sponsor" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="button">create</i></button></td>
-                                <td><button id="btn_delete_sponsor" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i></button></td>
-                            </tr>
-                        </table>
-                        <button id="btn_ajout_sponsor" class="bouton_ajout bouton_table"><i id="btn_ajout_membre" class="bouton_table mdl-color-text--blue-grey-400 material-icons" role="presentation">add_circle</i></button>
-
-                    </div>
+                        <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                            <table class="mdl-data-table">
+                                <tr>
+                                    <th class="large">Nom sponsor</th>
+                                    <th>Categorie</th>
+                                    <th>Logo</th>
+                                    <th> Mod</th>
+                                    <th>Suppr</th>
+                                </tr>
+                                @foreach ($sponsors as $sponsor)
+                                <tr>
+                                    <td id="sponsor_actif_nom">{{ $sponsor['society'] }}</td>
+                                    <td id="sponsor_actif_rank">
+                                        @if ($sponsor['rank_name']!= null)
+                                        {{ $sponsor['rank_name'] }}
+                                        @else
+                                        -
+                                        @endif
+                                    <td id="sponsor_actif_logo">
+                                        @if ($sponsor['logo_url']!= null)
+                                        {{ $sponsor['logo_url'] }}
+                                        @else
+                                        -
+                                        @endif
+                                    <td><button id="btn_modifier_sponsor" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="button">create</i></button></td>
+                                    <td><button id="btn_delete_sponsor" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i></button></td>
+                                </tr>
+                                @endforeach
+                            </table>
+                            <button id="btn_ajout_sponsor" class="bouton_ajout bouton_table"><i id="btn_ajout_membre" class="bouton_table mdl-color-text--blue-grey-400 material-icons" role="presentation">add_circle</i></button>
+                            <input type="sumbit" name="type" value="Valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast" role="presententaion">
+                        </div>
                     </section>
                     <section class="aCacher" id="ajout_sponsor">
                         <h5>Ajouter un nouveau sponsor</h5>
-                        <p>Entreprise <input id="sponsor_nouveau_nom"type="text"></p>
-                        <p>Catégorie</p><select id="sponsor_nouveau_categorie">
+                        <form method="POST" action="{{url('/auth/sponsors')}}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <p>Entreprise <input id="sponsor_nouveau_nom"type="text" name="society"></p>
+                            <p>Rang 
+                                <select id="sponsor_nouveau_categorie" name="rank">
+                                    @foreach ($ranks as $rank)
+                                    <option value="{{$rank->name}}">{{$rank->name}}</option>;
+                                    @endforeach
+                                </select>
+                            </p>
+                            <p>Logo <input id="sponsor_nouveau_img" type="file" accept="image/png" name="logo_url"></p>
+                            <p><input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast"></p>
+                        </form>
 
-                        </select>
-                        <p>Logo <input id="sponsor_nouveau_img" type="file" accept="image/png"></p>
                     </section>
                     <section class="aCacher" id="modifier_sponsor">
                         <h5>Modifier un sponsor</h5>
@@ -79,11 +100,11 @@
 
                 </div>
 
-        </section>
+            </section>
 
 
+        </div>
     </div>
-</div>
 
 </main>
 </div>
