@@ -1,38 +1,4 @@
-<!doctype html>
-
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Admin hydrocontest HEIG-VD">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Hydrocontest HEIG-VD</title>
-
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="{{url('img/backoffice/android-desktop.png')}}">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Admin HEIG-VD">
-    <link rel="apple-touch-icon-precomposed" href="{{url('img/backoffice/ios-desktop.png')}}">
-
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
-
-    <link rel="shortcut icon" href="{{url('img/backoffice/favicon.png')}}">
-
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{url('css/style/material.min.css')}}">
-    <link rel="stylesheet" href="{{url('css/style/styles.css')}}">
-    <script src="{{url('js/jquery.js')}}"></script>
-    <script src="{{url('js/main.js')}}" type="text/javascript"></script>
-
-</head>
-<body>
+@include('../backoffice/header')
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--teal-400">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
@@ -53,18 +19,20 @@
                         <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                             <header class="mdl-layout__header  mdl-color--teal-400">
                                 <div class="demo-navigation mdl-layout--large-screen-only mini_header mdl-layout__header-row">
-                                    <a class="mdl-navigation__link" href="#" id="lnk_description"><h4>Description</h4></a>
                                     <a class="mdl-navigation__link" href="#" id="lnk_membres"><h4>Membres</h4></a>
+                                    <a class="mdl-navigation__link" href="#" id="lnk_description"><h4>Description</h4></a>
+
 
                                 </div>
                             </header>
-                            <section class="aCacher section_default" id="description">
+                            <section class="aCacher " id="description">
                                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                                     <h5>Ecrivez votre description</h5>
                                     <textarea id="equipe_description" rows="8"></textarea>
                                 </div>
                             </section>
-                            <section class="aCacher" id="membres">
+                            <div>
+                            <section class="aCacher section_default" id="membres">
                                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                                     <table class="mdl-data-table">
                                         <thead>
@@ -93,6 +61,7 @@
                             </section>
                             <section class="aCacher" id="ajout_membre">
                                 <h5>Ajouter un nouveau membre</h5>
+                                <form method="POST" action="" enctype="">
                                 <p>Nom <input id="membre_nouveau_nom" type="text"></p>
                                 <p>Prenom <input id="membre_nouveau_prenom" type="text"></p>
                                 <p>Mail <input id="membre_nouveau_mail" type="email"></p>
@@ -102,10 +71,12 @@
                                         <option class="liste_resp">les differentes options ici</option>
                                     </select>
                                 </div>
-
+                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </section>
                             <section class="aCacher" id="modifier_membre">
                                 <h5>Modifier un membre</h5>
+                                <form method="POST" action="" enctype="">
                                 <input type="hidden" name="id" value="">
                                 <p>Nom <input id="membre_modifier_nom" type="text"></p>
                                 <p>Prenom <input id="membre_modifier_prenom" type="text"></p>
@@ -116,15 +87,19 @@
                                         <option class="liste_resp">les differentes options ici</option>
                                     </select>
                                 </div>
+                                </form>
 
+                            </div>
                             </section>
+
 
                         </div>
                     </div>
                 </div>
 
                 <div class="btn_footer mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
-                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+
+                    <input type="submit" name="type" value="Valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                 </div>
 
 
