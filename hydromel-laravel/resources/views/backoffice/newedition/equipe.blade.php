@@ -10,26 +10,26 @@
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="../images/android-desktop.png">
+    <link rel="icon" sizes="192x192" href="{{url('img/backoffice/android-desktop.png')}}">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Admin HEIG-VD">
-    <link rel="apple-touch-icon-precomposed" href="../images/ios-desktop.png">
+    <link rel="apple-touch-icon-precomposed" href="{{url('img/backoffice/ios-desktop.png')}}">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
-    <link rel="shortcut icon" href="../images/favicon.png">
+    <link rel="shortcut icon" href="{{url('img/backoffice/favicon.png')}}">
 
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../style/material.min.css">
-    <link rel="stylesheet" href="../style/styles.css">
-    <script src="../js/jquery.js"></script>
-    <script src="../js/main.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="{{url('css/style/material.min.css')}}">
+    <link rel="stylesheet" href="{{url('css/style/styles.css')}}">
+    <script src="{{url('js/jquery.js')}}"></script>
+    <script src="{{url('js/main.js')}}" type="text/javascript"></script>
 
 </head>
 <body>
@@ -186,6 +186,6 @@
         </g>
     </defs>
 </svg>
-<script src="../style/material.min.js"></script>
+<script src="{{url('css/style/material.min.js')}}"></script>
 </body>
 </html>

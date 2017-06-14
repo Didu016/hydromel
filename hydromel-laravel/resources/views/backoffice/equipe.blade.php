@@ -27,9 +27,13 @@
                             <section class="aCacher section_default" id="description">
                             <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                                 <h5>Ecrivez votre description</h5>
+                                <form method="POST" action="" enctype="">
                                 <textarea id="equipe_description" rows="8"></textarea>
+                                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </div>
                             </section>
+
                         <section class="aCacher" id="membres">
                             <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                             <table class="mdl-data-table">
@@ -44,13 +48,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr id="membre_2">
-                                    <td class="membre_actif_image">image</td>
-                                    <td class="membre_actif_nom">Le nom long d'un Membre</td>
-                                    <td class="membre_actif_mail">mailAT.com</td>
-                                    <td class ="membre_actif_respo">La responsabilité</td>
+                                <tr id="membre_">
+                                    <td class="membre_image">image</td>
+                                    <td class="membre_nom">Le nom long d'un Membre</td>
+                                    <td class="membre_mail">mailAT.com</td>
+                                    <td class ="membre_respo">La responsabilité</td>
                                     <td><button id="btn_modifier_membre" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="button">create</i></button></td>
-                                  <td><button data-id="2" id="btn_delete_membre" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i></button></td>
+                                  <td><button data-id="" id="btn_delete_membre" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i></button></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -59,67 +63,121 @@
                         </section>
                             <section class="aCacher" id="ajout_membre">
                                 <h5>Ajouter un nouveau membre</h5>
-                                <p>Nom <input id="membre_nouveau_nom" type="text"></p>
-                                <p>Prenom <input id="membre_nouveau_prenom" type="text"></p>
-                                <p>Mail <input id="membre_nouveau_mail" type="email"></p>
-                                <input id="membre_nouveau_image" type="file" accept="image">
+                                <form method="POST" action="" enctype="">
+                                <input type="hidden" name="id" value="">
+                                    <p>Nom <input name="membre_nom" type="text"></p>
+                                    <p>Prenom <input name="membre_prenom" type="text"></p>
+                                    <p>Mail <input name="membre_mail" type="email"></p>
+                                    <input name="membre_image" type="file" accept="image">
                                 <div>
                                    Responsabilité <select id="membre_nouveau_resp">
                                         <option class="liste_resp">les differentes options ici</option>
                                     </select>
                                 </div>
-
+                                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </section>
                             <section class="aCacher" id="modifier_membre">
                                 <h5>Modifier un membre</h5>
+                                <form method="POST" action="" enctype="">
                                 <input type="hidden" name="id" value="">
-                                <p>Nom <input id="membre_modifier_nom" type="text"></p>
-                                <p>Prenom <input id="membre_modifier_prenom" type="text"></p>
-                                <p>Mail <input id="membre_modifier_mail" type="email"></p>
-                                <input id="membre_modifier_image" type="file" accept="image">
+                                <p>Nom <input name="membre_nom" type="text"></p>
+                                <p>Prenom <input name="membre_prenom" type="text"></p>
+                                <p>Mail <input name="membre_mail" type="email"></p>
+                                <input name="membre_image" type="file" accept="image">
                                 <div>
-                                    Responsabilité <select id="membre_modifier_resp">
+                                    Responsabilité <select id="membre_resp">
                                         <option class="liste_resp">les differentes options ici</option>
                                     </select>
                                 </div>
-
+                                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </section>
                             <section class="aCacher" id="respo">
                             <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                                 <h5>Ajouter une responsabilité</h5>
+                                <form method="POST" action="" enctype="">
                             <p>Créer une responsabilité <input id="nouvelle_resp" name="responsabilite">
-                                <input type="submit" value="Ajouter" name="ajouter" class="btn_ajout mdl-button mdl-color--teal-400 mdl-color-text--accent-contrast">
+                                <input type="submit" value="Ajouter" name="ajouter" class="btn_ajout mdl-button">
+                            </p>
+                                    <ul class="listes">
+                                        <li>une respo</li>
+                                    </ul>
 
+                                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
                             </div>
                             </section>
                             <section class="aCacher" id="prix">
+                                <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                                    <table class="mdl-data-table">
+                                        <thead>
+                                        <tr>
+                                            <th>Distinction</th>
+                                            <th >Position</th>
+                                            <th class="large"> Description</th>
+                                            <th>Value</th>
+                                            <th> Mod</th>
+                                            <th>Suppr</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr id="prix_">
+                                            <td class="prix_distinction">distinction</td>
+                                            <td class="prix_position">position</td>
+                                            <td class="prix_description">description</td>
+                                            <td class ="prix_value">value prix</td>
+                                            <td><button id="btn_modifier_prix" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="button">create</i></button></td>
+                                            <td><button data-id="" id="btn_delete_prix" class="bouton_table"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i></button></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <button id="btn_ajout_prix" class="bouton_ajout bouton_table"><i class="bouton_table mdl-color-text--blue-grey-400 material-icons" role="presentation">add_circle</i></button>
+                                </div>
+                            </section>
+                            <section class="aCacher" id="ajout_prix">
                                 <h5>Ajouter un prix</h5>
+                                <form method="POST" action="" enctype="">
                                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                                     <p>Distinction <input id="prix_distinction" type="text" required name="prix_distinction">
                                     <p>Position <input id="prix_position" type="number" required name="prix_position" ></p>
                                     <p>Description <textarea required id="prix_description"></textarea></p>
                                     <p>Value <input id="prix_value" type="text"></p>
-
+                                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
 
                                 </div>
+                                </form>
+                            </section>
+                            <section class="aCacher" id="modifier_prix">
+                                <h5>Modifier un prix</h5>
+                                <form method="POST" action="" enctype="">
+                                    <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                                        <p>Distinction <input id="prix_distinction" type="text" required name="prix_distinction">
+                                        <p>Position <input id="prix_position" type="number" required name="prix_position" ></p>
+                                        <p>Description <textarea required id="prix_description"></textarea></p>
+                                        <p>Value <input id="prix_value" type="text"></p>
+
+                                        <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+
+                                    </div>
+                                </form>
                             </section>
                         </div>
                     </div>
-                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+
                 </div>
 
                 <div class="btn_footer mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
-                    <a href="/adminhydromelpanel" class="mdl-button  mdl-color--accent mdl-color-text--accent-contrast">Accueil</a>
+                    <a href="/auth/home" class="mdl-button  mdl-color--accent mdl-color-text--accent-contrast">Accueil</a>
                 </div>
 
 
 
-        </section>
+          </section>
 
 
+        </div>
     </div>
 </div>
 
-</main>
-</div>
 @include('backoffice/footer')
