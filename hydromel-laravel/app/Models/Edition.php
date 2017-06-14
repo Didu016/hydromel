@@ -56,7 +56,7 @@ class Edition extends Model {
         $current_edition_members = Member::getMembersFormatted($current_edition->members()->get());
         $current_edition_rewards = $current_edition->rewards()->get();
         $current_edition_sponsors = Sponsor::getSponsorsFormatted($current_edition->sponsors()->get());
-        $current_edition_articles = Article::getArticlesFormatted($current_edition->articles()->get());
+        $current_edition_articles = Article::getArticlesFormatted($current_edition->articles()->orderBy('created_at','desc')->get());
         $medias = $current_edition->medias()->get();
 
         // Filter medias that are not associated with an article (because media already showed in the article)
