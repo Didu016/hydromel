@@ -38,6 +38,7 @@
                                 <table class="mdl-data-table">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Distinction</th>
                                             <th>Position</th>
                                             <th class="large"> Description</th>
@@ -50,6 +51,7 @@
                                     @if($reward['edition_id'] == $editionP['id'])
                                     <tbody>
                                         <tr id="prix_">
+                                            <td id="id">{{$reward['id']}}</td>
                                             <td class="prix_distinction">{{$reward['distinction']}}</td>
                                             <td class="prix_position">{{$reward['position']}}
                                                 @if($reward['position'] == 1)
