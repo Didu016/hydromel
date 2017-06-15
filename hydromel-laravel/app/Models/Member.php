@@ -126,9 +126,10 @@ class Member extends Model {
 
                 // Creer le media
                 $mediaDestination = "../public/img/membersMedias";
+                $mediaDestinationShortened = "img/membersMedias";
                 $media = new Media();
                 $media->title = 'media_' . $dataMember['name'];
-                $media->url = $mediaDestination . '/media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension();
+                $media->url = $mediaDestinationShortened . '/media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension();
                 $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                 if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                     $media->mediatype_id = 1; // Alors on set que c'est une photo

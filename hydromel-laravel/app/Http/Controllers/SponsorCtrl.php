@@ -75,9 +75,10 @@ class SponsorCtrl extends Controller {
                 // Creer le media (s'il y en a un)
                 if($dataMedia != null){
                     $mediaDestination = "../public/img/sponsorsMedias";
+                    $mediaDestinationShortened = "img/sponsorsMedias";
                     $media = new Media();
                     $media->title = 'logo_' . $dataSponsor['society'];
-                    $media->url = $mediaDestination . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
+                    $media->url = $mediaDestinationShortened . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
                     $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                     if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                         $media->mediatype_id = 1; // Alors on set que c'est une photo
@@ -87,7 +88,7 @@ class SponsorCtrl extends Controller {
                     $media->save(); // Sauvegarde du media
                     $dataMedia->move($mediaDestination, 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension()); // Déplace la photo dans le dossier voulu
 
-                    $sponsor->logo_url =  $mediaDestination . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
+                    $sponsor->logo_url =  $mediaDestinationShortened . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
 
                 } else {
                     $sponsor->logo_url = null; // Pas de media specifie, alors null
@@ -190,8 +191,9 @@ class SponsorCtrl extends Controller {
                 // Modifier le media
                 if ($dataMedia != null) {
                     $mediaDestination = "../public/img/sponsorsMedias";
+                    $mediaDestinationShortened = "img/sponsorsMedias";
                     $existingMedia->title = 'logo_' . $dataSponsor['society'];
-                    $existingMedia->url = $mediaDestination . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
+                    $existingMedia->url = $mediaDestinationShortened . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
                     $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                     if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                         $existingMedia->mediatype_id = 1; // Alors on set que c'est une photo
@@ -200,7 +202,7 @@ class SponsorCtrl extends Controller {
                     }
                     $existingMedia->save(); // Sauvegarde du media
                     $dataMedia->move($mediaDestination, 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension()); // Déplace la photo dans le dossier voulu
-                    $sponsor->logo_url = $mediaDestination . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
+                    $sponsor->logo_url = $mediaDestinationShortened . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
                 } else { // Alors y'a pas de media
                     $sponsor->logo_url = null; // Pas de media specifie, alors null
                 }
