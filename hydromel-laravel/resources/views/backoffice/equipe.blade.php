@@ -10,6 +10,7 @@
         </div>
 
     </header>
+
     <div class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-layout__tab-panel is-active" id="overview">
             <section class=" mdl-grid ">
@@ -29,7 +30,7 @@
 
                                 <h5>Ecrivez votre description</h5>
                                 <form method="POST" action="" enctype="">
-                                    <textarea id="equipe_description" rows="8"></textarea>
+                                    <textarea id="equipe_description" rows="8">{{$editions['attributes']['team_description']}}re</textarea>
                                     <input type="submit" name="valider"
                                            class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                 </form>
@@ -91,9 +92,9 @@
                                     <input name="membre_image" type="file" accept="image">
                                     <div>
                                         Responsabilité<select id="membre_nouveau_resp" name="membre_responsibility">
-                                            <!-- ici il faut foreach -->
-                                            <!-- IL FAUT BOUCLER ICI -->
-                                            <option>Team Manager</option>
+                                            @foreach($responsability as $resp)
+                                                <option>{{($resp['attributes']['name'])}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <input type="submit" name="valider"
@@ -122,16 +123,9 @@
                                     <h5>Ajouter une responsabilité</h5>
                                     <form method="POST" action="{{url('/auth/responsibility')}}"
                                           enctype="multipart/form-data">
-                                        <p>Créer une responsabilité <input id="nouvelle_resp" name="responsabilite">
-                                            <input type="submit" value="Ajouter" name="ajouter"
-                                                   class="btn_ajout mdl-button">
-                                        </p>
+                                        <p>Créer une responsabilité <input id="nouvelle_resp" name="responsabilite"></p>
                                         {{ csrf_field() }}
-                                        <ul class="listes">
-                                            <li>une respo</li>
-                                        </ul>
-
-                                        <input type="submit" name="valider"
+                                        <input type="submit" name="valider" value="Ajouter"
                                                class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                     </form>
                                 </div>

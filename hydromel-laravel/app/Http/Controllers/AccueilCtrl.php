@@ -15,7 +15,10 @@ class AccueilCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('backoffice/accueil');
+        $editions = Edition::getCurrentEdition();
+        return view('backoffice/accueil',[
+            'editions' => $editions,
+        ]);
     }
 
     /**

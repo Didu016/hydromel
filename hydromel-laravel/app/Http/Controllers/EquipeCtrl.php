@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Media;
+use App\Models\Responsibility;
 use App\Models\Reward;
 use Illuminate\Http\Request;
 use App\Models\Member;
@@ -18,9 +19,13 @@ class EquipeCtrl extends Controller {
     public function index() {
         $members = Member::getMembersFormatted(Edition::getCurrentEdition()->members()->get());
         $rewards = Edition::getCurrentEdition()->rewards()->get();
+        $editions = Edition::getCurrentEdition();
+        $responsability = Responsibility::all();
         return view('backoffice/equipe', [
             'members' => $members,
-            'rewards' => $rewards
+            'rewards' => $rewards,
+            'responsability' => $responsability,
+            'editions' => $editions,
         ]);
     }
 
