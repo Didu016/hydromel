@@ -10,7 +10,7 @@ class Responsibility extends Model {
     public $timestamps = false;
     protected $table = "responsibilities";
 
-    public static function isValid(string $dataResponsibility) {
+    public static function isValid($dataResponsibility) {
         $responsibilities = self::all();
         foreach ($responsibilities as $responsibility) {
             if ($responsibility->name == $dataResponsibility) {
