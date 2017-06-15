@@ -10,15 +10,14 @@ use App\Models\Edition;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
-class ArticleCtrl extends Controller
-{
+class ArticleCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -27,9 +26,8 @@ class ArticleCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-
+    public function create() {
+        
     }
 
     /**
@@ -38,49 +36,48 @@ class ArticleCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        /*---- RECUPERATIONS DES DONNEES RECUES ----*/
+    public function store(Request $request) {
+        /* ---- RECUPERATIONS DES DONNEES RECUES ---- */
         $dataArticle['title'] = $request->title;
         $dataArticle['description'] = $request->description;
         $dataArticle['link'] = $request->link;
         $articleType = $request->type;
-        if($dataArticle['link'] == 'null'){ // si le champ est hidden, on recoit null en string
+        if ($dataArticle['link'] == 'null') { // si le champ est hidden, on recoit null en string
             $dataArticle['link'] = null; // alors on set ici a la valeur null
         }
         $dataMedia = $request->files->get('media');
 
         $error = false; // Set l'erreur à false
 
-        /*---- CHAMPS OBLIGATOIRES (non testés par un validateur) ----*/
-        if($articleType == null){
+        /* ---- CHAMPS OBLIGATOIRES (non testés par un validateur) ---- */
+        if ($articleType == null) {
             $error = true; // L'article doit de toute façon posséder un type
         }
 
-        /*---- CONTRAINTES D'INTEGRITES ----*/
-        if($articleType == 'presse'){ // Si c'est un article de presse
-            if($dataArticle['link'] == null){ // Si cet article n'a pas de lien
+        /* ---- CONTRAINTES D'INTEGRITES ---- */
+        if ($articleType == 'presse') { // Si c'est un article de presse
+            if ($dataArticle['link'] == null) { // Si cet article n'a pas de lien
                 $error = true; // RETURN
             }
         }
-        if($dataArticle['description'] == null && $dataArticle['link'] == null){ // Si l'article n'a pas de titre n'y de corps
+        if ($dataArticle['description'] == null && $dataArticle['link'] == null) { // Si l'article n'a pas de titre n'y de corps
             $error = true; // Il faut au moins un des
         }
 
-        /*---- VALIDATIONS ----*/
+        /* ---- VALIDATIONS ---- */
         $validArticle = Article::isValid($dataArticle); // Validation du contenu de l'article
         $validArticleType = ArticleType::exists($articleType); // Validation du type de l'article
         $validMedia = true; // Par defaut la validation du media est a true, pour si jamais il n'y a pas de media
-        if($dataMedia != null) { // Si il y a un media
+        if ($dataMedia != null) { // Si il y a un media
             $mediaMaxSize = 20000000;
             $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
             $validMedia = Media::isValid($dataMedia, $allowedTypes, $mediaMaxSize);
         }
         // Est-ce que la description d'un article presse doit revoir sa taille de caractère vérifiée ?????
 
-        /*---- UPDATES ----*/
+        /* ---- UPDATES ---- */
         /* soit on check les medias soit on crée un nouveau un duplicata */
-        if($validArticle != false && $validArticleType != false && $validMedia != false && $error != true){
+        if ($validArticle != false && $validArticleType != false && $validMedia != false && $error != true) {
             DB::transaction(function () use ($dataArticle, $articleType, $dataMedia) {
                 // création de l'article
                 $article = new Article();
@@ -99,7 +96,7 @@ class ArticleCtrl extends Controller
                 $article->save();
 
                 // Creer le media
-                if($dataMedia != null) {
+                if ($dataMedia != null) {
                     $mediaDestination = "../public/img/articlesMedias";
                     $mediaDestinationShortened = "img/articlesMedias";
                     $media = new Media();
@@ -125,7 +122,6 @@ class ArticleCtrl extends Controller
                 // mettre le nouveau dans le repertoire
                 // mettre le nouvel url dans le media
                 // sauvegarder le media
-
                 //dd('apparently done');
             }); // Fin de la transaction
         } else {
@@ -139,8 +135,7 @@ class ArticleCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -150,8 +145,7 @@ class ArticleCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -162,14 +156,13 @@ class ArticleCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request /*, $id*/)
-    {
+    public function update(Request $request /* , $id */) {
         // Ici on va update un article avec un id reçu
         $idArticle = 1;
 
         $article = Article::find($idArticle);
 
-    /*---- RECUPERATIONS DES DONNEES RECUES ----*/
+        /* ---- RECUPERATIONS DES DONNEES RECUES ---- */
         $dataArticle['title'] = $request->title;
         $dataArticle['description'] = $request->description;
         $dataArticle['link'] = $request->link;
@@ -178,35 +171,35 @@ class ArticleCtrl extends Controller
 
         $error = false; // Set l'erreur à false
 
-    /*---- CHAMPS OBLIGATOIRES (non testés par un validateur) ----*/
-        if($articleType == null){
+        /* ---- CHAMPS OBLIGATOIRES (non testés par un validateur) ---- */
+        if ($articleType == null) {
             $error = true; // L'article doit de toute façon posséder un type
         }
 
-    /*---- CONTRAINTES D'INTEGRITES ----*/
-        if($articleType == 'presse'){ // Si c'est un article de presse
-            if($dataArticle['link'] == null){ // Si cet article n'a pas de lien
+        /* ---- CONTRAINTES D'INTEGRITES ---- */
+        if ($articleType == 'presse') { // Si c'est un article de presse
+            if ($dataArticle['link'] == null) { // Si cet article n'a pas de lien
                 $error = true; // RETURN
             }
         }
-        if($dataArticle['description'] == null && $dataArticle['link'] == null){ // Si l'article n'a pas de titre n'y de corps
+        if ($dataArticle['description'] == null && $dataArticle['link'] == null) { // Si l'article n'a pas de titre n'y de corps
             $error = true; // Il faut au moins un des
         }
 
-    /*---- VALIDATIONS ----*/
+        /* ---- VALIDATIONS ---- */
         $validArticle = Article::isValid($dataArticle); // Validation du contenu de l'article
         $validArticleType = ArticleType::exists($articleType); // Validation du type de l'article
         $validMedia = true; // Par defaut la validation du media est a true, pour si jamais il n'y a pas de media
-        if($dataMedia != null) { // Si il y a un media
+        if ($dataMedia != null) { // Si il y a un media
             $mediaMaxSize = 20000000;
             $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
             $validMedia = Media::isValid($dataMedia, $allowedTypes, $mediaMaxSize);
         }
         // Est-ce que la description d'un article presse doit revoir sa taille de caractère vérifiée ?????
 
-    /*---- UPDATES ----*/
+        /* ---- UPDATES ---- */
         /* soit on check les medias soit on crée un nouveau un duplicata */
-        if($validArticle != false && $validArticleType != false && $validMedia != false && $error != true){
+        if ($validArticle != false && $validArticleType != false && $validMedia != false && $error != true) {
             DB::transaction(function () use ($dataArticle, $articleType, $article, $dataMedia) {
                 // Faire la transaction patati patata
 
@@ -227,7 +220,6 @@ class ArticleCtrl extends Controller
                 // mettre le nouveau dans le repertoire
                 // mettre le nouvel url dans le media
                 // sauvegarder le media
-
                 //dd('apparently done');
             }); // Fin de la transaction
         } else {
@@ -241,8 +233,8 @@ class ArticleCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }

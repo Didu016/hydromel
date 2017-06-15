@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
-class Member extends Model {
+class Member extends Model
+{
 
     public $timestamps = false;
 
@@ -19,19 +20,21 @@ class Member extends Model {
 
     //////////// RELATIONSHIPS ////////////
 
-    public function editions() {
+    public function editions()
+    {
         return $this->belongsToMany('App\Models\Edition', 'participation', 'member_id', 'edition_id')
-                        ->withPivot('responsibility_id', 'media_id');
+            ->withPivot('responsibility_id', 'media_id');
     }
 
     //////////// CLASS METHODS ////////////
 
     /**
-     * Formats the members to display. 
+     * Formats the members to display.
      * @param type $laravel_members the members as laravel displays it (with foreign keys)
      * @return array formatted members
      */
-    public static function getMembersFormatted($laravel_members) {
+    public static function getMembersFormatted($laravel_members)
+    {
         $members = array();
         for ($i = 0; $i < $laravel_members->count(); $i++) {
             $member = $laravel_members->get($i);
@@ -61,109 +64,127 @@ class Member extends Model {
         return $members;
     }
 
-    public static function isValid($data) {
+    public static function isValid($data)
+    {
         // CHECK CONTRAINTES INTEGRITES
         // un membre peut avoir plusieurs médias si pas même édition
         // Pas besoin de tester car on va, si la personne veut changer, changer le file ou changer le url, donc pas de rajout
-        $erreur = false;
-
         // REGLES DE VALIDATION
-        if ($erreur != true) { // Si les contraintes d'integrites sont respectees
-            return Validator::make($data, [
-                        'firstname' => 'string|between:1,50|required', // on vérifie pas les chiffres et autres caractères
-                        'name' => 'string|between:1,50|required', // on vérifie pas les chiffres et autres caractères
-                        'email' => 'email|between:1,50|required',
-                    ])->passes();
-        } else { // Si les contraintes n'ont pas etee respectees
-            return !$erreur;
-        }
+        return Validator::make($data, [
+            'firstname' => 'string|between:1,50|required', // on vérifie pas les chiffres et autres caractères
+            'name' => 'string|between:1,50|required', // on vérifie pas les chiffres et autres caractères
+            'email' => 'email|between:1,50|required',
+        ])->passes();
     }
 
-    public static function exists($data) {
-        $name = $data['name'];
-        $firstname = $data['firstname'];
-        $email = $data['email'];
+    public static function exists($data)
+    {
 
-        $someone = self::where([
-                    ['firstname', '=', $firstname], ['name', '=', $name], ['email', '=', $email]
-                ])->get();
-
-        if ($someone->isEmpty()) {
-            return false; // personne n'existe encore avec ces infos
-        } else {
-            return true; // qqun existe deja avec les memes infos
-        }
+        return self::where([
+                ['firstname', '=', $data['firstname']],
+                ['name', '=', $data['name']],
+                ['email', '=', $data['email']]
+            ])->first() != null;
     }
 
+    public static function findFromAttribute($data)
+    {
 
-    public static function createMember($dataMember, $dataResponsibility, $dataMedia) {
+        return self::where([
+            ['firstname', '=', $data['firstname']],
+            ['name', '=', $data['name']],
+            ['email', '=', $data['email']]
+        ])->first();
+    }
+
+    public static function createMember($dataMember, $dataResponsibility, $dataMedia, $edition = null)
+    {
+
         // Valider les champs du membre
+        if (!Member::isValid($dataMember)) {
+            return null;
+        }
+
         $alreadyExistingMember = Member::exists($dataMember);
-        $validDataMember = Member::isValid($dataMember); // true si valid, false si non
+        //
         // Valider la responsability
-        $validResponsibility = false;
-        $validDataResponsibility = Responsibility::isValid($dataResponsibility);
+        if (!Responsibility::isValid($dataResponsibility)) {
+            return null;
+        }
 
-        // Valider le média
-        $validMedia = false;
-        $mediaMaxSize = 2000000;
+        // Valider le media
+        // 12 Mo max size
+        $mediaMaxSize = 12000000;
         $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
-        $validMedia = Media::isValid($dataMedia, $allowedTypes, $mediaMaxSize);
+        if (!Media::isValid($dataMedia, $allowedTypes, $mediaMaxSize)) {
+            return null;
+        }
+        return DB::transaction(function () use ($dataMedia, $dataMember, $dataResponsibility, $edition, $alreadyExistingMember) {
 
-        // Changer les data
-        // Changer la responsibility
-        // Changer le media
-
-        if ($validDataMember != false && $validDataResponsibility != false && $validMedia != false && $alreadyExistingMember != true) {
-            DB::transaction(function () use ($dataMedia, $dataMember, $dataResponsibility) {
-
-                // Creer le membre
+            $member = null;
+            if ($alreadyExistingMember) {
+                $member = self::findFromAttribute($dataMember);
+            } else {
                 $member = new Member();
                 $member->firstname = $dataMember['firstname'];
                 $member->name = $dataMember['name'];
                 $member->email = $dataMember['email'];
                 $member->save();
+            }
 
-                // Creer le media
-                $mediaDestination = "../public/img/membersMedias";
-                $mediaDestinationShortened = "img/membersMedias";
-                $media = new Media();
-                $media->title = 'media_' . $dataMember['name'];
-                $media->url = $mediaDestinationShortened . '/media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension();
-                $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
-                if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
-                    $media->mediatype_id = 1; // Alors on set que c'est une photo
-                } else { // Si le média reçu est une photo
-                    $media->mediatype_id = 2; // Alors on set que c'est une photo
+            if ($member == null) {
+                return null;
+            }
+
+            // Creer le media
+            $mediaDestination = "../public/img/membersMedias";
+            $mediaDestinationShortened = "img/membersMedias";
+            $media = new Media();
+            $media->title = 'media_' . $dataMember['name'];
+            $media->url = $mediaDestinationShortened . '/media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension();
+            $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
+            if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
+                $media->mediatype_id = 1; // Alors on set que c'est une photo
+            } else { // Si le média reçu est une photo
+                $media->mediatype_id = 2; // Alors on set que c'est une photo
+            }
+            $media->save();
+            $dataMedia->move($mediaDestination, ('media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension())); // Déplace la photo dans le dossier voulu
+
+            // Ajouter ce membre a l'edition
+            if ($edition == null) {
+                $edition = Edition::getCurrentEdition();
+            }
+            $responsibilities = Responsibility::all();
+            $responsibilityId = 0;
+
+            for ($i = 1; $i < count($responsibilities) + 1; $i++) {
+                $oneResponsibility = Responsibility::find($i);
+                if ($oneResponsibility['name'] == $dataResponsibility) {
+                    $responsibilityId = $oneResponsibility->id;
                 }
-                $media->save();
-                $dataMedia->move($mediaDestination, ('media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension())); // Déplace la photo dans le dossier voulu
+            }
 
-                // Ajouter ce membre a l'edition
-                $actualEdition = Edition::all()->sortByDesc("year")->first();
-                $responsibilities = Responsibility::all();
-                $responsibilityId = 0;
+            $edition->medias()->save($media); // PK ON FAIT CA
+            $participation = new Participation();
+            $participation->member_id = $member->id;
+            $participation->edition_id = $edition->id;
+            $participation->responsibility_id = $responsibilityId;
+            $participation->media_id = $media->id;
+            $participation->save();
+            return $member;
+        }); // Fin de la transaction
+    }
 
-                for ($i = 1; $i < count($responsibilities) + 1; $i ++) {
-                    $oneResponsibility = Responsibility::find($i);
-                    if ($oneResponsibility['name'] == $dataResponsibility) {
-                        $responsibilityId = $oneResponsibility->id;
-                    }
-                }
-
-                $actualEdition->medias()->save($media); // PK ON FAIT CA
-
-                $participation = new Participation();
-                $participation->member_id = $member->id;
-                $participation->edition_id = $actualEdition->id;
-                $participation->responsibility_id = $responsibilityId;
-                $participation->media_id = $media->id;
-                $participation->save();
-            }); // Fin de la transaction
-            // REUSSITE REDIRECTION --------------------------------------
-        } else { // SINON ERREUUUUUUUUUUUUUUR --------------------------------------------------------------------------
-            dd('un des champs est pas bon ou alors le membre existe déjà');
+    public static function getSupervisorFromEdition($edition)
+    {
+        $current_edition_members = Member::getMembersFormatted($edition->members()->get());
+        foreach ($current_edition_members as $member) {
+            if ($member['responsibility_name'] == 'Chercheur-Superviseur') {
+                return $member;
+            }
         }
+        return null;
     }
 
 }

@@ -1,6 +1,6 @@
 @include('backoffice/header')
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--teal-400">
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--teal-700">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
         <div class="mdl-layout">

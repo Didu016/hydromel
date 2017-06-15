@@ -1,6 +1,6 @@
 @include('backoffice/header')
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--teal-500">
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--teal-700">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
         <div class="mdl-layout  mdl-layout__header-row">
@@ -38,99 +38,80 @@
                                         </tr>
 
                                         @foreach($articles as $article)
-                                            @if ($article['articletype_name'] == 'news')
-                                                <tr id="article_">
-                                                    <td id="id">{{$article['id']}}</td>
-                                                    <td class="article_news_titre">
-                                                        {{$article['title']}}
-                                                    </td>
-                                                    <td class="article_news_resume">{{substr($article['description'],0,5)}}
-                                                        ...
-                                                    </td>
-                                                    <td class="article_news_image">
-                                                        @if(empty($article['medias']))
-                                                            -
-                                                        @else
-                                                            @foreach($article['medias'] as $media)
-                                                                <img src="{{ url($media['url']) }}" height="50"
-                                                                     width="50">
-                                                            @endforeach
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <button id="btn_modifier_news" class="bouton_table"><i
-                                                                    class="mdl-color-text--blue-grey-400 material-icons"
-                                                                    role="button">create</i></button>
-                                                    </td>
-                                                    <td>
+                                        @if ($article['articletype_name'] == 'news')
+                                        <tr id="article_">
+                                            <td id="id">{{$article['id']}}</td>
+                                            <td class="article_news_titre">
+                                                {{$article['title']}}
+                                            </td>
+                                            <td class="article_news_resume">{{substr($article['description'],0,5)}}
+                                                ...
+                                            </td>
+                                            <td class="article_news_image">
+                                                @if(empty($article['medias']))
+                                                -
+                                                @else
+                                                @foreach($article['medias'] as $media)
+                                                <img src="{{ url($media['url']) }}" height="50"
+                                                     width="50">
+                                                @endforeach
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <button id="btn_modifier_news" class="bouton_table"><i
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="button">create</i></button>
+                                            </td>
+                                            <td>
 
-                                                        <button data-id="" id="btn_delete_news" class="bouton_table"><i
-                                                                    class="mdl-color-text--blue-grey-400 material-icons"
-                                                                    role="presentation">delete</i></button>
+                                                <button data-id="" id="btn_delete_news" class="bouton_table"><i
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="presentation">delete</i></button>
 
-                                                    </td>
-                                                    <input type="hidden" name="id" value="">
-                                                </tr>
-                                            @endif
+                                            </td>
+                                        <input type="hidden" name="id" value="">
+                                        </tr>
+                                        @endif
                                         @endforeach
                                     </table>
                                     <button id="btn_ajout_news" class="bouton_ajout bouton_table"><i
 
-                                                class="bouton_table mdl-color-text--blue-grey-400 material-icons"
-                                                role="presentation">add_circle</i></button>
+                                            class="bouton_table mdl-color-text--blue-grey-400 material-icons"
+                                            role="presentation">add_circle</i></button>
 
 
                                 </div>
                             </section>
                             <section class="aCacher" id="ajout_news">
                                 <h5>Ajouter un article news</h5>
-                                <<<<<<< HEAD
-                                <form method="POST" action="" enctype="">
-                                    <p>Titre <input id="article_news_nouveau_nom" type="text"></p>
-                                    Description <textarea id="article_news_nouveau_description"></textarea>
-                                    <p>Audiovisuel <input id="article_news_nouveau_media" type="file" accept="image"
-                                                          accept="video" file="media"></p>
+
+                                <form method="POST" action="{{url('/auth/article')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <p>Titre <input id="article_news_nouveau_nom" name="title" type="text"></p>
+                                    Description <textarea id="article_news_nouveau_description"
+                                                          name="description"></textarea>
+                                    <p>Audiovisuel <input id="article_news_nouveau_media" type="file" name="media"
+                                                          accept="image"
+                                                          accept="video" file="media">
+                                    </p>
                                     <input type="hidden" name="type" value="news">
-                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor"
+                                    <input type="hidden" name="link" value=null>
+                                    <input type="submit" name="btn" value="Valider" id="btn_ajout_sponsor"
                                            class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-                                    =======
-                                    <form method="POST" action="{{url('/auth/article')}}" enctype="multipart/form-data">
-                                        {{ csrf_field() }}
-                                        <p>Titre <input id="article_news_nouveau_nom" name="title" type="text"></p>
-                                        Description <textarea id="article_news_nouveau_description"
-                                                              name="description"></textarea>
-                                        <p>Audiovisuel <input id="article_news_nouveau_media" type="file" name="media"
-                                                              accept="image"
-                                                              accept="video" file="media">
-                                        </p>
-                                        <input type="hidden" name="type" value="news">
-                                        <input type="hidden" name="link" value=null>
-                                        <input type="submit" name="btn" value="Valider" id="btn_ajout_sponsor"
-                                               class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-                                        >>>>>>> a53e995b4bcd56791afb607c1bca9d59f42ffbed
-                                    </form>
+                                </form>
                             </section>
                             <section class="aCacher" id="ajout_presse">
                                 <h5>Ajouter un article presse</h5>
-                                <<<<<<< HEAD
-                                <form method="POST" action="" enctype="">
+
+                                <form method="POST" action="{{url('/auth/article')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
                                     <p>Titre <input name="title" type="text"></p>
                                     Description <textarea name="description"></textarea>
                                     <p>Lien <input name="link" type="url"></p>
                                     <input type="hidden" name="type" value="presse">
-                                    <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor"
+                                    <input type="submit" name="btn" value="Valider" id="btn_ajout_sponsor"
                                            class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-                                    =======
-                                    <form method="POST" action="{{url('/auth/article')}}" enctype="multipart/form-data">
-                                        {{ csrf_field() }}
-                                        <p>Titre <input name="title" type="text"></p>
-                                        Description <textarea name="description"></textarea>
-                                        <p>Lien <input name="link" type="url"></p>
-                                        <input type="hidden" name="type" value="presse">
-                                        <input type="submit" name="btn" value="Valider" id="btn_ajout_sponsor"
-                                               class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-                                        >>>>>>> a53e995b4bcd56791afb607c1bca9d59f42ffbed
-                                    </form>
+                                </form>
                             </section>
 
                             <section class="aCacher" id="presse">
@@ -144,33 +125,33 @@
                                             <th>Suppr</th>
                                         </tr>
                                         @foreach($articles as $article)
-                                            @if ($article['articletype_name'] == 'presse')
-                                                <tr id="article_">
-                                                    <td id="article_presse_titre">{{$article['title']}}</td>
-                                                    <td id="article_presse_lien"><a href="{{$article['link']}}"
-                                                                                    target="_blank">lien</a></td>
-                                                    <td>
-                                                        <button id="btn_modifier_presse" class="bouton_table"><i
-                                                                    class="mdl-color-text--blue-grey-400 material-icons"
-                                                                    role="button">create</i></button>
-                                                    </td>
-                                                    <td>
+                                        @if ($article['articletype_name'] == 'presse')
+                                        <tr id="article_">
+                                            <td id="article_presse_titre">{{$article['title']}}</td>
+                                            <td id="article_presse_lien"><a href="{{$article['link']}}"
+                                                                            target="_blank">lien</a></td>
+                                            <td>
+                                                <button id="btn_modifier_presse" class="bouton_table"><i
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="button">create</i></button>
+                                            </td>
+                                            <td>
 
-                                                        <button data-id="" id="btn_delete_presse" class="bouton_table">
-                                                            <i
-                                                                    class="mdl-color-text--blue-grey-400 material-icons"
-                                                                    role="presentation">delete</i></button>
+                                                <button data-id="" id="btn_delete_presse" class="bouton_table">
+                                                    <i
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="presentation">delete</i></button>
 
-                                                    </td>
-                                                    <input type="hidden" name="id" value="">
-                                                </tr>
-                                            @endif
+                                            </td>
+                                        <input type="hidden" name="id" value="">
+                                        </tr>
+                                        @endif
                                         @endforeach
                                     </table>
                                     <button id="btn_ajout_presse" class="bouton_ajout bouton_table"><i
 
-                                                class="bouton_table mdl-color-text--blue-grey-400 material-icons"
-                                                role="presentation">add_circle</i></button>
+                                            class="bouton_table mdl-color-text--blue-grey-400 material-icons"
+                                            role="presentation">add_circle</i></button>
 
 
                                 </div>
@@ -214,36 +195,36 @@
                                             <th>Suppr</th>
                                         </tr>
                                         @foreach ($medias as $media)
-                                            <tr id="media_">
-                                                <td id="media_titre">{{$media['title']}}</td>
-                                                <td id="media_description">
-                                                    @if ($media['legend']!= null)
-                                                        {{ substr($media['legend']) }}...
-                                                    @else
-                                                        -
-                                                    @endif</td>
-                                                <td id="media_image"><img src="{{ url($media['url']) }}" height="50"
-                                                                          width="50"></td>
-                                                <td>
-                                                    <button id="btn_modifier_media" class="bouton_table"><i
-                                                                class="mdl-color-text--blue-grey-400 material-icons"
-                                                                role="button">create</i></button>
-                                                </td>
-                                                <td>
+                                        <tr id="media_">
+                                            <td id="media_titre">{{$media['title']}}</td>
+                                            <td id="media_description">
+                                                @if ($media['legend']!= null)
+                                                {{ substr($media['legend']) }}...
+                                                @else
+                                                -
+                                                @endif</td>
+                                            <td id="media_image"><img src="{{ url($media['url']) }}" height="50"
+                                                                      width="50"></td>
+                                            <td>
+                                                <button id="btn_modifier_media" class="bouton_table"><i
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="button">create</i></button>
+                                            </td>
+                                            <td>
 
-                                                    <button id="btn_delete_media" class="bouton_table"><i
-                                                                class="mdl-color-text--blue-grey-400 material-icons"
-                                                                role="presentation">delete</i></button>
+                                                <button id="btn_delete_media" class="bouton_table"><i
+                                                        class="mdl-color-text--blue-grey-400 material-icons"
+                                                        role="presentation">delete</i></button>
 
-                                                </td>
-                                                <input type="hidden" name="id" value="">
-                                            </tr>
+                                            </td>
+                                        <input type="hidden" name="id" value="">
+                                        </tr>
                                         @endforeach
                                     </table>
                                     <button id="btn_ajout_media" class="bouton_ajout bouton_table"><i
 
-                                                class="bouton_table mdl-color-text--blue-grey-400 material-icons"
-                                                role="presentation">add_circle</i></button>
+                                            class="bouton_table mdl-color-text--blue-grey-400 material-icons"
+                                            role="presentation">add_circle</i></button>
 
                                 </div>
                             </section>
