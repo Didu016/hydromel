@@ -57,9 +57,11 @@ class EditionCtrl extends Controller {
         $supervisor['name'] = $request->supervisor_name;
         $supervisor['email'] = $request->supervisor_email;
         $supervisor_dataMedia = $request->files->get('supervisor_media');
-        $current_edition_supervisor = null;
+        if ($supervisor_dataMedia == null) {
+            return redirect('/auth/home')->with('error', 'no_media_found');
+        }
         if ($year != null && $team != null && $description != null) {
-            if ($supervisor['firstname'] != null && $supervisor['name'] != null && $supervisor['email'] != null && $supervisor_dataMedia != null) {
+            if ($supervisor['firstname'] != null && $supervisor['name'] != null && $supervisor['email'] != null) {
                 if (!Edition::existsByAttributes($year, $team)) {
                     DB::beginTransaction();
                     $edition = new Edition();
@@ -89,7 +91,7 @@ class EditionCtrl extends Controller {
                 return redirect('/auth/home')->with('error', 'invalid_edition_input');
             }
         } else {
-            return redirect('/auth/home')->with('error', 'invalid_edition_input');
+            return redirect('/auth/home')->with('error', 'invalid_supervisor_input');
         }
     }
 
