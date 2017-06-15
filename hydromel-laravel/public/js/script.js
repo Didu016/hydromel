@@ -9,6 +9,7 @@ var template5;
 var template6;
 var template7;
 var template8;
+var template9;
 $(function(){
   template = $("#articleNews").clone();
   template2 = $("#articlePresse").clone();
@@ -18,6 +19,7 @@ $(function(){
   template6 = $("#sliderImageActualite div").clone();
   template7 = $("#articleSponsor").clone();
   template8 = $("#choixEditionEdition button").clone();
+  template9 = $("#rewardEdition").clone();
   $("#articlesAccueil").empty();
   $("#sponsorsAccueil").empty();
   $("#membresEquipe").empty();
@@ -237,19 +239,30 @@ $(function(){
       $('#choixEditionEdition').append(template8Clone);
     });
     $(".navChoixEdition").on("click", function (){
+        $("#sliderImageEdition").empty();
         $("#articlesEdition").empty();
+        $("#rewardsEdition").empty();
         var id_edition = $('a', this).attr("data");
         $.getJSON(PREVIOUS_EDITION+id_edition, function (json) {
-
           var descriptionEdition = json.data.edition.description;
           var articlesEdition = json.data.articles;
-          var membre = json.data.members;
+          var members = json.data.members;
+          var rewards = json.data.rewards;
           if(descriptionEdition.length!==null){
             $("#descriptionEdition p").text(descriptionEdition);
           }
           else{
             $("#descriptionEdition p").addClass(displayNone);
           }
+          $.each(rewards, function(i, reward) {
+            if(i>=6){return}
+            var template11Clone = template9.clone();
+            $('.positionEdition', template11Clone).text(reward.position);
+            $('.distinctionEdition', template11Clone).text(reward.distinction);
+            $('.descriptionDistinctionEdition', template11Clone).text(reward.description);
+            console.log(template11Clone);
+            $("#rewardsEdition").append(template11Clone);
+          });
           $.each(articlesEdition, function(i, article) {
             if(i>=3){return}
             if(article.articletype_name == "news"){
@@ -280,24 +293,25 @@ $(function(){
               $("#articlesEdition").append(template9Clone);
             }
           });
-          sliderMembreSetting();
           $.each(members, function(i, member) {
             if(i>=50){return}
-              var template10Clone = template6.clone();
-              $('img', template10Clone).attr('src', member.media_url);
-              $("#sliderImageEdition").append(template10Clone);
-
+            var template4Clone = template4.clone();
+            $('img', template4Clone).attr('src', member.media_url);
+            var prenomNom = member.firstname + ' ' + member.name;
+            $('.prenomNomMembre', template4Clone).text(prenomNom);
+            $('.reponsabiliteMembre', template4Clone).text(member.responsibility_name);
+            $("#sliderImageEdition").append(template4Clone);
           });
           });
-
         $(".navChoixEdition a").removeAttr("selected");
         $(".articlesActualitePage").hide();
         var attr=$('a', this).attr("data");
         $('a', this).attr('selected','selected');
         navArticleShow(attr);
-
     });
+    $( ".navChoixEdition:last-child" ).trigger("click");
   });
+
 });
 function menuHandler() {
     // History manipulation

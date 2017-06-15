@@ -17,7 +17,7 @@
     <section class="sectionPage" id="page_accueil">
         <section class="sectionAccueil">
             <div style="width: 100%; height: auto;"
-                data-vide-bg="mp4: vid/videoAcceuil2, poster: img/HydroHEIGBateau2016.jpg"
+                data-vide-bg="mp4: img/heroSectionHome, poster: img/HydroHEIGBateau2016"
                 data-vide-options="posterType: jpg, loop: true, muted: false, position: 0% 0%">
             </div>
             <div class="blocDescription">
@@ -119,30 +119,39 @@
         <header id="headerEdition"></header>
         <section class="titrePage"><h1>Editions précédentes</h1></section>
         <section class="sectionEdition">
-
-        </section>
-        <section class="sectionChoixEdition">
-          <div class="center" id="choixEditionEdition">
-            <button class="navChoixEdition"><a>2015</a></button>
+          <section class="sectionChoixEdition">
+            <div class="center" id="choixEditionEdition">
+              <button class="navChoixEdition"><a></a></button>
+            </div>
+          </section>
+          <section class="sectionResumeEdition" id="descriptionEdition">
+            <div class="margin20">
+              <h2>Résumé</h2>
+              <p></p>
+            </div>
+          </section>
+          <section  id="sectionRewardEdition">
+          <div class="margin20">
+            <h2>Prix</h2>
+            <div id="rewardsEdition">
+              <div id="rewardEdition">
+                <div class="positionEdition">1</div>
+                <div class="descriptionPositionEdition">
+                  <div class="distinctionEdition"><h3>Prix de la meilleure communication</h3></div>
+                  <div class="descriptionDistinctionEdition">Le prix de la meilleure communication est décerné à l'équipe qui a mené la meilleure campagne de communication durant le concours Hydrocontest</div>
+                </div>
+              </div>
+            </div>
           </div>
-        </section>
-        <section class="sectionResumeEdition" id="descriptionEdition">
-          <h2>Résumé</h2>
-          <p>Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. $
-            Vivamus massa magna, venenatis id commodo at,
-            ultricies sit amet tortor. Lorem ipsum dolor sit amet,
-            consectetur adipis
-            Vivamus massa magna, venenatis id commodo at,
-              ultricies sit amet tortor.</p>
-        </section>
-        <section class="sectionMedia">
-          <section class="titrePage"><h2>Membres</h2></section>
-          <div  class="sliderMembre" id="sliderImageEdition">
-          </div>
-        </section>
-        <section class="sectionArticle" id="articlesEdition">
-        </section>
+          </section>
+          <section class="sectionMembreEdition">
+            <section class="titreSection"><h2>Membres</h2></section>
+            <section  class="sectionMembreEdition" id="sliderImageEdition">
+            </section>
+          </section>
+          <section class="sectionArticle" id="articlesEdition">
+          </section>
+      </section>
     </section>
 </body>
 </html>
