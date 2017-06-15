@@ -59,5 +59,6 @@ nav ul a:active a:link a:visited
 }
 #contactMenu ul li{
 	margin-top: 10px;
+	text-align: left;
 	color:#888888;
 }

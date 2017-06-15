@@ -16,7 +16,6 @@
         <a href="https://www.facebook.com/teamheigvd.hydrocontest/"><img class="logoContact" src="img/facebook.png"></a>
         <a href="https://www.instagram.com/hydrocontest_heig_vd/?hl=fr"><img class="logoContact" src="img/instagram.png"></a>
       </br>
-
       </div>
-    </div>
+  </div>
 </nav>
