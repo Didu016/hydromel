@@ -98,14 +98,13 @@ class ArticleCtrl extends Controller
                 // On ne change pas l'année de l'article, parce qu'un article ne change pas de date
                 $article->save();
 
-                // création du média
-
                 // Creer le media
                 if($dataMedia != null) {
                     $mediaDestination = "../public/img/articlesMedias";
+                    $mediaDestinationShortened = "img/articlesMedias";
                     $media = new Media();
                     $media->title = $articleType . '_media_' . $dataArticle['title']; // on pourrait faire en sorte de supprimer les espaces ou de les remplacer avec des tirets etc etc oui. Sera fait si le temps le permet, l'idee est la meme
-                    $media->url = $mediaDestination . '/' . $articleType . '_media_' . $dataArticle['title'] . '.' . $dataMedia->getClientOriginalExtension();
+                    $media->url = $mediaDestinationShortened . '/' . $articleType . '_media_' . $dataArticle['title'] . '.' . $dataMedia->getClientOriginalExtension();
                     $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                     if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                         $media->mediatype_id = 1; // Alors on set que c'est une photo

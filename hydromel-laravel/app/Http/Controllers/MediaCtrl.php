@@ -52,10 +52,11 @@ class MediaCtrl extends Controller
             DB::transaction(function () use ($dataMedia, $theMedia) {
                 // Creer le media
                 $mediaDestination = "../public/img/generalMedias";
+                $mediaDestinationShortened = "img/generalMedias";
                 $media = new Media();
                 $media->title = $dataMedia['title'];
                 $media->legend = $dataMedia['legend'];
-                $media->url = $mediaDestination . '/' . $theMedia->getClientOriginalName();
+                $media->url = $mediaDestinationShortened . '/' . $theMedia->getClientOriginalName();
                 $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes)
                 if (in_array($theMedia->getClientOriginalExtension(), $videoTypes)) { // Si le media reçu est une vidéo
                     $media->mediatype_id = 1; // Alors on set que c est une photo
@@ -135,10 +136,11 @@ class MediaCtrl extends Controller
 
                 // modification du media
                 $mediaDestination = "../public/img/generalMedias";
+                $mediaDestinationShortened = "img/generalMedias";
                 $media = Media::find($idMedia);
                 $media->title = $dataMedia['title'];
                 $media->legend = $dataMedia['legend'];
-                $media->url = $mediaDestination . '/' . $theNewMedia->getClientOriginalName();
+                $media->url = $mediaDestinationShortened . '/' . $theNewMedia->getClientOriginalName();
                 $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                 if (in_array($theNewMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                     $media->mediatype_id = 1; // Alors on set que c'est une photo
