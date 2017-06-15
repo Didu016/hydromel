@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Responsibility extends Model {
 
@@ -17,6 +18,13 @@ class Responsibility extends Model {
             }
         }
         return false;
+    }
+
+    public static function isValidForCreation($data) {
+        $dataArray['reponsibility'] = $data;
+        return Validator::make($dataArray, [
+                    'reponsibility' => 'string|between:1,50|required', // on vérifie pas les chiffres et autres caractères
+                ])->passes();
     }
 
 }

@@ -112,8 +112,6 @@ class Member extends Model {
         if (!Media::isValid($dataMedia, $allowedTypes, $mediaMaxSize)) {
             return null;
         }
-
-
         return DB::transaction(function () use ($dataMedia, $dataMember, $dataResponsibility, $edition, $alreadyExistingMember) {
 
                     $member = null;

@@ -36,9 +36,20 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Edition
     Route::resource('/auth/editions', 'EditionCtrl');
+    //Rank
+    Route::resource('/auth/rank', 'RankCtrl');
+
+    // Responsibility
+    Route::resource('/auth/responsibility', 'ResponsibilityCtrl');
 
     //Equipe
     Route::resource('/auth/team', 'EquipeCtrl');
+
+    Route::resource('/auth/member', 'MembreCtrl');
+
+    Route::resource('/auth/article', 'ArticleCtrl');
+
+    Route::resource('/auth/media', 'MediaCtrl');
 
     //Actualités
     Route::resource('/auth/news', 'ActualiteCtrl');
@@ -47,15 +58,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/auth/sponsors', 'SponsorCtrl');
 
     //Editions précdènte
-    Route::get('/auth/previousedition', function () {
-        return view("backoffice/editionP");
-    });
+    Route::resource('/auth/previousedition', 'PreviousEditionCtrl');
 
     //Changer Edition
     Route::get('/auth/changeedition', function () {
         $edition = Edition::getCurrentEdition();
         return view("backoffice/changeedition", [
         ]);
+    });
+
+    //Changer mot de passe
+    Route::get('/auth/changepassword', function () {
+        return view("backoffice/changepassword");
     });
 
     //Authentification

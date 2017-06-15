@@ -34,7 +34,7 @@ class AccueilCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        dd('methode store');
     }
 
     /**
@@ -65,8 +65,9 @@ class AccueilCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request) { // IL FAUT REMETTRE LE $id QUAND ON AURA ACCES AU FORMULAIRE (ou pas, peut-être)
-        $editionActuelle = json_decode(EditionCtrl::getDataFromCurrentEdition()->content())->current_edition; // Récupération de la totalité des informations des éditions
-        $idEditionActuelle = $editionActuelle->edition->id;
+
+        $editionActuelle = Edition::getCurrentEdition();
+        $idEditionActuelle = $editionActuelle->id;
 
         // RECUPERATIONS DES DONNEES RECUES
         $dataEdition['description'] = $request->description;
@@ -78,6 +79,7 @@ class AccueilCtrl extends Controller {
 
         // Validations des champs de l'édition
         $validDescription = Edition::isValidForUpdate($dataEdition); // true si valid, false si non
+
         // Validations des médias
         $validMedia = false;
         $target_dir = "files/";
@@ -87,11 +89,11 @@ class AccueilCtrl extends Controller {
         for ($i = 0; $i < count($dataMedia); $i++) { // On va creer chacuns des médias
             $uploadOk = Media::isValid($dataMedia[$i], $allowedTypes, $mediaMaxSize);
         }
-        dd($uploadOk);
+
         // Fin des validations
         // UPLOAD - UPDATES
         if ($validDescription != false && $uploadOk != false) { // Si les donnees sont valides, on fait les mises a jour
-            DB::transaction(function () use ($idEditionActuelle, $dataMedia) {
+            DB::transaction(function () use ($idEditionActuelle, $dataMedia, $dataEdition, $allowedTypes) {
 
                 $edition = Edition::find($idEditionActuelle);
                 $edition->description = $dataEdition['description'];
@@ -109,19 +111,19 @@ class AccueilCtrl extends Controller {
                 $backgroundB = $dataMedia[1];
                 if ($backgroundA != null) {
                     for ($i = 0; $i < count($allowedTypes); $i++) {
-                        if (file_exists('../public/img/backgroundA.' . $allowedTypes[$i])) {
-                            unlink('../public/img/backgroundA.' . $allowedTypes[$i]); // Supprimer la photo
+                        if (file_exists('../public/img/heroSectionHome.' . $allowedTypes[$i])) {
+                            unlink('../public/img/heroSectionHome.' . $allowedTypes[$i]); // Supprimer la photo
                         }
                     }
-                    $backgroundA->move($destination, 'backgroundA' . '.' . $backgroundA->getClientOriginalExtension()); // On met la photo dans le dossier
+                    $backgroundA->move($destination, 'heroSectionHome' . '.' . $backgroundA->getClientOriginalExtension()); // On met la photo dans le dossier
                 }
                 if ($backgroundB != null) {
                     for ($i = 0; $i < count($allowedTypes); $i++) {
-                        if (file_exists('../public/img/backgroundB' . '.' . $allowedTypes[$i])) {
-                            unlink('../public/img/backgroundB' . '.' . $allowedTypes[$i]); // Supprimer la photo
+                        if (file_exists('../public/img/bannerDatePlace' . '.' . $allowedTypes[$i])) {
+                            unlink('../public/img/bannerDatePlace' . '.' . $allowedTypes[$i]); // Supprimer la photo
                         }
                     }
-                    $backgroundB->move($destination, 'backgroundB' . '.' . $backgroundB->getClientOriginalExtension());
+                    $backgroundB->move($destination, 'bannerDatePlace' . '.' . $backgroundB->getClientOriginalExtension());
                 }
             }); // Fin de la transaction
         } else {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Edition;
+use App\Models\Reward;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,13 @@ class PreviousEditionCtrl extends Controller
      */
     public function index()
     {
-        //
+        $id_current = Edition::getCurrentEdition()->id;
+        $editionsP = Edition::getPreviousEditionsSimplified();
+        $rewards = Reward::all()->whereNotIn('edition_id', $id_current)->sortByDesc("year")->toArray();
+        return view("backoffice/editionP", [
+            'editionsP' => $editionsP,
+            'rewards' => $rewards
+        ]);
     }
 
     /**

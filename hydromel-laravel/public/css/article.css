@@ -14,7 +14,7 @@
 }
 .articleNews:nth-child(even) .imageArticle{
 	float: right;
-	
+
 }
 .articleNews{
 	width: 100%;
@@ -96,4 +96,11 @@ button a:hover
     color: #fff;
     transition: background 0.3s;
     border: 2px solid #fff;
+}
+
+button a[selected=selected] {
+	background-color: #333333;
+  color: #fff;
+	border: 2px solid #fff;
+	text-decoration : underline;
 }
