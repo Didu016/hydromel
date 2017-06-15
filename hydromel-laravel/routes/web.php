@@ -42,11 +42,17 @@ Route::group(['middleware' => ['auth']], function () {
     //Equipe
     Route::resource('/auth/team', 'EquipeCtrl');
 
+    //Member
     Route::resource('/auth/member', 'MembreCtrl');
 
+    // Article
     Route::resource('/auth/article', 'ArticleCtrl');
 
+    // Media
     Route::resource('/auth/media', 'MediaCtrl');
+
+    // Reward
+    Route::resource('/auth/reward', 'RewardCtrl');
 
     //Actualités
     Route::resource('/auth/news', 'ActualiteCtrl');
