@@ -72,6 +72,8 @@
                                     <input name="membre_image" type="file" accept="image">
                                 <div>
                                    Responsabilité<select id="membre_nouveau_resp" name="membre_responsibility"> <!-- ici il faut foreach -->
+                                        <!-- IL FAUT BOUCLER ICI -->
+                                        <option>Team Manager</option>
                                     </select>
                                 </div>
                                     <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">

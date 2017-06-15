@@ -102,10 +102,10 @@ class ArticleCtrl extends Controller
 
                 // Creer le media
                 if($dataMedia != null) {
-                    $mediaDestination = "../../img/articlesMedias";
+                    $mediaDestination = "../public/img/articlesMedias";
                     $media = new Media();
-                    $media->title = 'Photo_' . $dataArticle['title'];
-                    $media->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
+                    $media->title = $articleType . '_media_' . $dataArticle['title']; // on pourrait faire en sorte de supprimer les espaces ou de les remplacer avec des tirets etc etc oui. Sera fait si le temps le permet, l'idee est la meme
+                    $media->url = $mediaDestination . '/' . $articleType . '_media_' . $dataArticle['title'] . '.' . $dataMedia->getClientOriginalExtension();
                     $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                     if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                         $media->mediatype_id = 1; // Alors on set que c'est une photo
@@ -113,7 +113,7 @@ class ArticleCtrl extends Controller
                         $media->mediatype_id = 2; // Alors on set que c'est une photo
                     }
                     $media->save();
-                    $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
+                    $dataMedia->move($mediaDestination, $articleType . '_media_' . $dataArticle['title'] . '.' . $dataMedia->getClientOriginalExtension()); // Déplace la photo dans le dossier voulu
                     $article->medias()->save($media);
                 }
 

@@ -111,19 +111,19 @@ class AccueilCtrl extends Controller {
                 $backgroundB = $dataMedia[1];
                 if ($backgroundA != null) {
                     for ($i = 0; $i < count($allowedTypes); $i++) {
-                        if (file_exists('../public/img/backgroundA.' . $allowedTypes[$i])) {
-                            unlink('../public/img/backgroundA.' . $allowedTypes[$i]); // Supprimer la photo
+                        if (file_exists('../public/img/heroSectionHome.' . $allowedTypes[$i])) {
+                            unlink('../public/img/heroSectionHome.' . $allowedTypes[$i]); // Supprimer la photo
                         }
                     }
-                    $backgroundA->move($destination, 'backgroundA' . '.' . $backgroundA->getClientOriginalExtension()); // On met la photo dans le dossier
+                    $backgroundA->move($destination, 'heroSectionHome' . '.' . $backgroundA->getClientOriginalExtension()); // On met la photo dans le dossier
                 }
                 if ($backgroundB != null) {
                     for ($i = 0; $i < count($allowedTypes); $i++) {
-                        if (file_exists('../public/img/backgroundB' . '.' . $allowedTypes[$i])) {
-                            unlink('../public/img/backgroundB' . '.' . $allowedTypes[$i]); // Supprimer la photo
+                        if (file_exists('../public/img/bannerDatePlace' . '.' . $allowedTypes[$i])) {
+                            unlink('../public/img/bannerDatePlace' . '.' . $allowedTypes[$i]); // Supprimer la photo
                         }
                     }
-                    $backgroundB->move($destination, 'backgroundB' . '.' . $backgroundB->getClientOriginalExtension());
+                    $backgroundB->move($destination, 'bannerDatePlace' . '.' . $backgroundB->getClientOriginalExtension());
                 }
             }); // Fin de la transaction
         } else {

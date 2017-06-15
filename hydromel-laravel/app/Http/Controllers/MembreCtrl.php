@@ -116,13 +116,15 @@ class MembreCtrl extends Controller {
                 $actualEditionYear = $actualEdition->edition->year;
                 $actualEditionMembers = $actualEdition->members;
 
-                $mediaDestination = "../../img/membersMedias";
+                // il faut supprimer le media deja existant dans le dossier
+
+                $mediaDestination = "../public/img/membersMedias";
                 for ($i = 0; $i < count($actualEditionMembers); $i ++) {
                     if ($actualEditionMembers[$i]->id == $memberId) {
                         $hisMedia = Media::find($actualEditionMembers[$i]->pivot->media_id); // Recuperation de son media
                         // On pourrait changer le nom du média aisément (reprendre le mail par exemple, comme ça il reste unique
-                        $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
-                        $hisMedia->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName(); // Sauvegarde du nouveau chemin
+                        $dataMedia->move($mediaDestination, ('media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension())); // Déplace la photo dans le dossier voulu
+                        $hisMedia->url = $mediaDestination . '/media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension(); // Sauvegarde du nouveau chemin
                         // Regarde le lien avec MediaTypes
                         $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                         if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo

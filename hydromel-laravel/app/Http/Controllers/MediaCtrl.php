@@ -51,7 +51,7 @@ class MediaCtrl extends Controller
         if($theMedia != null && $validMediaData != false && $validMedia != false){
             DB::transaction(function () use ($dataMedia, $theMedia) {
                 // Creer le media
-                $mediaDestination = "../../img/generalMedias";
+                $mediaDestination = "../public/img/generalMedias";
                 $media = new Media();
                 $media->title = $dataMedia['title'];
                 $media->legend = $dataMedia['legend'];
@@ -134,7 +134,7 @@ class MediaCtrl extends Controller
                 }
 
                 // modification du media
-                $mediaDestination = "../../img/generalMedias";
+                $mediaDestination = "../public/img/generalMedias";
                 $media = Media::find($idMedia);
                 $media->title = $dataMedia['title'];
                 $media->legend = $dataMedia['legend'];
