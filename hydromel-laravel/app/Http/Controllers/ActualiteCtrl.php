@@ -7,15 +7,14 @@ use App\Models\Edition;
 use App\Models\Media;
 use Illuminate\Http\Request;
 
-class ActualiteCtrl extends Controller
-{
+class ActualiteCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $articles = Article::getArticlesFormatted(Edition::getCurrentEdition()->articles()->get());
         $medias = Media::getMediasFormatted(Edition::getCurrentEdition()->medias()->get());
         return view('backoffice/actualite', [
@@ -29,8 +28,7 @@ class ActualiteCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -40,8 +38,7 @@ class ActualiteCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -51,8 +48,7 @@ class ActualiteCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -62,8 +58,7 @@ class ActualiteCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -74,8 +69,7 @@ class ActualiteCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -85,8 +79,8 @@ class ActualiteCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }

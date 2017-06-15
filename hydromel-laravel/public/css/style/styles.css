@@ -137,11 +137,6 @@ textarea {
     z-index: 900;
 }
 
-.mdl-navigation__link a:hover {
-    background-color: #1b6d96;
-!important;
-}
-
 .demo-avatar {
     width: 48px;
     height: 48px;
@@ -411,6 +406,14 @@ _:-ms-input-placeholder, :root .demo-graph {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+}
+
+#success{
+    color: olivedrab;
+}
+
+#error{
+    color:red;
 }
 
 
