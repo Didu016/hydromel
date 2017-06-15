@@ -96,10 +96,11 @@
                             <section class="aCacher" id="respo">
                             <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                                 <h5>Ajouter une responsabilité</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="POST" action="{{url('/auth/responsibility')}}" enctype="multipart/form-data">
                             <p>Créer une responsabilité <input id="nouvelle_resp" name="responsabilite">
                                 <input type="submit" value="Ajouter" name="ajouter" class="btn_ajout mdl-button">
                             </p>
+                                    {{ csrf_field() }}
                                     <ul class="listes">
                                         <li>une respo</li>
                                     </ul>

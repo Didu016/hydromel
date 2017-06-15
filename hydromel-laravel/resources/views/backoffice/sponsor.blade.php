@@ -97,7 +97,8 @@
                             </select>
                         </section>
                         <section class="aCacher" id="categorie">
-                            <form method="POST" action="" enctype="">
+                            <form method="POST" action="{{url('/auth/rank')}}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                                     <h5>Ajouter une catégorie</h5>
                                     <p>Créer une catégorie <input id="nouvelle_categorie" name="category">

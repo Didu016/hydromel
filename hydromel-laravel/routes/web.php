@@ -33,6 +33,12 @@ Route::group(['middleware' => ['auth']], function () {
     //Accueil
     Route::resource('/auth/accueil', 'AccueilCtrl');
 
+    //Rank
+    Route::resource('/auth/rank', 'RankCtrl');
+
+    // Responsibility
+    Route::resource('/auth/responsibility', 'ResponsibilityCtrl');
+
     //Equipe
     Route::resource('/auth/team', 'EquipeCtrl');
 
