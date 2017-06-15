@@ -12,8 +12,4 @@ npm-debug.log
 .env.example
 /nbproject
 .DS_Store
-<<<<<<< HEAD
-/public/.htaccess
-=======
 /img
->>>>>>> a06a25682af3e5ca26c9257c9661e290e02afde4

@@ -65,7 +65,7 @@
             @endif
 
             <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-                <header class="demo-drawer-header"><a href="/auth/home">
+                <header class="demo-drawer-header"><a href="{{url('/auth/home')}}">
                         <img src="{{url('img/backoffice/user.jpg')}}" class="demo-avatar"></a>
                     <span>Team HEIG-VD</span>
 
