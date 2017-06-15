@@ -33,3 +33,28 @@
 
 </head>
 <body>
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+
+
+    <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header"><a href="/auth/home">
+            <img src="{{url('img/backoffice/user.jpg')}}" class="demo-avatar"></a>
+            <span>Team HEIG-VD</span>
+
+        </header>
+        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+            <a id="changerEdition" class="mdl-navigation__link"
+               href="changeedition"><i
+                        class="mdl-color-text--blue-grey-400 material-icons" role="presentation">compare_arrows</i>Changer
+                Edition</a>
+            <a id="changerMdp" class="mdl-navigation__link" href="changepassword"><i
+                        class="mdl-color-text--blue-grey-400 material-icons" role="presentation">build</i>Changer mot de
+                passe</a>
+            <div class="mdl-layout-spacer"></div>
+            <a id="deconnexion" class="mdl-navigation__link" href="logout"><i
+                        class="mdl-color-text--blue-grey-400 material-icons"	Le rank
+                        role="presentation">delete</i>Deconnexion</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content mdl-color--grey-100">
+        <div id="accueil" class="mdl-grid demo-content">

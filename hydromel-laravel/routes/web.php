@@ -1,15 +1,15 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+  |--------------------------------------------------------------------------
+  | Web Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where you can register web routes for your application. These
+  | routes are loaded by the RouteServiceProvider within a group which
+  | contains the "web" middleware group. Now create something great!
+  |
+ */
 
 Route::get('/', function () {
     return view("index");
@@ -21,6 +21,7 @@ Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
 Route::get('/editions/{id}', 'EditionCtrl@show');
 Route::get('/hydromeladminpanel', 'AuthController@login');
 Route::post('/auth/check', 'AuthController@check');
+Route::resource('/auth/editions', 'EditionCtrl');
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -30,10 +31,22 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     //Accueil
-    Route::resource('/auth/accueil', 'EditionCtrl');
+    Route::resource('/auth/accueil', 'AccueilCtrl');
+
+    //Rank
+    Route::resource('/auth/rank', 'RankCtrl');
+
+    // Responsibility
+    Route::resource('/auth/responsibility', 'ResponsibilityCtrl');
 
     //Equipe
     Route::resource('/auth/team', 'EquipeCtrl');
+
+    Route::resource('/auth/member', 'MembreCtrl');
+
+    Route::resource('/auth/article', 'ArticleCtrl');
+
+    Route::resource('/auth/media', 'MediaCtrl');
 
     //Actualités
     Route::resource('/auth/news', 'ActualiteCtrl');
@@ -42,18 +55,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/auth/sponsors', 'SponsorCtrl');
 
     //Editions précdènte
-    Route::get('/auth/previousedition', function () {
-        return view("backoffice/editionP");
-    });
+    Route::resource('/auth/previousedition', 'PreviousEditionCtrl');
 
     //Changer Edition
-    Route::get('/auth/changeedition/home', function () {
-        return view("backoffice/newedition/accueil");
+    Route::get('/auth/changeedition', function () {
+        return view("backoffice/changeedition");
     });
 
-    //Changer Edition
-    Route::get('/auth/changeedition/team', function () {
-        return view("backoffice/newedition/equipe");
+    //Changer mot de passe
+    Route::get('/auth/changepassword', function () {
+        return view("backoffice/changepassword");
     });
 
     //Authentification

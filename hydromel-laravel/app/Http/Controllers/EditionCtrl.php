@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Edition;
 use App\Lib\Message;
+use App\Models\Member;
 
 class EditionCtrl extends Controller {
 
@@ -14,7 +15,7 @@ class EditionCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('backoffice/accueil');
+        return view('backoffice/test');
     }
 
     /**
@@ -33,7 +34,21 @@ class EditionCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+
+        $year = $request->team;
+        $team = $request->year;
+        $description = $request->description;
+        $place = $request->place;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $team_description = $request->team_description;
+        $supervisor_name = $request->supervisor_name;
+        $supervisor_firstname = $request->supervisor_firstname;
+        $supervisor_email = $request->supervisor_email;
+
+        $current_edition_members = Member::getMembersFormatted(Edition::getCurrentEdition()->members()->get());
+        dd($current_edition_members);
+        $supervisor_responsibility = $supervisor_media = $request->files->get('membre_modifier_image');
     }
 
     /**
@@ -87,7 +102,7 @@ class EditionCtrl extends Controller {
      * only basics infos from previous editions
      */
     public static function getDataFromCurrentEdition() {
-        $currentEditionJson = Edition::getCurrentEdition();
+        $currentEditionJson = Edition::getCurrentEditionJson();
         if ($currentEditionJson == null) {
             return self::jsend(Message::error('edition.current.missing'), Message::$ERROR_KEY);
         }

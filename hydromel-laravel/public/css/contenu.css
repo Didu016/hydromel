@@ -11,12 +11,16 @@ cursor : wait;
 }*/
 
 /* COMMUN */
+.margin20{
+  margin:20px;
+  float: left;
+
+}
 .sectionDescription{
     width: 100%;
     height: fit-content;
     background-color: #f9f9f9;
     float: left;
-
 }
 .sectionDescription p{
 	margin : 30px;
@@ -150,21 +154,26 @@ color: #333333;
 .sectionPreviewSponsor h1{
   text-align: center;
 }
-
-.sectionPreviewSponsor img{
-    width: 100px;
-    margin: 20px;
-}
 .blocSponsor{
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-wrap:wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
+.sectionPreviewSponsor img{
+    width: 100px;
+    margin: auto;
+
+}
+
 .blocSponsor article{
     background-color: #fff;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    border: 5px solid #f9f9f9;
 }
 
 .sectionLieuDate{
@@ -206,12 +215,18 @@ color: #333333;
 /* EQUIPE */
 #headerEquipe{
     background: #333333 url(../img/equipeHydroHeig.jpg);
+    filter: brightness(95%);
 		background-position:50% 50%;
     height: 60vh;
     width: 100%;
     float: left;
     background-size: cover !important;
 }
+#headerEquipe:hover{
+    filter: brightness(100%);
+    transition: 0.3s;
+}
+
 
 
 
@@ -220,7 +235,7 @@ color: #333333;
     float: left;
     display: flex;
     flex-wrap:wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 .sectionMembre article{
     background-color: #333333;
@@ -254,8 +269,8 @@ color: #333333;
  float: left;
  height: 100px;
 	width: 100%;
-
 }
+
 #navArticle
 {
 	width: 100%;
@@ -303,6 +318,13 @@ margin-left: auto;
     transition: background 0.3s;
     border: 2px solid #fff;
 }
+#navArticle li a[selected=selected] {
+	background-color: #333333;
+  color: #fff;
+	border: 2px solid #fff;
+	text-decoration : underline;
+  text-underline-position: under left;
+}
 .sectionMedia{
 	height: fit-content;
 	width: 100%;
@@ -327,7 +349,7 @@ margin-left: auto;
     float: left;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 .sectionSponsor article{
     background-color: #333333;
@@ -345,4 +367,100 @@ margin-left: auto;
 {
     color: #1a3d7f;
     transition: all 0.5s ease;
+}
+/*EDITION PRECEDENTE*/
+.sectionChoixEdition{
+	width: 100%;
+	height: fit-content;
+	background-color: #fff;
+	float: left;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+  z-index: 8;
+}
+.sectionChoixEdition button{
+	margin:10px;
+
+}
+.sectionResumeEdition
+{
+  width: 50%;
+  height: fit-content;
+  background-color: #f9f9f9;
+  float: left;
+  margin-top: 20px;
+}
+#sectionRewardEdition
+{
+  width: 45%;
+  margin-left: 5%;
+  height: fit-content;
+  background-color: #f9f9f9;
+  float: left;
+  margin-top: 20px;
+}
+.sliderMembre{
+ float: left;
+ height: 100px;
+	width: 100%;
+}
+.sliderMembre div{
+ height: 300px;
+}
+.sliderMembre div img{
+ height: 300px;
+ width: inherit;;
+}
+.sectionMembreEdition{
+    width:100%;
+    float: left;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+.sectionMembreEdition article{
+    background-color: #333333;
+    width: 150px;
+    height: fit-content;
+    margin: 20px;
+    padding: 10px;
+     color:#fff;
+}
+.sectionMembreEdition article p{
+        font-family:'open_bold';
+}
+
+.sectionMembreEdition article:hover
+{
+    color: #1a3d7f;
+    transition: all 0.5s ease;
+}
+.positionEdition
+{
+  font-size: 6em;
+  float: left;
+  line-height: 80%;
+  margin-top: 20px;
+}
+.descriptionPositionEdition
+{
+  float: left;
+  width: 80%;
+  margin-top: 20px;
+}
+.distinctionEdition
+{
+  float: left;
+  font-size: 1.2em;
+
+}
+.descriptionDistinctionEdition{
+  float: left;
+  margin-top: 5px;
+}
+.titreSection
+{
+  margin: 20px;
+  text-align: left;
 }

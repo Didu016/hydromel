@@ -12,3 +12,4 @@ npm-debug.log
 .env.example
 /nbproject
 .DS_Store
+/public/.htaccess

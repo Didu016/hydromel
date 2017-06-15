@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Article extends Model {
 
@@ -68,5 +69,4 @@ class Article extends Model {
             'link' => 'URL|between:1,101|nullable',
         ])->passes();
     }
-
 }

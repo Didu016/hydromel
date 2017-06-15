@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Edition;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
 class ActualiteCtrl extends Controller
@@ -13,7 +16,12 @@ class ActualiteCtrl extends Controller
      */
     public function index()
     {
-        return view('backoffice/actualite');
+        $articles = Article::getArticlesFormatted(Edition::getCurrentEdition()->articles()->get());
+        $medias = Media::getMediasFormatted(Edition::getCurrentEdition()->medias()->get());
+        return view('backoffice/actualite', [
+            'articles' => $articles,
+            'medias' => $medias
+        ]);
     }
 
     /**
