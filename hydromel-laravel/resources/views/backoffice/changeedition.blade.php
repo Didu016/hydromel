@@ -27,11 +27,11 @@
                             <section class="aCacher section_default" id="description">
                                 <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description">
                                     <p class="p-normal">Année de l'édition à créer</p>
-                                    <input type="number" name="year" id="year">
+                                    <input type="number" name="year" id="year" value="{{$current_edition->year + 1}}">
                                     <p class="p-normal">Nom de la team de l'édition</p>
                                     <input type="text" name="team" id="team">
                                     <h4>Description de l'édition</h4>
-                                    <textarea name="description" id="description" rows="10"></textarea>
+                                    <textarea name="description" id="description" rows="10">{{$current_edition->description}}</textarea>
 
                                     <h4>Description de l'équipe</h4>
                                     <textarea name="team_description" id="team_description" rows="10"></textarea>
@@ -61,9 +61,9 @@
                             <section class="aCacher" id="superviseur">
                                 <h5>Ajouter un nouveau superviseur</h5>
                                 <input type="hidden" name="id" value="">
-                                <p>Nom <input name="supervisor_name" id="supervisor_name" type="text"></p>
-                                <p>Prenom <input name="supervisor_firstname" id="supervisor_firstname" type="text"></p>
-                                <p>Mail <input name="supervisor_email" id="supervisor_email" type="email"></p>
+                                <p>Nom <input name="supervisor_name" id="supervisor_name" type="text" value="{{$current_supervisor['name']}}"></p>
+                                <p>Prenom <input name="supervisor_firstname" id="supervisor_firstname" type="text" value="{{$current_supervisor['firstname']}}"></p>
+                                <p>Mail <input name="supervisor_email" id="supervisor_email" type="email" value="{{$current_supervisor['email']}}"></p>
                                 <input name="supervisor_media" type="file" accept="image/*">
                                 <input type="submit" name="valider"
                                        class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">

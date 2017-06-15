@@ -38,7 +38,13 @@
             @if (session('error') == 'invalid_edition_input')
             <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
                 <div class="mdl-layout__header-row" id="error">
-                    <span class="mdl-layout-title">L'édition n'a pas été créée, veuillez renseigner tous les champs.</span>
+                    <span class="mdl-layout-title">L'édition n'a pas été créée, veuillez renseigner tous les champs obligatoires (nom d'équipe, année et description de l'équipe)</span>
+                </div>
+            </header>
+            @elseif (session('error') == 'invalid_supervisor_input')
+            <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+                <div class="mdl-layout__header-row" id="error">
+                    <span class="mdl-layout-title">L'édition n'a pas été créée, veuillez renseigner tous les champs du superviseur</span>
                 </div>
             </header>
             @elseif (session('error') == 'edition_exists')
@@ -52,6 +58,13 @@
             <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
                 <div class="mdl-layout__header-row" id="error">
                     <span class="mdl-layout-title">L'édition n'a pas pu être créé car le superviseur n'a pas pu être créé.</span>
+                </div>
+            </header>
+
+            @elseif (session('error') == 'no_media_found')
+            <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+                <div class="mdl-layout__header-row" id="error">
+                    <span class="mdl-layout-title">L'édition n'a pas pu être créé car vous n'avez sélectionner aucune photo pour le superviseur</span>
                 </div>
             </header>
 

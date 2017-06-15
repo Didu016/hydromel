@@ -12,6 +12,7 @@
  */
 
 use App\Models\Edition;
+use App\Models\Member;
 
 Route::get('/', function () {
     return view("index");
@@ -63,7 +64,10 @@ Route::group(['middleware' => ['auth']], function () {
     //Changer Edition
     Route::get('/auth/changeedition', function () {
         $edition = Edition::getCurrentEdition();
+        $current_supervisor = Member::getSupervisorFromEdition($edition);
         return view("backoffice/changeedition", [
+            'current_edition' => $edition,
+            'current_supervisor' => $current_supervisor
         ]);
     });
 
