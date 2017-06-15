@@ -13,8 +13,8 @@
           <li><a href="mailto:david.kostic@heig-vd.ch">Mail</a></li>
       </ul>
       <div>
-        <a href="https://www.facebook.com/teamheigvd.hydrocontest/"><img class="logoContact" src="{{url('img/facebook.png')}}"></a>
-        <a href="https://www.instagram.com/hydrocontest_heig_vd/?hl=fr"><img class="logoContact" src="{{url('img/instagram.png')}}"></a>
+        <a href="{{url('https://www.facebook.com/teamheigvd.hydrocontest/')}}"><img class="logoContact" src="{{url('img/facebook.png')}}"></a>
+        <a href="{{url('https://www.instagram.com/hydrocontest_heig_vd/?hl=fr')}}"><img class="logoContact" src="{{url('img/instagram.png')}}"></a>
       </br>
       </div>
   </div>
