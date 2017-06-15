@@ -11,6 +11,8 @@
   |
  */
 
+use App\Models\Edition;
+
 Route::get('/', function () {
     return view("index");
 });
@@ -21,7 +23,6 @@ Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
 Route::get('/editions/{id}', 'EditionCtrl@show');
 Route::get('/hydromeladminpanel', 'AuthController@login');
 Route::post('/auth/check', 'AuthController@check');
-Route::resource('/auth/editions', 'EditionCtrl');
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -32,10 +33,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Accueil
     Route::resource('/auth/accueil', 'AccueilCtrl');
-    
+
     //Edition
-    
-    
+    Route::resource('/auth/editions', 'EditionCtrl');
+
     //Equipe
     Route::resource('/auth/team', 'EquipeCtrl');
 
@@ -52,7 +53,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Changer Edition
     Route::get('/auth/changeedition', function () {
-        return view("backoffice/changeedition");
+        $edition = Edition::getCurrentEdition();
+        return view("backoffice/changeedition", [
+        ]);
     });
 
     //Authentification

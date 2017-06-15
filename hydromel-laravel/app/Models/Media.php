@@ -81,4 +81,5 @@ class Media extends Model {
                     'legend' => 'string|between:1,2000|nullable', // on vérifie pas les chiffres et autres caractères
                 ])->passes();
     }
+
 }
