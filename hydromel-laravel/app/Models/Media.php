@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Media extends Model {
 
@@ -55,8 +56,8 @@ class Media extends Model {
         return $medias;
     }
 
-    public static function isValid($data, $allowedTypes, $maxSize){
-        if($data != null) {
+    public static function isValid($data, $allowedTypes, $maxSize) {
+        if ($data != null) {
             $typeMedia = $data->getClientOriginalExtension();
             for ($i = 0; $i < count($allowedTypes); $i++) {
                 if (in_array($typeMedia, $allowedTypes)) { // Si le media est de bon type
@@ -74,11 +75,12 @@ class Media extends Model {
         }
     }
 
-    public static function isDataValid($data){
+    public static function isDataValid($data) {
         // validation du titre et de la légende
         return Validator::make($data, [
-            'title' => 'string|between:1,50|nullable', // on vérifie pas les chiffres et autres caractères
-            'legend' => 'string|between:1,2000|nullable', // on vérifie pas les chiffres et autres caractères
-        ])->passes();
+                    'title' => 'string|between:1,50|nullable', // on vérifie pas les chiffres et autres caractères
+                    'legend' => 'string|between:1,2000|nullable', // on vérifie pas les chiffres et autres caractères
+                ])->passes();
     }
+
 }

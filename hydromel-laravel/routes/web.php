@@ -11,6 +11,9 @@
   |
  */
 
+use App\Models\Edition;
+use App\Models\Member;
+
 Route::get('/', function () {
     return view("index");
 });
@@ -30,10 +33,24 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     //Accueil
-    Route::resource('/auth/accueil', 'EditionCtrl');
+    Route::resource('/auth/accueil', 'AccueilCtrl');
+
+    //Edition
+    Route::resource('/auth/editions', 'EditionCtrl');
+    //Rank
+    Route::resource('/auth/rank', 'RankCtrl');
+
+    // Responsibility
+    Route::resource('/auth/responsibility', 'ResponsibilityCtrl');
 
     //Equipe
     Route::resource('/auth/team', 'EquipeCtrl');
+
+    Route::resource('/auth/member', 'MembreCtrl');
+
+    Route::resource('/auth/article', 'ArticleCtrl');
+
+    Route::resource('/auth/media', 'MediaCtrl');
 
     //Actualités
     Route::resource('/auth/news', 'ActualiteCtrl');
@@ -42,18 +59,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/auth/sponsors', 'SponsorCtrl');
 
     //Editions précdènte
-    Route::get('/auth/previousedition', function () {
-        return view("backoffice/editionP");
-    });
+    Route::resource('/auth/previousedition', 'PreviousEditionCtrl');
 
     //Changer Edition
-    Route::get('/auth/changeedition/home', function () {
-        return view("backoffice/newedition/accueil");
+    Route::get('/auth/changeedition', function () {
+        $edition = Edition::getCurrentEdition();
+        $current_supervisor = Member::getSupervisorFromEdition($edition);
+        return view("backoffice/changeedition", [
+            'current_edition' => $edition,
+            'current_supervisor' => $current_supervisor
+        ]);
     });
 
-    //Changer Edition
-    Route::get('/auth/changeedition/team', function () {
-        return view("backoffice/newedition/equipe");
+    //Changer mot de passe
+    Route::get('/auth/changepassword', function () {
+        return view("backoffice/changepassword");
     });
 
     //Authentification

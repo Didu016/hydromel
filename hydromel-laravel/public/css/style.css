@@ -7,74 +7,75 @@
 
 
 @font-face {
-	font-family: 'open_regular';
-	src:url(../font/OpenSans/OpenSans-Regular.ttf);
+    font-family: 'open_regular';
+    src:url(../font/OpenSans/OpenSans-Regular.ttf);
 }
 @font-face {
-	font-family: 'open_bold';
-	src:url(../font/OpenSans/OpenSans-Bold.ttf);
+    font-family: 'open_bold';
+    src:url(../font/OpenSans/OpenSans-Bold.ttf);
 }
 @font-face {
-	font-family: 'open_light';
-	src:url(../font/OpenSans/OpenSans-Light.ttf);
+    font-family: 'open_light';
+    src:url(../font/OpenSans/OpenSans-Light.ttf);
 }
 
 body
 {
-	font-family:'open_regular';
+    font-family:'open_regular';
 }
 
 * {
-	position: relative;
-	padding: 0px;
-	margin: 0px;
-	z-index: 1;
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    z-index: 1;
 }
 h1
 {
-	font-family:'open_bold';
-	font-size:3em;
-	text-transform: uppercase;
+    font-family:'open_bold';
+    font-size:3em;
+    text-transform: uppercase;
 }
 h2
 {
-	font-family:'open_bold';
-	font-size:1.5em;
-	text-transform: uppercase;
+    font-family:'open_bold';
+    font-size:1.5em;
+    text-transform: uppercase;
 }
 h3
 {
-	font-family:'open_regular';
-	font-size:0.8em;
-	color:#333333;
-	text-transform: uppercase;
+    font-family:'open_regular';
+    font-size:0.8em;
+    color:#333333;
+    text-transform: uppercase;
 }
 h4
 {
-	font-family:'open_regular';
-	font-size:0.8em;
-	color:#fff;
+    font-family:'open_regular';
+    font-size:0.8em;
+    color:#fff;
 }
 a
 {
-	text-decoration:none;
-	color:#888888;
+    text-decoration:none;
+    color:#888888;
 }
 
 a:visited
 {
-	color:#666666;
-	text-decoration:none;
+    color:#666666;
+    text-decoration:none;
 }
 
 img{
-	width: 100%;
+    width: 100%;
 }
 
 .center{
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 .displayNone{
-	display:none;
+    display:none;
 }
+
