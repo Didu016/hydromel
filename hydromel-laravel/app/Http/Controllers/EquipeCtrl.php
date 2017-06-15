@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Media;
+use App\Models\Responsibility;
+use App\Models\Reward;
 use Illuminate\Http\Request;
+use App\Models\Member;
+use App\Models\Edition;
 
 class EquipeCtrl extends Controller {
 
@@ -12,7 +17,16 @@ class EquipeCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('backoffice/equipe');
+        $members = Member::getMembersFormatted(Edition::getCurrentEdition()->members()->get());
+        $rewards = Edition::getCurrentEdition()->rewards()->get();
+        $editions = Edition::getCurrentEdition();
+        $responsability = Responsibility::all();
+        return view('backoffice/equipe', [
+            'members' => $members,
+            'rewards' => $rewards,
+            'responsability' => $responsability,
+            'editions' => $editions,
+        ]);
     }
 
     /**

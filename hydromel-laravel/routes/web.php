@@ -11,6 +11,9 @@
   |
  */
 
+use App\Models\Edition;
+use App\Models\Member;
+
 Route::get('/', function () {
     return view("index");
 });
@@ -21,7 +24,6 @@ Route::get('/getCurrentEdition', 'EditionCtrl@getDataFromCurrentEdition');
 Route::get('/editions/{id}', 'EditionCtrl@show');
 Route::get('/hydromeladminpanel', 'AuthController@login');
 Route::post('/auth/check', 'AuthController@check');
-Route::resource('/auth/editions', 'EditionCtrl');
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -33,6 +35,8 @@ Route::group(['middleware' => ['auth']], function () {
     //Accueil
     Route::resource('/auth/accueil', 'AccueilCtrl');
 
+    //Edition
+    Route::resource('/auth/editions', 'EditionCtrl');
     //Rank
     Route::resource('/auth/rank', 'RankCtrl');
 
@@ -61,13 +65,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/auth/sponsors', 'SponsorCtrl');
 
     //Editions précdènte
-    Route::get('/auth/previousedition', function () {
-        return view("backoffice/editionP");
-    });
+    Route::resource('/auth/previousedition', 'PreviousEditionCtrl');
 
     //Changer Edition
     Route::get('/auth/changeedition', function () {
-        return view("backoffice/changeedition");
+        $edition = Edition::getCurrentEdition();
+        $current_supervisor = Member::getSupervisorFromEdition($edition);
+        return view("backoffice/changeedition", [
+            'current_edition' => $edition,
+            'current_supervisor' => $current_supervisor
+        ]);
     });
 
     //Changer mot de passe

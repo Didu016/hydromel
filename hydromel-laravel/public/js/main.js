@@ -8,6 +8,11 @@ $(function(){
         switchPage($(this).attr("id").substr(4));
     });
     $(".btn_delete").on("click", deleteLine);
+
+    $('.bouton_table').on('click', function(){
+        var id =$(this).parent().prev().prev().prev('#sponsor_actif_nom').text();
+        console.log(id);
+    });
 });
 
 

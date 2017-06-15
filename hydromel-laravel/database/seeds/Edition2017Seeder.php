@@ -43,9 +43,15 @@ class Edition2017Seeder extends Seeder {
                     'email' => 'philippe.spat@heig-vd.ch'
         ]);
 
+        $member_gravier = Member::create([
+                    'firstname' => 'Laurent',
+                    'name' => 'Gravier',
+                    'email' => 'laurent.gravier@heig-vd.ch'
+        ]);
+
 
         $responsibility_cs_manager = Responsibility::create([
-                    'name' => 'Chercheur - superviseur'
+                    'name' => 'Chercheur-Superviseur'
         ]);
 
 
