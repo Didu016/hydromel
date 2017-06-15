@@ -1,5 +1,5 @@
 <nav>
-    <a href="index.blade.php"><img id="logoAccueil" src="img/logoHydro.png"></a>
+    <a href="#accueil"><img id="logoAccueil" src="img/logoHydro.png"></a>
     <ul>
         <li><a href="#accueil">Accueil</a></li>
         <li><a href="#equipe">L'équipe</a></li>
