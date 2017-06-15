@@ -1,14 +1,14 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8">
-    <title>Hydrocontest HEIG-VD</title>
-    <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/script.js" type="text/javascript"></script>
-    <script src="js/jquery.vide.js" type="text/javascript"></script>
-    <script src="js/slick.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <head>
+        <meta charset="utf-8">
+            <title>Hydrocontest HEIG-VD</title>
+            <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+            <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+            <script src="js/script.js" type="text/javascript"></script>
+            <script src="js/jquery.vide.js" type="text/javascript"></script>
+            <script src="js/slick.js" type="text/javascript"></script>
+            <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 <body>

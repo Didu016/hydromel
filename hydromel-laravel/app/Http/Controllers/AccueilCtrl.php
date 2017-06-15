@@ -7,16 +7,15 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Edition;
 use App\Models\Media;
 
-class AccueilCtrl extends Controller
-{
+class AccueilCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view('backoffice/accueil');
     }
 
     /**
@@ -24,8 +23,7 @@ class AccueilCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -35,9 +33,8 @@ class AccueilCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        dd('methode store');
     }
 
     /**
@@ -46,8 +43,7 @@ class AccueilCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -57,8 +53,7 @@ class AccueilCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -69,13 +64,13 @@ class AccueilCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request) // IL FAUT REMETTRE LE $id QUAND ON AURA ACCES AU FORMULAIRE (ou pas, peut-être)
-    {
-        $editionActuelle = json_decode(EditionCtrl::getDataFromCurrentEdition()->content())->current_edition; // Récupération de la totalité des informations des éditions
-        $idEditionActuelle = $editionActuelle->edition->id;
+    public function update(Request $request) { // IL FAUT REMETTRE LE $id QUAND ON AURA ACCES AU FORMULAIRE (ou pas, peut-être)
+
+        $editionActuelle = Edition::getCurrentEdition();
+        $idEditionActuelle = $editionActuelle->id;
 
         // RECUPERATIONS DES DONNEES RECUES
-        $dataEdition['description']= $request->description;
+        $dataEdition['description'] = $request->description;
         $dataEdition['place'] = $request->place;
         $dataEdition['beginningDate'] = $request->beginningDate;
         $dataEdition['finishingDate'] = $request->finishingDate;
@@ -91,15 +86,14 @@ class AccueilCtrl extends Controller
         $mediaMaxSize = 2000000;
         $uploadOk = true;
         $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png'); // Types de fichiers autorisés
-        for($i = 0 ; $i < count($dataMedia) ; $i++) { // On va creer chacuns des médias
+        for ($i = 0; $i < count($dataMedia); $i++) { // On va creer chacuns des médias
             $uploadOk = Media::isValid($dataMedia[$i], $allowedTypes, $mediaMaxSize);
         }
-        dd($uploadOk);
-        // Fin des validations
 
+        // Fin des validations
         // UPLOAD - UPDATES
-        if($validDescription != false && $uploadOk != false) { // Si les donnees sont valides, on fait les mises a jour
-            DB::transaction(function () use ($idEditionActuelle, $dataMedia) {
+        if ($validDescription != false && $uploadOk != false) { // Si les donnees sont valides, on fait les mises a jour
+            DB::transaction(function () use ($idEditionActuelle, $dataMedia, $dataEdition, $allowedTypes) {
 
                 $edition = Edition::find($idEditionActuelle);
                 $edition->description = $dataEdition['description'];
@@ -117,19 +111,19 @@ class AccueilCtrl extends Controller
                 $backgroundB = $dataMedia[1];
                 if ($backgroundA != null) {
                     for ($i = 0; $i < count($allowedTypes); $i++) {
-                        if (file_exists('../public/img/backgroundA.' . $allowedTypes[$i])) {
-                            unlink('../public/img/backgroundA.' . $allowedTypes[$i]); // Supprimer la photo
+                        if (file_exists('../public/img/heroSectionHome.' . $allowedTypes[$i])) {
+                            unlink('../public/img/heroSectionHome.' . $allowedTypes[$i]); // Supprimer la photo
                         }
                     }
-                    $backgroundA->move($destination, 'backgroundA' . '.' . $backgroundA->getClientOriginalExtension()); // On met la photo dans le dossier
+                    $backgroundA->move($destination, 'heroSectionHome' . '.' . $backgroundA->getClientOriginalExtension()); // On met la photo dans le dossier
                 }
                 if ($backgroundB != null) {
                     for ($i = 0; $i < count($allowedTypes); $i++) {
-                        if (file_exists('../public/img/backgroundB' . '.' . $allowedTypes[$i])) {
-                            unlink('../public/img/backgroundB' . '.' . $allowedTypes[$i]); // Supprimer la photo
+                        if (file_exists('../public/img/bannerDatePlace' . '.' . $allowedTypes[$i])) {
+                            unlink('../public/img/bannerDatePlace' . '.' . $allowedTypes[$i]); // Supprimer la photo
                         }
                     }
-                    $backgroundB->move($destination, 'backgroundB' . '.' . $backgroundB->getClientOriginalExtension());
+                    $backgroundB->move($destination, 'bannerDatePlace' . '.' . $backgroundB->getClientOriginalExtension());
                 }
             }); // Fin de la transaction
         } else {
@@ -144,8 +138,7 @@ class AccueilCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 
