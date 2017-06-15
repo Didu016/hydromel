@@ -46,9 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/auth/sponsors', 'SponsorCtrl');
 
     //Editions précdènte
-    Route::get('/auth/previousedition', function () {
-        return view("backoffice/editionP");
-    });
+    Route::resource('/auth/previousedition', 'PreviousEditionCtrl');
 
     //Changer Edition
     Route::get('/auth/changeedition', function () {
