@@ -10,6 +10,7 @@ var template6;
 var template7;
 var template8;
 var template9;
+
 $(function(){
   template = $("#articleNews").clone();
   template2 = $("#articlePresse").clone();
