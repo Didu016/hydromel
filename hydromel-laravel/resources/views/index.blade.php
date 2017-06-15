@@ -17,7 +17,7 @@
     <section class="sectionPage" id="page_accueil">
         <section class="sectionAccueil">
             <div style="width: 100%; height: auto;"
-                data-vide-bg="mp4: img/heroSectionHome, poster: img/HydroHEIGBateau2016"
+                data-vide-bg="mp4: vid/videoAcceuil, poster: img/HydroHEIGBateau2016"
                 data-vide-options="posterType: jpg, loop: true, muted: false, position: 0% 0%">
             </div>
             <div class="blocDescription">
@@ -41,7 +41,7 @@
                     <h2>Titre</h2>
                     <date></date>
                     <p>Praesent semper urna tincidunt, sodales tellus nec, finibus nunc. Proin rutrum porta tortor, efficitur maximus tellus porttitor pellentesque. Sed blandit posuere ultricies. Proin tempus augue nunc, luctus vehicula tellus porttitor pellentesque. Etiam lacinia vulputate sem, quis tincidunt orci porta id.</p>
-                    <button><a href="#">Lire plus</a></button>
+                    <button><a>Lire plus</a></button>
                 </div>
             </article>
             <article class="article articlePresse"  id="articlePresse">
@@ -49,12 +49,12 @@
                     <h2>Titre</h2>
                     <date></date>
                     <p>LLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseLorem ipsum dolor sit amet, conseorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus massa magna, venenatis id commodo at, ultricies sit amet tortor. </p>
-                    <button><a href="#">Lire plus</a></button>
+                    <button><a>Lire plus</a></button>
                 </div>
             </article>
         </section>
         <section class="sectionPreviewSponsor">
-            <p><h1>Sponsors</h1></p>
+            <p><h1>Article</h1></p>
             <div class="blocSponsor" id="sponsorsAccueil">
                 <article id="articlePreviewSponsor">
                     <img src="img/logoHydro.png">
@@ -153,5 +153,17 @@
           </section>
       </section>
     </section>
+    <!--PAGE LIRE PLUS ARTICLES-->
+    <section class="sectionPage" id="page_article">
+        <header id="headerArticle"></header>
+        <section class="titrePage" id="titrePageArticle"><h1>Article</h1></section>
+        <section class="sectionImageArticle">
+          <div class="imageArticleComplet"></div>
+        </section>
+        <section class="sectionDescription" >
+          <div id="sectionDescriptionArticle"></div>
+        </section>
+    </section>
+
 </body>
 </html>
