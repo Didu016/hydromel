@@ -44,7 +44,9 @@
                                                     <td class="article_news_titre">
                                                         {{$article['title']}}
                                                     </td>
-                                                    <td class="article_news_resume">{{substr($article['description'],0,5)}}...</td>
+                                                    <td class="article_news_resume">{{substr($article['description'],0,5)}}
+                                                        ...
+                                                    </td>
                                                     <td class="article_news_image">
                                                         @if(empty($article['medias']))
                                                             -
@@ -82,6 +84,7 @@
                             </section>
                             <section class="aCacher" id="ajout_news">
                                 <h5>Ajouter un article news</h5>
+                                <<<<<<< HEAD
                                 <form method="POST" action="" enctype="">
                                     <p>Titre <input id="article_news_nouveau_nom" type="text"></p>
                                     Description <textarea id="article_news_nouveau_description"></textarea>
@@ -90,10 +93,26 @@
                                     <input type="hidden" name="type" value="news">
                                     <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor"
                                            class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-                                </form>
+                                    =======
+                                    <form method="POST" action="{{url('/auth/article')}}" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
+                                        <p>Titre <input id="article_news_nouveau_nom" name="title" type="text"></p>
+                                        Description <textarea id="article_news_nouveau_description"
+                                                              name="description"></textarea>
+                                        <p>Audiovisuel <input id="article_news_nouveau_media" type="file" name="media"
+                                                              accept="image"
+                                                              accept="video" file="media">
+                                        </p>
+                                        <input type="hidden" name="type" value="news">
+                                        <input type="hidden" name="link" value=null>
+                                        <input type="submit" name="btn" value="Valider" id="btn_ajout_sponsor"
+                                               class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                        >>>>>>> a53e995b4bcd56791afb607c1bca9d59f42ffbed
+                                    </form>
                             </section>
                             <section class="aCacher" id="ajout_presse">
                                 <h5>Ajouter un article presse</h5>
+                                <<<<<<< HEAD
                                 <form method="POST" action="" enctype="">
                                     <p>Titre <input name="title" type="text"></p>
                                     Description <textarea name="description"></textarea>
@@ -101,7 +120,17 @@
                                     <input type="hidden" name="type" value="presse">
                                     <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor"
                                            class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-                                </form>
+                                    =======
+                                    <form method="POST" action="{{url('/auth/article')}}" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
+                                        <p>Titre <input name="title" type="text"></p>
+                                        Description <textarea name="description"></textarea>
+                                        <p>Lien <input name="link" type="url"></p>
+                                        <input type="hidden" name="type" value="presse">
+                                        <input type="submit" name="btn" value="Valider" id="btn_ajout_sponsor"
+                                               class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                        >>>>>>> a53e995b4bcd56791afb607c1bca9d59f42ffbed
+                                    </form>
                             </section>
 
                             <section class="aCacher" id="presse">
@@ -118,7 +147,8 @@
                                             @if ($article['articletype_name'] == 'presse')
                                                 <tr id="article_">
                                                     <td id="article_presse_titre">{{$article['title']}}</td>
-                                                    <td id="article_presse_lien"><a href="{{$article['link']}}" target = "_blank">lien</a></td>
+                                                    <td id="article_presse_lien"><a href="{{$article['link']}}"
+                                                                                    target="_blank">lien</a></td>
                                                     <td>
                                                         <button id="btn_modifier_presse" class="bouton_table"><i
                                                                     class="mdl-color-text--blue-grey-400 material-icons"
@@ -184,45 +214,47 @@
                                             <th>Suppr</th>
                                         </tr>
                                         @foreach ($medias as $media)
-                                        <tr id="media_">
-                                            <td id="media_titre">{{$media['title']}}</td>
-                                            <td id="media_description">
-                                                @if ($media['legend']!= null)
-                                                    {{ substr($media['legend']) }}...
-                                                @else
-                                                    -
-                                                @endif</td>
-                                            <td id="media_image"><img src="{{ url($media['url']) }}" height="50" width="50"></td>
-                                            <td>
-                                                <button id="btn_modifier_media" class="bouton_table"><i
-                                                            class="mdl-color-text--blue-grey-400 material-icons"
-                                                            role="button">create</i></button>
-                                            </td>
-                                            <td>
+                                            <tr id="media_">
+                                                <td id="media_titre">{{$media['title']}}</td>
+                                                <td id="media_description">
+                                                    @if ($media['legend']!= null)
+                                                        {{ substr($media['legend']) }}...
+                                                    @else
+                                                        -
+                                                    @endif</td>
+                                                <td id="media_image"><img src="{{ url($media['url']) }}" height="50"
+                                                                          width="50"></td>
+                                                <td>
+                                                    <button id="btn_modifier_media" class="bouton_table"><i
+                                                                class="mdl-color-text--blue-grey-400 material-icons"
+                                                                role="button">create</i></button>
+                                                </td>
+                                                <td>
 
-                                                <button id="btn_delete_media" class="bouton_table"><i
-                                                            class="mdl-color-text--blue-grey-400 material-icons"
-                                                            role="presentation">delete</i></button>
+                                                    <button id="btn_delete_media" class="bouton_table"><i
+                                                                class="mdl-color-text--blue-grey-400 material-icons"
+                                                                role="presentation">delete</i></button>
 
-                                            </td>
-                                            <input type="hidden" name="id" value="">
-                                        </tr>
-                                            @endforeach
+                                                </td>
+                                                <input type="hidden" name="id" value="">
+                                            </tr>
+                                        @endforeach
                                     </table>
                                     <button id="btn_ajout_media" class="bouton_ajout bouton_table"><i
 
                                                 class="bouton_table mdl-color-text--blue-grey-400 material-icons"
-
+                                                role="presentation">add_circle</i></button>
 
                                 </div>
                             </section>
                             <section class="aCacher" id="ajout_media">
                                 <h5>Ajouter un media</h5>
-                                <form method="POST" action="" enctype="">
-                                    <p>Titre <input id="media_nouveau_titre" type="text"></p>
-                                    Description <textarea id="media_nouveau_description"></textarea>
+                                <form method="POST" action="{{url('/auth/media')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <p>Titre <input id="media_nouveau_titre" name="title" type="text"></p>
+                                    Legend <textarea id="media_nouveau_description" name="legend"></textarea>
                                     <p>Audiovisuel <input id="media_nouveau_image" type="file" accept="image"
-                                                          accept="video"></p>
+                                                          accept="video" name="media"></p>
                                     <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor"
                                            class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                 </form>
@@ -230,10 +262,10 @@
                             <section class="aCacher" id="modifier_media">
                                 <h5>Modifier un media</h5>
                                 <form method="POST" action="" enctype="">
-                                    <p>Titre <input id="media_modifier_titre" type="text"></p>
-                                    Description <textarea id="media_modifier_description"></textarea>
+                                    <p>Titre <input id="media_modifier_titre" name="title" type="text"></p>
+                                    Legend <textarea id="media_modifier_description" name="legend"></textarea>
                                     <p>Audiovisuel <input id="media_modifier_image" type="file" accept="image"
-                                                          accept="video"></p>
+                                                          accept="video" name="media"></p>
                                     <input type="submit" name="type" value="Valider" id="btn_ajout_sponsor"
                                            class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                 </form>

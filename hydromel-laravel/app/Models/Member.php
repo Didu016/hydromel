@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
+use Illuminate\Support\Facades\DB;
 
 class Member extends Model {
 
@@ -123,10 +125,10 @@ class Member extends Model {
                 $member->save();
 
                 // Creer le media
-                $mediaDestination = "../../img/membersMedias";
+                $mediaDestination = "../public/img/membersMedias";
                 $media = new Media();
-                $media->title = 'Photo' . $dataMember['firstname'];
-                $media->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
+                $media->title = 'media_' . $dataMember['name'];
+                $media->url = $mediaDestination . '/media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension();
                 $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                 if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                     $media->mediatype_id = 1; // Alors on set que c'est une photo
@@ -134,7 +136,7 @@ class Member extends Model {
                     $media->mediatype_id = 2; // Alors on set que c'est une photo
                 }
                 $media->save();
-                $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
+                $dataMedia->move($mediaDestination, ('media_' . $dataMember['name'] . '.' . $dataMedia->getClientOriginalExtension())); // Déplace la photo dans le dossier voulu
 
                 // Ajouter ce membre a l'edition
                 $actualEdition = Edition::all()->sortByDesc("year")->first();
@@ -157,9 +159,9 @@ class Member extends Model {
                 $participation->media_id = $media->id;
                 $participation->save();
             }); // Fin de la transaction
-            // REUSSITE
+            // REUSSITE REDIRECTION --------------------------------------
         } else { // SINON ERREUUUUUUUUUUUUUUR --------------------------------------------------------------------------
-            dd('un des champs est pas bon ou alors le type existe déjà');
+            dd('un des champs est pas bon ou alors le membre existe déjà');
         }
     }
 

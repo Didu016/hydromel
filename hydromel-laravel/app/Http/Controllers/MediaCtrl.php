@@ -46,13 +46,12 @@ class MediaCtrl extends Controller
         $validMediaData = Media::isDataValid($dataMedia);
         $mediaMaxSize = 2000000;
         $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
-        $validMedia = Media::isValid($theNewMedia, $allowedTypes, $mediaMaxSize);
-
+        $validMedia = Media::isValid($theMedia, $allowedTypes, $mediaMaxSize);
 
         if($theMedia != null && $validMediaData != false && $validMedia != false){
             DB::transaction(function () use ($dataMedia, $theMedia) {
                 // Creer le media
-                $mediaDestination = "../../img/generalMedias";
+                $mediaDestination = "../public/img/generalMedias";
                 $media = new Media();
                 $media->title = $dataMedia['title'];
                 $media->legend = $dataMedia['legend'];
@@ -107,6 +106,7 @@ class MediaCtrl extends Controller
      */
     public function update(Request $request /*, $id*/)
     {
+
         /*---- RECUPERATIONS DES DONNEES RECUES ----*/
         $dataMedia['title']= $request->title;
         $dataMedia['legend'] = $request->legend;
@@ -134,7 +134,7 @@ class MediaCtrl extends Controller
                 }
 
                 // modification du media
-                $mediaDestination = "../../img/generalMedias";
+                $mediaDestination = "../public/img/generalMedias";
                 $media = Media::find($idMedia);
                 $media->title = $dataMedia['title'];
                 $media->legend = $dataMedia['legend'];

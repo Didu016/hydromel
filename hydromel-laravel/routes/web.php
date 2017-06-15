@@ -32,12 +32,21 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Accueil
     Route::resource('/auth/accueil', 'AccueilCtrl');
-    
-    //Edition
-    
-    
+
+    //Rank
+    Route::resource('/auth/rank', 'RankCtrl');
+
+    // Responsibility
+    Route::resource('/auth/responsibility', 'ResponsibilityCtrl');
+
     //Equipe
     Route::resource('/auth/team', 'EquipeCtrl');
+
+    Route::resource('/auth/member', 'MembreCtrl');
+
+    Route::resource('/auth/article', 'ArticleCtrl');
+
+    Route::resource('/auth/media', 'MediaCtrl');
 
     //Actualités
     Route::resource('/auth/news', 'ActualiteCtrl');

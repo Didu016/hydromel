@@ -74,10 +74,10 @@ class SponsorCtrl extends Controller {
 
                 // Creer le media (s'il y en a un)
                 if($dataMedia != null){
-                    $mediaDestination = "../../img/sponsorsMedias";
+                    $mediaDestination = "../public/img/sponsorsMedias";
                     $media = new Media();
                     $media->title = 'logo_' . $dataSponsor['society'];
-                    $media->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
+                    $media->url = $mediaDestination . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
                     $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                     if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                         $media->mediatype_id = 1; // Alors on set que c'est une photo
@@ -85,9 +85,9 @@ class SponsorCtrl extends Controller {
                         $media->mediatype_id = 2; // Alors on set que c'est une photo
                     }
                     $media->save(); // Sauvegarde du media
-                    $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
+                    $dataMedia->move($mediaDestination, 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension()); // Déplace la photo dans le dossier voulu
 
-                    $sponsor->logo_url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
+                    $sponsor->logo_url =  $mediaDestination . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
 
                 } else {
                     $sponsor->logo_url = null; // Pas de media specifie, alors null
@@ -189,9 +189,9 @@ class SponsorCtrl extends Controller {
 
                 // Modifier le media
                 if ($dataMedia != null) {
-                    $mediaDestination = "../../img/sponsorsMedias";
+                    $mediaDestination = "../public/img/sponsorsMedias";
                     $existingMedia->title = 'logo_' . $dataSponsor['society'];
-                    $existingMedia->url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
+                    $existingMedia->url = $mediaDestination . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
                     $videoTypes = array('mp4', 'webm'); // Par la suite nous pourrions faire d'autre check pour des fichiers audios etc etc (en fonction de nos types de MediaTypes
                     if (in_array($dataMedia->getClientOriginalExtension(), $videoTypes)) { // Si le média reçu est une vidéo
                         $existingMedia->mediatype_id = 1; // Alors on set que c'est une photo
@@ -199,8 +199,8 @@ class SponsorCtrl extends Controller {
                         $existingMedia->mediatype_id = 2; // Alors on set que c'est une photo
                     }
                     $existingMedia->save(); // Sauvegarde du media
-                    $dataMedia->move($mediaDestination, $dataMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
-                    $sponsor->logo_url = $mediaDestination . '/' . $dataMedia->getClientOriginalName();
+                    $dataMedia->move($mediaDestination, 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension()); // Déplace la photo dans le dossier voulu
+                    $sponsor->logo_url = $mediaDestination . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
                 } else { // Alors y'a pas de media
                     $sponsor->logo_url = null; // Pas de media specifie, alors null
                 }
@@ -221,7 +221,7 @@ class SponsorCtrl extends Controller {
                     ->where('edition_id', $currentEditionId)
                     ->where('sponsor_id', $sponsorId)
                     ->update(array('rank_id' => $rankId));
-                /*
+                /* ceci ci-dessous ne fonctionne pas, nous n'avons pas trouvé pourquoi
                                 $sponsoring = Sponsoring::where([
                                     ['edition_id', '=', $currentEditionId],['sponsor_id', '=', $sponsorId],['rank_id', '=', 1]
                                 ])->get()->first();

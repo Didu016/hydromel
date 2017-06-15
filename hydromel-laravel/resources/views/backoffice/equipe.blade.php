@@ -27,12 +27,12 @@
                             </header>
                             <section class="aCacher section_default mdl-cell--10-col-desktop" id="description">
 
-                                    <h5>Ecrivez votre description</h5>
-                                    <form method="POST" action="" enctype="">
-                                        <textarea id="equipe_description" rows="8"></textarea>
-                                        <input type="submit" name="valider"
-                                               class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
-                                    </form>
+                                <h5>Ecrivez votre description</h5>
+                                <form method="POST" action="" enctype="">
+                                    <textarea id="equipe_description" rows="8"></textarea>
+                                    <input type="submit" name="valider"
+                                           class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                </form>
 
                             </section>
 
@@ -82,15 +82,18 @@
                             </section>
                             <section class="aCacher" id="ajout_membre">
                                 <h5>Ajouter un nouveau membre</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="POST" action="{{url('/auth/member')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
                                     <input type="hidden" name="id" value="">
                                     <p>Nom <input name="membre_nom" type="text"></p>
                                     <p>Prenom <input name="membre_prenom" type="text"></p>
                                     <p>Mail <input name="membre_mail" type="email"></p>
                                     <input name="membre_image" type="file" accept="image">
                                     <div>
-                                        Responsabilité <select id="membre_nouveau_resp">
-                                            <option class="liste_resp">les differentes options ici</option>
+                                        Responsabilité<select id="membre_nouveau_resp" name="membre_responsibility">
+                                            <!-- ici il faut foreach -->
+                                            <!-- IL FAUT BOUCLER ICI -->
+                                            <option>Team Manager</option>
                                         </select>
                                     </div>
                                     <input type="submit" name="valider"
@@ -99,7 +102,7 @@
                             </section>
                             <section class="aCacher" id="modifier_membre">
                                 <h5>Modifier un membre</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="" action="" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="">
                                     <p>Nom <input name="membre_nom" type="text"></p>
                                     <p>Prenom <input name="membre_prenom" type="text"></p>
@@ -117,11 +120,13 @@
                             <section class="aCacher" id="respo">
                                 <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                                     <h5>Ajouter une responsabilité</h5>
-                                    <form method="POST" action="" enctype="">
+                                    <form method="POST" action="{{url('/auth/responsibility')}}"
+                                          enctype="multipart/form-data">
                                         <p>Créer une responsabilité <input id="nouvelle_resp" name="responsabilite">
                                             <input type="submit" value="Ajouter" name="ajouter"
                                                    class="btn_ajout mdl-button">
                                         </p>
+                                        {{ csrf_field() }}
                                         <ul class="listes">
                                             <li>une respo</li>
                                         </ul>
@@ -153,7 +158,9 @@
                                                 <td id="ID">{{$reward['attributes']['edition_id']}}</td>
                                                 <td class="prix_distinction">{{$reward['attributes']['distinction']}}</td>
                                                 <td class="prix_position">{{$reward['attributes']['position']}}</td>
-                                                <td class="prix_description">{{substr($reward['attributes']['description'],0,5)}}...</td>
+                                                <td class="prix_description">{{substr($reward['attributes']['description'],0,5)}}
+                                                    ...
+                                                </td>
                                                 <td class="prix_value">{{$reward['attributes']['value']}}</td>
                                                 <td>
                                                     <button id="btn_modifier_prix" class="bouton_table"><i

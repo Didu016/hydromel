@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Rank extends Model {
 
@@ -17,6 +18,13 @@ class Rank extends Model {
         } else {
             return true;
         }
+    }
+
+    public static function isValid($data){
+        $dataArray['rankName'] = $data;
+        return Validator::make($dataArray, [
+            'rankName' => 'string|between:1,50|required', // on vérifie pas les chiffres et autres caractères
+        ])->passes();
     }
 
 }
