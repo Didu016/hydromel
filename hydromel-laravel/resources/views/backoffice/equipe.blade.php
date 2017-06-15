@@ -177,30 +177,29 @@
                             </section>
                             <section class="aCacher" id="ajout_prix">
                                 <h5>Ajouter un prix</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="POST" action="{{url('/auth/reward')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
                                     <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-                                        <p>Distinction <input id="prix_distinction" type="text" required
-                                                              name="prix_distinction">
-                                        <p>Position <input id="prix_position" type="number" required
-                                                           name="prix_position"></p>
-                                        <p>Description <textarea required id="prix_description"></textarea></p>
-                                        <p>Value <input id="prix_value" type="text"></p>
-                                        <input type="submit" name="valider"
-                                               class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                    <p>Distinction <input id="prix_distinction" type="text" required name="prix_distinction">
+                                    <p>Position <input id="prix_position" type="number" required name="prix_position" ></p>
+                                    <p>Description <textarea required id="prix_description" name="prix_description"></textarea></p>
+                                    <p>Value <input id="prix_value" type="text" name="prix_value"></p>
+                                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
 
                                     </div>
                                 </form>
                             </section>
                             <section class="aCacher" id="modifier_prix">
                                 <h5>Modifier un prix</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="POST" action="{{url('/auth/reward/')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">
                                     <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-                                        <p>Distinction <input id="prix_distinction" type="text" required
-                                                              name="prix_distinction">
-                                        <p>Position <input id="prix_position" type="number" required
-                                                           name="prix_position"></p>
-                                        <p>Description <textarea required id="prix_description"></textarea></p>
-                                        <p>Value <input id="prix_value" type="text"></p>
+
+                                        <p>Distinction <input id="prix_distinction" type="text" required name="prix_distinction">
+                                        <p>Position <input id="prix_position" type="number" required name="prix_position" ></p>
+                                        <p>Description <textarea required id="prix_description" name="prix_description">></textarea></p>
+                                        <p>Value <input id="prix_value" type="text" name="prix_value"></p>
 
                                         <input type="submit" name="valider"
                                                class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
