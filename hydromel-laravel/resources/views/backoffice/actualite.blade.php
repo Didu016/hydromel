@@ -127,6 +127,7 @@
                                         @foreach($articles as $article)
                                         @if ($article['articletype_name'] == 'presse')
                                         <tr id="article_">
+                                            <td id="id">{{$article['id']}}</td>
                                             <td id="article_presse_titre">{{$article['title']}}</td>
                                             <td id="article_presse_lien"><a href="{{$article['link']}}"
                                                                             target="_blank">lien</a></td>
@@ -199,6 +200,7 @@
                                         </tr>
                                         @foreach ($medias as $media)
                                         <tr id="media_">
+                                            <td id="id">{{$article['id']}}</td>
                                             <td id="media_titre">{{$media['title']}}</td>
                                             <td id="media_description">
                                                 @if ($media['legend']!= null)
