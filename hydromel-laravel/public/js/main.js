@@ -16,13 +16,15 @@ $(function(){
         console.log(sponsor_id, sponsor_nom, sponsor_rank);
     });
 
-    $('#btn_modifier_membre').on('click', function(){
+    $('body').on('click', '#btn_modifier_membre',function(){
         var membre_id =$(this).parent().prev().prev().prev().prev().prev('#id').text();
         //Obliger diviser!!!!
         var membre_nom =$(this).parent().prev().prev().prev('.membre_nom').text();
         var membre_mail =$(this).parent().prev().prev('.membre_mail').text();
         var membre_respo =$(this).parent().prev('.membre_respo').text();
-        console.log(membre_id,membre_nom);
+
+        $('#id_member').attr("value", membre_id);
+        console.log(membre_id);
     });
 
     $('#btn_modifier_news').on('click', function () {
@@ -50,12 +52,14 @@ $(function(){
     });
 
     $('#btn_modifier_prix').on('click', function () {
-        var prix_id = $(this).parent().prev().prev().prev().prev().prev('#id').text();
+        var prix_id = $(this).parent().prev().prev().prev().prev().prev().prev('#id').text();
         //Obliger diviser!!!!
         var prix_distinction = $(this).parent().prev().prev().prev().prev().prev('.prix_distinction').text();
         var prix_position = $(this).parent().prev().prev().prev('.prix_distinction').text();
         var prix_description = $(this).parent().prev().prev('.prix_description').text();
         var prix_value = $(this).parent().prev('.prix_value').text();
+
+        $('#reward_id').attr("value", prix_id);
         console.log(prix_id, prix_distinction, prix_position, prix_description,prix_value);
     });
 });
@@ -70,6 +74,16 @@ function switchPage(pageId){
 function deleteLine(){
     var id =$(this).attr("data-id");
     $("#membre_" + id).hide();
+}
+
+function modifMembre() {
+    var membre_id =$(this).parent().prev().prev().prev().prev().prev('#id').text();
+    //Obliger diviser!!!!
+    var membre_nom =$(this).parent().prev().prev().prev('.membre_nom').text();
+    var membre_mail =$(this).parent().prev().prev('.membre_mail').text();
+    var membre_respo =$(this).parent().prev('.membre_respo').text();
+    console.log(membre_id,membre_nom);
+
 }
 
 

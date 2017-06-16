@@ -75,8 +75,9 @@ class MembreCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request/* ,  $id */) {
-        $memberId = 6;
+    public function update(Request $request,  $id) {
+        // $memberId = $id; // nous avons pas implémenter le formulaire de la sorte
+        $memberId = $request->id_member; // l'id du membre est passé en hidden dans la formulaire
 
         // RECUPERATION DU MEMBRE
         $member = Member::find($memberId);
