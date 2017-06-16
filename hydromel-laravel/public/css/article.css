@@ -119,12 +119,13 @@ button a[selected=selected] {
 .sectionImageArticle{
   float: left;
   width:  100%;
+
 }
 .imageArticleComplet{
 	background-position:50% 50%;
 	background-size: 100%;
 	width: 60%;
-	height: 400px;
+	height: 350px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -140,4 +141,11 @@ button a[selected=selected] {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 20px;
+}
+#sectionImageArticle
+{
+	text-align: center;
+}
+#retourActu{
+	margin-bottom: 20px;
 }

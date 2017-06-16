@@ -17,12 +17,12 @@
     <section class="sectionPage" id="page_accueil">
         <section class="sectionAccueil">
             <div style="width: 100%; height: auto;"
-                data-vide-bg="mp4: vid/videoAcceuil, poster: img/HydroHEIGBateau2016"
+                data-vide-bg="mp4: vid/videoAcceuil, poster: img/poster"
                 data-vide-options="posterType: jpg, loop: true, muted: false, position: 0% 0%">
             </div>
             <div class="blocDescription">
                 <h1><span>Accueil</span></h1>
-            <div class="link-slideright" id="descriptionAccueil">
+                <div class="link-slideright" id="descriptionAccueil">
                 <p></p>
             </div>
             </div>
@@ -54,10 +54,10 @@
             </article>
         </section>
         <section class="sectionPreviewSponsor">
-            <p><h1>Article</h1></p>
+            <p><h1>sponsors</h1></p>
             <div class="blocSponsor" id="sponsorsAccueil">
                 <article id="articlePreviewSponsor">
-                    <img src="img/logoHydro.png">
+                    <a href=""><img  src="img/logoHydro.png"></a>
                 </article>
             </div>
         </section>
@@ -117,6 +117,7 @@
     <!--PAGE EDITION PRECEDENTE-->
     <section class="sectionPage" id="page_edition">
         <header id="headerEdition"></header>
+
         <section class="titrePage"><h1>Editions précédentes</h1></section>
         <section class="sectionEdition">
           <section class="sectionChoixEdition">
@@ -135,10 +136,10 @@
             <h2>Prix</h2>
             <div id="rewardsEdition">
               <div id="rewardEdition">
-                <div class="positionEdition">1</div>
+                <div class="positionEdition"></div>
                 <div class="descriptionPositionEdition">
-                  <div class="distinctionEdition"><h3>Prix de la meilleure communication</h3></div>
-                  <div class="descriptionDistinctionEdition">Le prix de la meilleure communication est décerné à l'équipe qui a mené la meilleure campagne de communication durant le concours Hydrocontest</div>
+                  <div class="distinctionEdition"><h3></h3></div>
+                  <div class="descriptionDistinctionEdition"></div>
                 </div>
               </div>
             </div>
@@ -155,9 +156,9 @@
     </section>
     <!--PAGE LIRE PLUS ARTICLES-->
     <section class="sectionPage" id="page_article">
-        <header id="headerArticle"></header>
         <section class="titrePage" id="titrePageArticle"><h1>Article</h1></section>
-        <section class="sectionImageArticle">
+        <section class="sectionImageArticle" id="sectionImageArticle" >
+          <button id="retourActu"><a href="#actualite">Retour à la page actualité</a></button></br>
           <div class="imageArticleComplet"></div>
         </section>
         <section class="sectionDescription" >

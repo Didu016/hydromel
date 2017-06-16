@@ -12,6 +12,7 @@ var template8;
 var template9;
 
 $(function(){
+
   template = $("#articleNews").clone();
   template2 = $("#articlePresse").clone();
   template3 = $("#articlePreviewSponsor").clone();
@@ -91,7 +92,8 @@ $(function(){
       $.each(sponsors, function(i, sponsor) {
         if(i>=16){return}
           var template3Clone = template3.clone();
-          $('img', template3Clone).attr('src', sponsor.logo_url)
+          $('img', template3Clone).attr('src', sponsor.logo_url);
+          $('a', template3Clone).attr('href', sponsor.link);
           $("#sponsorsAccueil").append(template3Clone);
       });
       //PAGE MEMBRE
@@ -211,27 +213,7 @@ $(function(){
         console.log(sponsor.logo_url);
     });
     //PAGE EDITION
-    var fixmeTop = $('.sectionChoixEdition').offset().top;
-    $(window).scroll(function() {                  // assign scroll event listener
-      var currentScroll = $(window).scrollTop(); // get current position
-      if (currentScroll >= fixmeTop) {           // apply position: fixed if you
-          $('.sectionChoixEdition').css({                      // scroll to that element or below it
-              position: 'fixed',
-              top: '100',
-              width:'90%',
-              float:'left',
-              background:'#f9f9f9'
 
-          });
-      } else {                                   // apply position: static
-          $('.sectionChoixEdition').css({                      // if you scroll above it
-              position: 'static',
-              width:'100%',
-              background:'#fff',
-              border:'0'
-          });
-      }
-    });
     $.each(previousEditions, function(i, edition) {
       if(i>=50){return}
       var template8Clone = template8.clone();
@@ -278,6 +260,7 @@ $(function(){
                   $('p', templateClone).text(article.description);
               }
               $('date', templateClone).text(article.created_at.date.substring(0, 10));
+              $('a', templateClone).attr('data', article.id);
               if(article.medias[0]==null){
                 $(".imageArticle", templateClone).css('background-image','url(http://hydro.heig-vd.ch/wp-content/uploads/2017/03/cropped-DSC_0173.jpg)');
               }
@@ -293,6 +276,7 @@ $(function(){
               $('h2', template9Clone).text(article.title);
               $('p', template9Clone).text(article.description);
               $('date', template9Clone).text(article.created_at.date.substring(0, 10));
+
               $("#articlesEdition").append(template9Clone);
             }
           });
@@ -332,10 +316,28 @@ $(function(){
           $("#sectionDescriptionArticle").text(article.description);
         }
       });
-
-
     });
   });
+  /*var fixmeTop = $('.sectionChoixEdition').offset().top;
+  $(window).scroll(function() {                  // assign scroll event listener
+    var currentScroll = $(window).scrollTop(); // get current position
+    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+        $('.sectionChoixEdition').css({                      // scroll to that element or below it
+            position: 'fixed',
+            top: '100',
+            width:'90%',
+            float:'left',
+            background:'#f9f9f9'
+        });
+    } else {                                   // apply position: static
+        $('.sectionChoixEdition').css({                      // if you scroll above it
+            position: 'static',
+            width:'100%',
+            background:'#fff',
+            border:'0'
+        });
+    }
+  });*/
 });
 function menuHandler() {
     // History manipulation
@@ -346,6 +348,7 @@ function menuHandler() {
         if ($("#page_" + idPage).length == 0) {
             idPage = DEFAULT_PAGE;
             window.location = "#" + idPage;
+
         }
         switchPage(idPage);
     });
