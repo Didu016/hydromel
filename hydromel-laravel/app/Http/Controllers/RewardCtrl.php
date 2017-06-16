@@ -102,14 +102,14 @@ class RewardCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Récupération du reward à modifier
+        //$rewardId = $id; // Pas fait de la sorte
+        $rewardId = $request->reward_id; // l'id est passé en hidden dans le formulaire
+        $reward = Reward::find($rewardId);
         // Récupération de l'édition
-        //$editionId = $request->edtionId;
-        $editionId = 3; // set pendant les tests
+        $editionId = $reward->edition_id;
         $edition = Edition::find($editionId);
 
-        // Récupération du reward à modifier
-        $rewardId = $id;
-        $reward = Reward::find($rewardId);
 
         // Récupération des données
         $dataReward['distinction'] = $request->prix_distinction;
@@ -131,7 +131,7 @@ class RewardCtrl extends Controller
 
                 // Sauvegarde du reward
                 $edition->rewards()->save($reward);
-                echo 'ça a reussi il faut foutre un message';
+                echo 'ça a reussi il faut mettre un message ici';
             });
         } else {
             echo 'probleme ici il faut gérer le message d erreur';
