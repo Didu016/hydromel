@@ -11,12 +11,12 @@ use App\Models\Sponsoring;
 use Illuminate\Support\Facades\DB;
 
 class SponsorCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-  
     public function index() {
         $sponsors = Sponsor::getSponsorsFormatted(Edition::getCurrentEdition()->sponsors()->get());
         $ranks = Rank::all();
@@ -43,7 +43,7 @@ class SponsorCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        /*---- RECUPERATIONS DES DONNEES RECUES ----*/
+        /* ---- RECUPERATIONS DES DONNEES RECUES ---- */
         $dataSponsor['society'] = $request->society;
         $dataSponsor['mail_contact'] = $request->mail_contact;
         $dataSponsor['amount'] = $request->amount;
@@ -51,9 +51,9 @@ class SponsorCtrl extends Controller {
         $rank = $request->rank;
         $dataMedia = $request->files->get('logo_url');
 
-        /*---- VALIDATIONS ----*/
+        /* ---- VALIDATIONS ---- */
         $validMedia = true; // Par defaut la validation du media est a true, pour si jamais il n'y a pas de media
-        if($dataMedia != null) { // Si il y a un media
+        if ($dataMedia != null) { // Si il y a un media
             $mediaMaxSize = 20000000;
             $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
             $validMedia = Media::isValid($dataMedia, $allowedTypes, $mediaMaxSize);
@@ -61,8 +61,8 @@ class SponsorCtrl extends Controller {
         $validSponsor = Sponsor::isValid($dataSponsor);
         $validRank = Rank::exists($rank);
 
-        /*---- CREATION ----*/
-        if($validMedia != false && $validMedia != false && $validSponsor != false && $validRank != false){
+        /* ---- CREATION ---- */
+        if ($validMedia != false && $validMedia != false && $validSponsor != false && $validRank != false) {
             DB::transaction(function () use ($dataSponsor, $dataMedia, $rank) {
 
                 // Creation d'un nouveau sponsor
@@ -73,7 +73,7 @@ class SponsorCtrl extends Controller {
                 $sponsor->link = $dataSponsor['link'];
 
                 // Creer le media (s'il y en a un)
-                if($dataMedia != null){
+                if ($dataMedia != null) {
                     $mediaDestination = "../public/img/sponsorsMedias";
                     $mediaDestinationShortened = "img/sponsorsMedias";
                     $media = new Media();
@@ -88,18 +88,16 @@ class SponsorCtrl extends Controller {
                     $media->save(); // Sauvegarde du media
                     $dataMedia->move($mediaDestination, 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension()); // Déplace la photo dans le dossier voulu
 
-                    $sponsor->logo_url =  $mediaDestinationShortened . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
-
+                    $sponsor->logo_url = $mediaDestinationShortened . '/' . 'logo_' . $dataSponsor['society'] . '.' . $dataMedia->getClientOriginalExtension();
                 } else {
                     $sponsor->logo_url = null; // Pas de media specifie, alors null
                 }
 
                 $sponsor->save(); // Sauvegarde du sponsor
-
                 // Recuperation du rank id
                 $rankId = Rank::where([
-                    ['name', '=', $rank]
-                ])->get()->first()->id;
+                            ['name', '=', $rank]
+                        ])->get()->first()->id;
 
                 // Choppe l'edition courante et ses informations pour retrouver le sponsoring correspondant
                 $currentEdition = Edition::getCurrentEdition();
@@ -121,7 +119,6 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-  
     public function show($id) {
         //
     }
@@ -132,7 +129,6 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-  
     public function edit($id) {
         //
     }
@@ -144,10 +140,8 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function update(Request $request, $id)
-    {
-        /*---- RECUPERATIONS DES DONNEES RECUES ----*/
+    public function update(Request $request, $id) {
+        /* ---- RECUPERATIONS DES DONNEES RECUES ---- */
         $idSponsor = $id;
         $dataSponsor['society'] = $request->sponsor_nom;
         $dataSponsor['mail_contact'] = $request->sponsor_mail;
@@ -157,7 +151,7 @@ class SponsorCtrl extends Controller {
         $dataMedia = $request->files->get('sponsor_logo');
         $idOldMedia = $request->oldMedia_id;
 
-        /*---- VALIDATIONS ----*/
+        /* ---- VALIDATIONS ---- */
         $validMedia = true; // Par defaut la validation du media est a true, pour si jamais il n'y a pas de media
         if ($dataMedia != null) { // Si il y a un media
             $mediaMaxSize = 20000000;
@@ -175,7 +169,7 @@ class SponsorCtrl extends Controller {
             $existingMedia = null;
         }
 
-        /*---- MODIFICATION ----*/
+        /* ---- MODIFICATION ---- */
         if ($validMedia != false && $validMedia != false && $validSponsor != false && $validRank != false) {
             DB::transaction(function () use ($dataSponsor, $dataMedia, $rank, $sponsor, $existingMedia) {
 
@@ -187,7 +181,6 @@ class SponsorCtrl extends Controller {
 
 
                 // Modifier le media
-
                 // Modifier le media
                 if ($dataMedia != null) {
                     $mediaDestination = "../public/img/sponsorsMedias";
@@ -207,34 +200,31 @@ class SponsorCtrl extends Controller {
                     $sponsor->logo_url = null; // Pas de media specifie, alors null
                 }
                 $sponsor->save(); // Sauvegarde du sponsor
-
                 // Recuperation du rank id
                 $rankId = Rank::where([
-                    ['name', '=', $rank]
-                ])->get()->first()->id;
+                            ['name', '=', $rank]
+                        ])->get()->first()->id;
 
                 // Choppe l'edition courante et ses informations pour retrouver le sponsoring correspondant
                 $currentEdition = Edition::getCurrentEdition();
                 $currentEditionId = $currentEdition->id; // Recuperation de l'id de l'edition courrante
                 $sponsorId = $sponsor->id; // Récupération de l'id du sponsor
-
                 //recuperer et modifier le sponsoring
                 DB::table('sponsoring')
-                    ->where('edition_id', $currentEditionId)
-                    ->where('sponsor_id', $sponsorId)
-                    ->update(array('rank_id' => $rankId));
+                        ->where('edition_id', $currentEditionId)
+                        ->where('sponsor_id', $sponsorId)
+                        ->update(array('rank_id' => $rankId));
                 /* ceci ci-dessous ne fonctionne pas, nous n'avons pas trouvé pourquoi
-                                $sponsoring = Sponsoring::where([
-                                    ['edition_id', '=', $currentEditionId],['sponsor_id', '=', $sponsorId],['rank_id', '=', 1]
-                                ])->get()->first();
-                                dd($sponsoring->getKeyName());
-                                $sponsoring->rank_id = 0;
-                                $sponsoring->save();
-                */
+                  $sponsoring = Sponsoring::where([
+                  ['edition_id', '=', $currentEditionId],['sponsor_id', '=', $sponsorId],['rank_id', '=', 1]
+                  ])->get()->first();
+                  dd($sponsoring->getKeyName());
+                  $sponsoring->rank_id = 0;
+                  $sponsoring->save();
+                 */
             });
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -242,8 +232,9 @@ class SponsorCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function destroy($id) {
-        //
+        Sponsoring::where('sponsor_id', $id)->delete();
+        Sponsor::destroy($id);
     }
+
 }

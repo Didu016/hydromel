@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Media;
 use App\Models\Edition;
 use Illuminate\Support\Facades\DB;
+use App\Models\Integration;
 
-class MediaCtrl extends Controller
-{
+class MediaCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -24,8 +24,7 @@ class MediaCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -35,20 +34,19 @@ class MediaCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        /*---- RECUPERATIONS DES DONNEES RECUES ----*/
-        $dataMedia['title']= $request->title;
+    public function store(Request $request) {
+        /* ---- RECUPERATIONS DES DONNEES RECUES ---- */
+        $dataMedia['title'] = $request->title;
         $dataMedia['legend'] = $request->legend;
         $theMedia = $request->files->get('media');
 
-        /*---- VALIDATIONS ----*/
+        /* ---- VALIDATIONS ---- */
         $validMediaData = Media::isDataValid($dataMedia);
         $mediaMaxSize = 2000000;
         $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
         $validMedia = Media::isValid($theMedia, $allowedTypes, $mediaMaxSize);
 
-        if($theMedia != null && $validMediaData != false && $validMedia != false){
+        if ($theMedia != null && $validMediaData != false && $validMedia != false) {
             DB::transaction(function () use ($dataMedia, $theMedia) {
                 // Creer le media
                 $mediaDestination = "../public/img/generalMedias";
@@ -65,7 +63,6 @@ class MediaCtrl extends Controller
                 }
                 $media->save();
                 $theMedia->move($mediaDestination, $theMedia->getClientOriginalName()); // Déplace la photo dans le dossier voulu
-
                 // Sauvegarde du média dans l'édition actuelle
                 $currentEdition = Edition::all()->sortByDesc("year")->first();
                 $currentEdition->medias()->save($media);
@@ -82,8 +79,7 @@ class MediaCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -93,8 +89,7 @@ class MediaCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -105,32 +100,31 @@ class MediaCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request /*, $id*/)
-    {
+    public function update(Request $request /* , $id */) {
 
-        /*---- RECUPERATIONS DES DONNEES RECUES ----*/
-        $dataMedia['title']= $request->title;
+        /* ---- RECUPERATIONS DES DONNEES RECUES ---- */
+        $dataMedia['title'] = $request->title;
         $dataMedia['legend'] = $request->legend;
         $theNewMedia = $request->files->get('media');
         $idMedia = $request->id;
 
-        /*---- VALIDATIONS ----*/
+        /* ---- VALIDATIONS ---- */
         $validMediaData = Media::isDataValid($dataMedia);
         $mediaMaxSize = 2000000;
         $allowedTypes = array('gif', 'jpeg', 'jpg', 'mp4', 'png', 'webm'); // Types de fichiers acceptes
         $validMedia = Media::isValid($theNewMedia, $allowedTypes, $mediaMaxSize);
         $oldMedia = Media::find($idMedia);
-        if($oldMedia != null){
+        if ($oldMedia != null) {
             $existsMedia = true;
         } else {
             $existsMedia = false;
         }
 
 
-        if($theNewMedia != null && $validMediaData != false && $validMedia != false && $existsMedia != false){
+        if ($theNewMedia != null && $validMediaData != false && $validMedia != false && $existsMedia != false) {
             DB::transaction(function () use ($dataMedia, $theNewMedia, $idMedia, $oldMedia) {
                 // Supprimer l'ancien media
-                if (file_exists($oldMedia->url)){
+                if (file_exists($oldMedia->url)) {
                     unlink($oldMedia->url); // Supprimer la photo
                 }
 
@@ -162,8 +156,9 @@ class MediaCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        Integration::where('media_id', $id)->delete();
+        Media::destroy($id);
     }
+
 }

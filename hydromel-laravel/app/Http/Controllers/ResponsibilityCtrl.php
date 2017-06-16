@@ -6,15 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Responsibility;
 use Illuminate\Support\Facades\DB;
 
-class ResponsibilityCtrl extends Controller
-{
+class ResponsibilityCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -23,8 +22,7 @@ class ResponsibilityCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,12 +32,11 @@ class ResponsibilityCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $responsibility = $request->responsabilite;
         $validResponsibility = Responsibility::isValidForCreation($responsibility);
 
-        if($validResponsibility != false){
+        if ($validResponsibility != false) {
             //transaction
             DB::transaction(function () use ($responsibility) {
                 // création du ranl
@@ -58,8 +55,7 @@ class ResponsibilityCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -69,8 +65,7 @@ class ResponsibilityCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -81,8 +76,7 @@ class ResponsibilityCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -92,8 +86,8 @@ class ResponsibilityCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        
     }
+
 }
