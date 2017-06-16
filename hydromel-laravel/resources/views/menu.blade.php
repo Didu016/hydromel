@@ -20,7 +20,10 @@
         </li>
 
       </ul>
-
-
+      <div>
+        <a href="{{url('https://www.facebook.com/teamheigvd.hydrocontest/')}}"><img class="logoContact" src="{{url('img/facebook.png')}}"></a>
+        <a href="{{url('https://www.instagram.com/hydrocontest_heig_vd/?hl=fr')}}"><img class="logoContact" src="{{url('img/instagram.png')}}"></a>
+      </br>
+      </div>
   </div>
 </nav>

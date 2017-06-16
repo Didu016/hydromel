@@ -76,10 +76,10 @@ class PreviousEditionCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request /*, $id*/)
+    public function update(Request $request, $id)
     {
         // On va update le champ description de l'édition avec l'id reçu
-        $idEdition = 3;
+        $idEdition = $id;
 
         $newDescription = $request->editionP_description;
 

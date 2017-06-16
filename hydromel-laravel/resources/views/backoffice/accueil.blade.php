@@ -21,7 +21,7 @@
                             <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description">
 
                                 <h4>Description</h4>
-                                <textarea required id="accueil_description" name="description" rows="10"></textarea>
+                                <textarea required id="accueil_description" name="description" rows="10">{{$editions['attributes']['description']}}</textarea>
 
                                 <div class="espacement">
                                     <p class="p-normal">Image ou vidéo 1 </p>
@@ -34,15 +34,15 @@
                             <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description1">
                                 <div class="espacement">
                                     <p class="p-normal">Lieu</p>
-                                    <input type="text" name="place" id="accueil_lieu">
+                                    <input type="text" name="place" id="accueil_lieu" value="{{$editions['attributes']['place']}}">
                                 </div>
                                 <div>
                                     <p class="p-normal" id="date_debut">Date de début</p>
-                                    <input type="date" name="beginningDate" placeholder="">
+                                    <input type="date" name="beginningDate"  value="{{$editions['attributes']['start_date']}}">
                                 </div>
                                 <div>
                                     <p class="p-normal" id="date_fin">Date de fin</p>
-                                    <input type="date" name="finishingDate">
+                                    <input type="date" name="finishingDate" value="{{$editions['attributes']['end_date']}}">
                                 </div>
                             </div>
                             <input type="hidden" name="_method" value="PUT">

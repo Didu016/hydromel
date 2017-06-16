@@ -15,7 +15,10 @@ class AccueilCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('backoffice/accueil');
+        $editions = Edition::getCurrentEdition();
+        return view('backoffice/accueil',[
+            'editions' => $editions,
+        ]);
     }
 
     /**
@@ -64,7 +67,7 @@ class AccueilCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request) { // IL FAUT REMETTRE LE $id QUAND ON AURA ACCES AU FORMULAIRE (ou pas, peut-être)
+    public function update(Request $request, $id) { // L'id n'est pas utile pour nous, sachant que nous pouvons que update l'edition en cours via ce ctrl
 
         $editionActuelle = Edition::getCurrentEdition();
         $idEditionActuelle = $editionActuelle->id;
@@ -89,6 +92,9 @@ class AccueilCtrl extends Controller {
         for ($i = 0; $i < count($dataMedia); $i++) { // On va creer chacuns des médias
             $uploadOk = Media::isValid($dataMedia[$i], $allowedTypes, $mediaMaxSize);
         }
+
+        /* Quand on aura le temps, déplacer l'update dans l'édition présent ci dessous dans le EditionCtrl */
+        /* Et appeler ce controller, ou alors faire un put sur la route correspondante, directement ici */
 
         // Fin des validations
         // UPLOAD - UPDATES
