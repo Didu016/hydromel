@@ -124,7 +124,9 @@ class ArticleCtrl extends Controller {
                 // mettre le nouvel url dans le media
                 // sauvegarder le media
                 //dd('apparently done');
-            }); // Fin de la transaction
+            });
+
+            return redirect()->back();// Fin de la transaction
         } else {
             dd('erreur dans un des champs');
         }

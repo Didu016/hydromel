@@ -66,7 +66,8 @@ class MediaCtrl extends Controller {
                 // Sauvegarde du média dans l'édition actuelle
                 $currentEdition = Edition::all()->sortByDesc("year")->first();
                 $currentEdition->medias()->save($media);
-            }); // Fin de la transaction
+            });
+            return redirect()->back();// Fin de la transaction
         } else {
             // PROBLEMMEEEEEEEE
             dd('léger soucis là couz1');

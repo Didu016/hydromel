@@ -99,7 +99,7 @@ class PreviousEditionCtrl extends Controller
                     $uneEdition->description = $newDescription;
                     $uneEdition->save();
                 });
-                echo 'edition updated';
+                return redirect()->back();
             /* ----------------------------------- REUSSITE ---------------------------*/
             } else {
                 dd('problème dans les données reçues');

@@ -47,6 +47,8 @@ class ResponsibilityCtrl extends Controller {
         } else {
             dd('non valide le rang');
         }
+
+        return redirect()->back();
     }
 
     /**
