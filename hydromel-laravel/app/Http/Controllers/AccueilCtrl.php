@@ -98,7 +98,7 @@ class AccueilCtrl extends Controller {
 
         // Fin des validations
         // UPLOAD - UPDATES
-        if ($validDescription != false && $uploadOk != false) { // Si les donnees sont valides, on fait les mises a jour
+        if ($validDescription != false) { // Si les donnees sont valides, on fait les mises a jour
             DB::transaction(function () use ($idEditionActuelle, $dataMedia, $dataEdition, $allowedTypes) {
 
                 $edition = Edition::find($idEditionActuelle);
@@ -131,7 +131,8 @@ class AccueilCtrl extends Controller {
                     }
                     $backgroundB->move($destination, 'bannerDatePlace' . '.' . $backgroundB->getClientOriginalExtension());
                 }
-            }); // Fin de la transaction
+            });
+            return redirect()->back();// Fin de la transaction
         } else {
             // gérer l'erreur
             dd('passe pas frere');

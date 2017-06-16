@@ -69,6 +69,8 @@ class RewardCtrl extends Controller
         } else {
             echo 'problème mon gars, et il faut faire un message ici'; /*----- RENVOYER UN MESSAGE ICI -----*/
         }
+
+        return redirect()->back();
     }
 
     /**
@@ -136,6 +138,8 @@ class RewardCtrl extends Controller
         } else {
             echo 'probleme ici il faut gérer le message d erreur';
         }
+
+        return redirect()->back();
     }
 
     /**

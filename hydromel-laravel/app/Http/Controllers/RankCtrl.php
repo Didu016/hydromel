@@ -48,6 +48,7 @@ class RankCtrl extends Controller
                 $rank->name = $rankName;
                 $rank->save();
             });
+            return redirect()->back();
         } else {
             dd('non valide le rang');
         }

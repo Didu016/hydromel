@@ -113,8 +113,9 @@
                                     <input name="membre_image" type="file" accept="image">
                                     <div>
                                         Responsabilité <select id="membre_resp" name="membre_resp">
-                                            <option class="liste_resp">les differentes options ici</option>
-                                            <option class="liste_resp">Team Manager</option>
+                                            @foreach($responsability as $resp)
+                                                <option>{{($resp['attributes']['name'])}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <input type="submit" name="valider"

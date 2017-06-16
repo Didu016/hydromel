@@ -112,6 +112,7 @@ class SponsorCtrl extends Controller {
                 $sponsoring->rank_id = $rankId;
                 $sponsoring->save();
             });
+            return redirect()->back();
         }
     }
 
@@ -232,6 +233,7 @@ class SponsorCtrl extends Controller {
                                 $sponsoring->save();
                 */
             });
+            return redirect()->back();
         } else {
             echo 'gerer le message d erreur ici';
         }

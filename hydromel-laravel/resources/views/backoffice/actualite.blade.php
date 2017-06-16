@@ -3,7 +3,7 @@
     <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--teal-700">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
-        <div class="mdl-layout  mdl-layout__header-row">
+        <div class="mdl-layout  ">
             <h3 class="titrePage">Actualités</h3>
         </div>
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">

@@ -46,6 +46,8 @@ class MembreCtrl extends Controller {
         $dataMedia = $request->files->get('membre_image');
 
         Member::createMember($dataMember, $dataResponsibility, $dataMedia);
+
+        return redirect()->back();
     }
 
     /**
@@ -114,7 +116,7 @@ class MembreCtrl extends Controller {
                 $member->firstname = $dataMember['firstname'];
                 $member->name = $dataMember['name'];
                 $member->email = $dataMember['email'];
-                
+
                 //$actualEdition = EditionCtrl::getDataFromCurrentEdition()->content()->current_edition; // Récupération de la totalité des informations des éditions
                 $actualEdition = Edition::getCurrentEditionJson();
                 $actualEditionYear = $actualEdition['edition']->year;
@@ -149,9 +151,9 @@ class MembreCtrl extends Controller {
                 */
                 $member->save();
                // $hisMedia->save(); // Update du media
-                echo 'ça a marché';
             }); // Fin de la transaction
             // REUSSITE
+            return redirect()->back();
         } else { // SINON ERREUUUUUUUUUUUUUUR --------------------------------------------------------------------------
             dd('un des champs est pas bon');
         }
