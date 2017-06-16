@@ -2,26 +2,30 @@
  * Created by Carla on 08.06.17.
  */
 
-$(function(){
+var SERVER = "http://localhost:8000";
+
+$(function () {
     switchPage($(".section_default").attr("id"));
-    $(".mdl-navigation__link, .bouton_table, bouton_validerE").on("click", function(){
+    $(".mdl-navigation__link, .bouton_table, bouton_validerE").on("click", function () {
         switchPage($(this).attr("id").substr(4));
     });
     $(".btn_delete").on("click", deleteLine);
+    $("#btn_delete_membre").on("click", deleteMember);
 
-    $('#btn_modifier_sponsor').on('click', function(){
-        var sponsor_id =$(this).parent().prev().prev().prev().prev('#id').text();
-        var sponsor_nom =$(this).parent().prev().prev().prev('#sponsor_actif_nom').text();
-        var sponsor_rank =$(this).parent().prev().prev('#sponsor_actif_rank').text();
+
+    $('#btn_modifier_sponsor').on('click', function () {
+        var sponsor_id = $(this).parent().prev().prev().prev().prev('#id').text();
+        var sponsor_nom = $(this).parent().prev().prev().prev('#sponsor_actif_nom').text();
+        var sponsor_rank = $(this).parent().prev().prev('#sponsor_actif_rank').text();
         console.log(sponsor_id, sponsor_nom, sponsor_rank);
     });
 
-    $('body').on('click', '#btn_modifier_membre',function(){
-        var membre_id =$(this).parent().prev().prev().prev().prev().prev('#id').text();
+    $('body').on('click', '#btn_modifier_membre', function () {
+        var membre_id = $(this).parent().prev().prev().prev().prev().prev('#id').text();
         //Obliger diviser!!!!
-        var membre_nom =$(this).parent().prev().prev().prev('.membre_nom').text();
-        var membre_mail =$(this).parent().prev().prev('.membre_mail').text();
-        var membre_respo =$(this).parent().prev('.membre_respo').text();
+        var membre_nom = $(this).parent().prev().prev().prev('.membre_nom').text();
+        var membre_mail = $(this).parent().prev().prev('.membre_mail').text();
+        var membre_respo = $(this).parent().prev('.membre_respo').text();
 
         $('#id_member').attr("value", membre_id);
         console.log(membre_id);
@@ -60,31 +64,48 @@ $(function(){
         var prix_value = $(this).parent().prev('.prix_value').text();
 
         $('#reward_id').attr("value", prix_id);
-        console.log(prix_id, prix_distinction, prix_position, prix_description,prix_value);
+        console.log(prix_id, prix_distinction, prix_position, prix_description, prix_value);
     });
 });
 
 
-function switchPage(pageId){
+function switchPage(pageId) {
     $(".aCacher").hide();
     $("#" + pageId).show();
 }
 
 
-function deleteLine(){
-    var id =$(this).attr("data-id");
+function deleteLine() {
+    var id = $(this).attr("data-id");
     $("#membre_" + id).hide();
 }
 
-function modifMembre() {
-    var membre_id =$(this).parent().prev().prev().prev().prev().prev('#id').text();
-    //Obliger diviser!!!!
-    var membre_nom =$(this).parent().prev().prev().prev('.membre_nom').text();
-    var membre_mail =$(this).parent().prev().prev('.membre_mail').text();
-    var membre_respo =$(this).parent().prev('.membre_respo').text();
-    console.log(membre_id,membre_nom);
 
-}
+function deleteMember() {
+    var id = $(this).attr("data-id");
+    var token = $(this).attr("token");
+    $.ajax({
+        url: SERVER + "/auth/member/" + id,
+        type: 'DELETE',
+        data: {_token: token},
+        success: function (success) {
+            alert('Membre supprimé!');
+        },
+        error: function (error) {
+            alert(error.responseText);
+        }
+    });
+
+    function modifMembre() {
+        var membre_id = $(this).parent().prev().prev().prev().prev().prev('#id').text();
+        //Obliger diviser!!!!
+        var membre_nom = $(this).parent().prev().prev().prev('.membre_nom').text();
+        var membre_mail = $(this).parent().prev().prev('.membre_mail').text();
+        var membre_respo = $(this).parent().prev('.membre_respo').text();
+        console.log(membre_id, membre_nom);
+
+
+    }
 
 
 
