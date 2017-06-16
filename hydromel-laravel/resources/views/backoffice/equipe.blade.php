@@ -10,6 +10,7 @@
         </div>
 
     </header>
+
     <div class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-layout__tab-panel is-active" id="overview">
             <section class=" mdl-grid ">
@@ -29,7 +30,7 @@
 
                                 <h5>Ecrivez votre description</h5>
                                 <form method="POST" action="" enctype="">
-                                    <textarea id="equipe_description" rows="8"></textarea>
+                                    <textarea id="equipe_description" rows="8">{{$editions['attributes']['team_description']}}re</textarea>
                                     <input type="submit" name="valider"
                                            class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                 </form>
@@ -91,9 +92,9 @@
                                     <input name="membre_image" type="file" accept="image">
                                     <div>
                                         Responsabilité<select id="membre_nouveau_resp" name="membre_responsibility">
-                                            <!-- ici il faut foreach -->
-                                            <!-- IL FAUT BOUCLER ICI -->
-                                            <option>Team Manager</option>
+                                            @foreach($responsability as $resp)
+                                                <option>{{($resp['attributes']['name'])}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <input type="submit" name="valider"
@@ -102,15 +103,18 @@
                             </section>
                             <section class="aCacher" id="modifier_membre">
                                 <h5>Modifier un membre</h5>
-                                <form method="" action="" enctype="multipart/form-data">
-                                    <input type="hidden" name="id" value="">
+                                <form method="POST" action="{{url('auth/member/5')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input id="id_member"type="hidden" name="id_member" value="">
                                     <p>Nom <input name="membre_nom" type="text"></p>
                                     <p>Prenom <input name="membre_prenom" type="text"></p>
                                     <p>Mail <input name="membre_mail" type="email"></p>
                                     <input name="membre_image" type="file" accept="image">
                                     <div>
-                                        Responsabilité <select id="membre_resp">
+                                        Responsabilité <select id="membre_resp" name="membre_resp">
                                             <option class="liste_resp">les differentes options ici</option>
+                                            <option class="liste_resp">Team Manager</option>
                                         </select>
                                     </div>
                                     <input type="submit" name="valider"
@@ -122,16 +126,9 @@
                                     <h5>Ajouter une responsabilité</h5>
                                     <form method="POST" action="{{url('/auth/responsibility')}}"
                                           enctype="multipart/form-data">
-                                        <p>Créer une responsabilité <input id="nouvelle_resp" name="responsabilite">
-                                            <input type="submit" value="Ajouter" name="ajouter"
-                                                   class="btn_ajout mdl-button">
-                                        </p>
+                                        <p>Créer une responsabilité <input id="nouvelle_resp" name="responsabilite"></p>
                                         {{ csrf_field() }}
-                                        <ul class="listes">
-                                            <li>une respo</li>
-                                        </ul>
-
-                                        <input type="submit" name="valider"
+                                        <input type="submit" name="valider" value="Ajouter"
                                                class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
                                     </form>
                                 </div>
@@ -183,30 +180,30 @@
                             </section>
                             <section class="aCacher" id="ajout_prix">
                                 <h5>Ajouter un prix</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="POST" action="{{url('/auth/reward')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
                                     <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-                                        <p>Distinction <input id="prix_distinction" type="text" required
-                                                              name="prix_distinction">
-                                        <p>Position <input id="prix_position" type="number" required
-                                                           name="prix_position"></p>
-                                        <p>Description <textarea required id="prix_description"></textarea></p>
-                                        <p>Value <input id="prix_value" type="text"></p>
-                                        <input type="submit" name="valider"
-                                               class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
+                                    <p>Distinction <input id="prix_distinction" type="text" required name="prix_distinction">
+                                    <p>Position <input id="prix_position" type="number" required name="prix_position" ></p>
+                                    <p>Description <textarea required id="prix_description" name="prix_description"></textarea></p>
+                                    <p>Value <input id="prix_value" type="text" name="prix_value"></p>
+                                    <input type="submit" name="valider" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">
 
                                     </div>
                                 </form>
                             </section>
                             <section class="aCacher" id="modifier_prix">
                                 <h5>Modifier un prix</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="POST" action="{{url('/auth/reward/5')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input id="reward_id"type="hidden" name="reward_id" value="">
                                     <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
-                                        <p>Distinction <input id="prix_distinction" type="text" required
-                                                              name="prix_distinction">
-                                        <p>Position <input id="prix_position" type="number" required
-                                                           name="prix_position"></p>
-                                        <p>Description <textarea required id="prix_description"></textarea></p>
-                                        <p>Value <input id="prix_value" type="text"></p>
+
+                                        <p>Distinction <input id="prix_distinction" type="text" required name="prix_distinction">
+                                        <p>Position <input id="prix_position" type="number" required name="prix_position" ></p>
+                                        <p>Description <textarea required id="prix_description" name="prix_description">></textarea></p>
+                                        <p>Value <input id="prix_value" type="text" name="prix_value"></p>
 
                                         <input type="submit" name="valider"
                                                class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast">

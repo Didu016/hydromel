@@ -102,6 +102,7 @@
                         <section class="aCacher" id="modifier_sponsor">
                             <h5>Modifier un sponsor</h5>
                             <form method="POST" action="" enctype="">
+                                <input type="hidden" value="">
                                 <p>Entreprise <input id="sponsor_modifier_nom" type="text" name="society"></p>
                                 <p>Catégorie</p><select id="sponsor_modifier_categorie">
                                     <select id="sponsor_nouveau_categorie" name="rank">

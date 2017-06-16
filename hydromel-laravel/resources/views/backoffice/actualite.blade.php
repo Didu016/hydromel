@@ -127,6 +127,7 @@
                                         @foreach($articles as $article)
                                         @if ($article['articletype_name'] == 'presse')
                                         <tr id="article_">
+                                            <td id="id">{{$article['id']}}</td>
                                             <td id="article_presse_titre">{{$article['title']}}</td>
                                             <td id="article_presse_lien"><a href="{{$article['link']}}"
                                                                             target="_blank">lien</a></td>
@@ -158,8 +159,9 @@
                             </section>
                             <section class="aCacher" id="modifier_news">
                                 <h5>Modifier un article news</h5>
-                                <form method="POST" action="" enctype="">
-                                    <input type="hidden" name="id" value="">
+                                <form method="POST" action="{{url('auth/article/3')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">
                                     <p>Titre <input id="article_news_modifier_nom" type="text" name="title"></p>
                                     Description <textarea id="article_news_modifier_description"
                                                           name="description"></textarea>
@@ -173,7 +175,9 @@
                             </section>
                             <section class="aCacher" id="modifier_presse">
                                 <h5>Modifier un article de presse</h5>
-                                <form method="POST" action="" enctype="">
+                                <form method="POST" action="{{url('auth/article/3')}}" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="PUT">
                                     <p>Titre <input id="article_presse_modifier_nom" type="text"></p>
                                     Description <textarea id="article_presse_modifier_description"></textarea>
                                     <p>Lien <input type="url" id="article_url"></p>
@@ -196,10 +200,11 @@
                                         </tr>
                                         @foreach ($medias as $media)
                                         <tr id="media_">
+                                            <td id="id">{{$article['id']}}</td>
                                             <td id="media_titre">{{$media['title']}}</td>
                                             <td id="media_description">
                                                 @if ($media['legend']!= null)
-                                                {{ substr($media['legend']) }}...
+                                                {{ substr($media['legend'], 20) }}...
                                                 @else
                                                 -
                                                 @endif</td>

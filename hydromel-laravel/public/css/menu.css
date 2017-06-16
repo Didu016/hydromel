@@ -47,3 +47,21 @@ nav ul a:active a:link a:visited
 	margin-left: 20%;
 	width: 60%;
 }
+.logoContact{
+	margin-top: 10px;
+	width: 20%;
+}
+#contactMenu{
+	margin-top: 70px;
+	float: left;
+
+}
+#contactMenu ul li{
+	margin-top: 5px;
+	text-align: center;
+	color:#999999;
+}
+#contactMenu ul li[selected=selected] {
+	text-decoration : underline;
+  text-underline-position: under left;
+}

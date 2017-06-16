@@ -223,6 +223,8 @@ class SponsorCtrl extends Controller {
                   $sponsoring->save();
                  */
             });
+        } else {
+            echo 'gerer le message d erreur ici';
         }
     }
 

@@ -157,11 +157,16 @@ class ArticleCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request /* , $id */) {
+    public function update(Request $request, $id ) {
         // Ici on va update un article avec un id reçu
-        $idArticle = 1;
+        $idArticle = $id;
 
         $article = Article::find($idArticle);
+
+        $articleTypeId = $article->articletype_id;
+        $articleType = ArticleType::find($articleTypeId);
+        $nameArticleType = $articleType->name;
+        dd($nameArticleType);
 
         /* ---- RECUPERATIONS DES DONNEES RECUES ---- */
         $dataArticle['title'] = $request->title;
@@ -198,6 +203,8 @@ class ArticleCtrl extends Controller {
         }
         // Est-ce que la description d'un article presse doit revoir sa taille de caractère vérifiée ?????
 
+        dd($articleType);
+
         /* ---- UPDATES ---- */
         /* soit on check les medias soit on crée un nouveau un duplicata */
         if ($validArticle != false && $validArticleType != false && $validMedia != false && $error != true) {
@@ -215,7 +222,9 @@ class ArticleCtrl extends Controller {
                 // On ne change pas l'année de l'article, parce qu'un article ne change pas de date
                 $article->save();
 
-                // IL FAUT RECUPERER LE MEDIA
+                dd($article->media());
+
+                // IL FAUT RECUPERER LE MEDIA (si le temps le permet)
                 // réupérer le média puis change le file de ce medias
                 // du coup faut réupérer l'actuel, le supprimer du repertoire
                 // mettre le nouveau dans le repertoire

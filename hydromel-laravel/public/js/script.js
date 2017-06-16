@@ -1,6 +1,6 @@
 var DEFAULT_PAGE = 'accueil';
-var CURRENT_EDITION = "http://localhost:8000/getCurrentEdition";
-var PREVIOUS_EDITION = "http://localhost:8000/editions/";
+var CURRENT_EDITION = "http://pingouin.heig-vd.ch/hydromel/getCurrentEdition";
+var PREVIOUS_EDITION = "http://pingouin.heig-vd.ch/hydromel/editions/";
 var template;
 var template2;
 var template3;
@@ -10,7 +10,9 @@ var template6;
 var template7;
 var template8;
 var template9;
+
 $(function(){
+
   template = $("#articleNews").clone();
   template2 = $("#articlePresse").clone();
   template3 = $("#articlePreviewSponsor").clone();
@@ -28,8 +30,6 @@ $(function(){
   $("#sliderImageActualite").empty();
   $("#sponsorSponsor").empty();
   $("#choixEditionEdition").empty();
-
-
   menuHandler();
   $.getJSON(CURRENT_EDITION, function (json) {
       console.log(json);
@@ -77,6 +77,7 @@ $(function(){
             var url= media.url;
             $(".imageArticle", templateClone).css('background-image','url('+url+')');
           }
+          $('a', templateClone).attr('data', article.id);
           $("#articlesAccueil").append(templateClone);
         }
         else {
@@ -84,13 +85,15 @@ $(function(){
           $('h2', template2Clone).text(article.title);
           $('p', template2Clone).text(article.description);
           $('date', template2Clone).text(article.created_at.date.substring(0, 10));
+          $('a', template2Clone).attr('data', article.id);
           $("#articlesAccueil").append(template2Clone);
         }
       });
       $.each(sponsors, function(i, sponsor) {
         if(i>=16){return}
           var template3Clone = template3.clone();
-          $('img', template3Clone).attr('src', sponsor.logo_url)
+          $('img', template3Clone).attr('src', sponsor.logo_url);
+          $('a', template3Clone).attr('href', sponsor.link);
           $("#sponsorsAccueil").append(template3Clone);
       });
       //PAGE MEMBRE
@@ -138,6 +141,7 @@ $(function(){
                 var url= media.url;
                 $(".imageArticle", templateClone).css('background-image','url('+url+')');
               }
+              $('a', templateClone).attr('data', article.id);
               $("#articlesActualitePage"+ numPage).append(templateClone);
           }
           else {
@@ -167,6 +171,7 @@ $(function(){
                 var url= media.url;
                 $(".imageArticle", templateClone).css('background-image','url('+url+')');
               }
+              $('a', templateClone).attr('data', article.id);
               $("#articlesActualitePage"+ numPage).append(templateClone);
           }
           else {
@@ -178,6 +183,7 @@ $(function(){
           }
       }
       });
+      navArticle()
       $.each(medias, function(i, media) {
         if(i>=100){return}
           var template6Clone = template6.clone();
@@ -185,7 +191,6 @@ $(function(){
           $("#sliderImageActualite").append(template6Clone);
       });
     sliderSetting();
-    navArticle();
     var boutton = $(".navArticleBoutton:first-child")
     $('a', boutton).attr('selected','selected');
     $(".navArticleBoutton").on("click", function (){
@@ -195,7 +200,6 @@ $(function(){
         $(".navArticleBoutton a").removeAttr("selected");
         $(".articlesActualitePage").hide();
         var attr=$('a', this).attr("data");
-
         $('a', this).attr('selected','selected');
         navArticleShow(attr);
     });
@@ -209,28 +213,7 @@ $(function(){
         console.log(sponsor.logo_url);
     });
     //PAGE EDITION
-    var fixmeTop = $('.sectionChoixEdition').offset().top;
-    $(window).scroll(function() {                  // assign scroll event listener
-      var currentScroll = $(window).scrollTop(); // get current position
-      if (currentScroll >= fixmeTop) {           // apply position: fixed if you
-          $('.sectionChoixEdition').css({                      // scroll to that element or below it
-              position: 'fixed',
-              top: '100',
-              width:'90%',
-              float:'left',
-              background:'#f9f9f9'
 
-          });
-      } else {                                   // apply position: static
-          $('.sectionChoixEdition').css({                      // if you scroll above it
-              position: 'static',
-              width:'100%',
-              background:'#fff',
-              border:'0'
-          });
-      }
-
-  });
     $.each(previousEditions, function(i, edition) {
       if(i>=50){return}
       var template8Clone = template8.clone();
@@ -238,7 +221,9 @@ $(function(){
       $('a', template8Clone).attr('data', edition.id).text(edition.year);
       $('#choixEditionEdition').append(template8Clone);
     });
+
     $(".navChoixEdition").on("click", function (){
+      console.log("hello3");
         $("#sliderImageEdition").empty();
         $("#articlesEdition").empty();
         $("#rewardsEdition").empty();
@@ -275,6 +260,7 @@ $(function(){
                   $('p', templateClone).text(article.description);
               }
               $('date', templateClone).text(article.created_at.date.substring(0, 10));
+              $('a', templateClone).attr('data', article.id);
               if(article.medias[0]==null){
                 $(".imageArticle", templateClone).css('background-image','url(http://hydro.heig-vd.ch/wp-content/uploads/2017/03/cropped-DSC_0173.jpg)');
               }
@@ -290,6 +276,7 @@ $(function(){
               $('h2', template9Clone).text(article.title);
               $('p', template9Clone).text(article.description);
               $('date', template9Clone).text(article.created_at.date.substring(0, 10));
+
               $("#articlesEdition").append(template9Clone);
             }
           });
@@ -307,11 +294,50 @@ $(function(){
         $(".articlesActualitePage").hide();
         var attr=$('a', this).attr("data");
         $('a', this).attr('selected','selected');
-        navArticleShow(attr);
     });
-    $( ".navChoixEdition:last-child" ).trigger("click");
+    $(".navChoixEdition:last-child").trigger("click");
+    $(".navArticleBoutton:first-child").trigger("click");
+    //PAGE ARTICLE
+    $(".blocArticleNewsTexte button").on("click", function (){
+      console.log("teste");
+      switchPageWithHistory("article");
+      var  id=$('a', this).attr("data");
+      $.each(articles, function(i, article) {
+        if(article.id==id){
+          $("#titrePageArticle h1").text(article.title);
+          if(article.medias[0]==null){
+            $(".imageArticleComplet").css('background-image','url(http://hydro.heig-vd.ch/wp-content/uploads/2017/03/cropped-DSC_0173.jpg)');
+          }
+          else{
+            var media = article.medias[0];
+            var url= media.url;
+            $(".imageArticleComplet").css('background-image','url('+url+')');
+          }
+          $("#sectionDescriptionArticle").text(article.description);
+        }
+      });
+    });
   });
-
+  /*var fixmeTop = $('.sectionChoixEdition').offset().top;
+  $(window).scroll(function() {                  // assign scroll event listener
+    var currentScroll = $(window).scrollTop(); // get current position
+    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+        $('.sectionChoixEdition').css({                      // scroll to that element or below it
+            position: 'fixed',
+            top: '100',
+            width:'90%',
+            float:'left',
+            background:'#f9f9f9'
+        });
+    } else {                                   // apply position: static
+        $('.sectionChoixEdition').css({                      // if you scroll above it
+            position: 'static',
+            width:'100%',
+            background:'#fff',
+            border:'0'
+        });
+    }
+  });*/
 });
 function menuHandler() {
     // History manipulation
@@ -322,6 +348,7 @@ function menuHandler() {
         if ($("#page_" + idPage).length == 0) {
             idPage = DEFAULT_PAGE;
             window.location = "#" + idPage;
+
         }
         switchPage(idPage);
     });
@@ -340,13 +367,7 @@ function switchPage(pageId) {
       $("video").resize()
     }
 }
-function switchPageArticle(pageId) {
-    $(".sectionPage").hide();
-    $("#page_" + pageId).show();
-    if(pageId=="accueil") {
-      $("video").resize()
-    }
-}
+
 function sliderSetting() {
   $('.sliderImage').slick({
     centerMode: true,
@@ -377,6 +398,7 @@ function sliderMembreSetting() {
 }
 
 function navArticle() {
+  console.log("helo");
     $(".articlesActualitePage").hide();
     $("#articlesActualitePage1").show();
 }

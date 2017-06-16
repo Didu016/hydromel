@@ -100,13 +100,14 @@ class MediaCtrl extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request /* , $id */) {
+    public function update(Request $request, $id) {
 
         /* ---- RECUPERATIONS DES DONNEES RECUES ---- */
         $dataMedia['title'] = $request->title;
         $dataMedia['legend'] = $request->legend;
         $theNewMedia = $request->files->get('media');
-        $idMedia = $request->id;
+        //$idMedia = $request->id;
+        $idMedia = $id;
 
         /* ---- VALIDATIONS ---- */
         $validMediaData = Media::isDataValid($dataMedia);
