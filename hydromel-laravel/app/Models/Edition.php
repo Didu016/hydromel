@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Lib\Message;
+use Validator;
 
 class Edition extends Model {
 
@@ -44,6 +45,12 @@ class Edition extends Model {
         return self::find($id) !== null;
     }
 
+    public static function existsByAttributes($year, $team) {
+        return self::where([
+                    ['year', '=', $year],
+                    ['team', '=', $team],
+                ])->first() != null;
+    }
 
     public static function getCurrentEdition() {
         return self::all()->sortByDesc("year")->first();
@@ -55,12 +62,13 @@ class Edition extends Model {
      */
     public static function getCurrentEditionJson() {
         $current_edition = self::getCurrentEdition();
-        if ($current_edition == null) {            
+        if ($current_edition == null) {
+            
         }
         $current_edition_members = Member::getMembersFormatted($current_edition->members()->get());
         $current_edition_rewards = $current_edition->rewards()->get();
         $current_edition_sponsors = Sponsor::getSponsorsFormatted($current_edition->sponsors()->get());
-        $current_edition_articles = Article::getArticlesFormatted($current_edition->articles()->orderBy('created_at','desc')->get());
+        $current_edition_articles = Article::getArticlesFormatted($current_edition->articles()->orderBy('created_at', 'desc')->get());
 
         $medias = $current_edition->medias()->get();
 
@@ -176,4 +184,5 @@ class Edition extends Model {
                     'user_id' => 'exists:users,id|sometimes|required',
                 ])->passes();
     }
+
 }

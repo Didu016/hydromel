@@ -1,6 +1,6 @@
 var DEFAULT_PAGE = 'accueil';
-var CURRENT_EDITION = "http://pingouin.heig-vd.ch/hydromel/getCurrentEdition";
-var PREVIOUS_EDITION = "http://pingouin.heig-vd.ch/hydromel/editions/";
+var CURRENT_EDITION = "http://localhost:8000/getCurrentEdition";
+var PREVIOUS_EDITION = "http://localhost:8000/editions/";
 var template;
 var template2;
 var template3;
