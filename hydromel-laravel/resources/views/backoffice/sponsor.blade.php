@@ -131,10 +131,6 @@
                     </div>
 
             </section>
-            <div class="btn_footer mdl-cell mdl-cell--10-col-desktop mdl-cell---col-tablet mdl-cell--4-col-phone">
-                <a href="/auth/home" class="mdl-button  mdl-color--accent mdl-color-text--accent-contrast">Accueil</a>
-
-            </div>
         </div>
     </div>
 

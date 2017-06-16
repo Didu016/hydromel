@@ -22,7 +22,7 @@
                                 <a class="mdl-navigation__link" href="#" id="lnk_superviseur"><h4>Superviseur</h4></a>
                             </div>
                         </header>
-                        <form method="POST" action="{{('/auth/editions')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{url('/auth/editions')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <section class="aCacher section_default" id="description">
                                 <div class="mdl-card__supporting-text mdl-cell--6-col-desktop description">
