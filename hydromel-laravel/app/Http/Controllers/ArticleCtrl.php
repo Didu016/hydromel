@@ -9,6 +9,7 @@ use App\Models\Media;
 use App\Models\Edition;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use App\Models\Integration;
 
 class ArticleCtrl extends Controller {
 
@@ -138,7 +139,7 @@ class ArticleCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        
     }
 
     /**
@@ -245,7 +246,8 @@ class ArticleCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
+        Integration::where('article_id', $id)->delete();
+        Article::destroy($id);
     }
 
 }

@@ -166,7 +166,8 @@ class MembreCtrl extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
+        Participation::where('member_id', $id)->delete();
+        Member::destroy($id);
     }
 
 }

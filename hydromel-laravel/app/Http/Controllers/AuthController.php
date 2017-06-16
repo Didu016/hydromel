@@ -29,6 +29,10 @@ class AuthController extends Controller {
         return redirect(Session::get('oldUrl', '/auth/home'));
     }
 
+    public function changePassword() {
+        
+    }
+
     /**
      * Logout the user
      * @return login view

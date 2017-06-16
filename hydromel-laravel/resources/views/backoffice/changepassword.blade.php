@@ -18,10 +18,10 @@
                     <h4>Changer votre mot de passe</h4>
                     <form method="POST" action="{{ action('AuthController@check') }}">
                         {{ csrf_field() }}
-                               <p>Ancien mot de passe <input type="password" placeholder="mot de passe" name="password"></p>
-                                <p>Nouveau mot de passe <input type="password" placeholder="mot de passe" name="password">
-                                <p>Confirmez votre nouveau mot de passe <input type="password" placeholder="mot de passe" name="password">
-                        <input type="submit" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast" value="Valider">
+                        <p>Ancien mot de passe <input type="password" placeholder="mot de passe" name="password"></p>
+                        <p>Nouveau mot de passe <input type="password" placeholder="mot de passe" name="password">
+                        <p>Confirmez votre nouveau mot de passe <input type="password" placeholder="mot de passe" name="password">
+                            <input type="submit" class="mdl-button bouton_valider mdl-color--accent mdl-color-text--accent-contrast" value="Valider">
                     </form>
                 </div>
             </div>

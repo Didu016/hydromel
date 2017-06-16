@@ -6,15 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Rank;
 use Illuminate\Support\Facades\DB;
 
-class RankCtrl extends Controller
-{
+class RankCtrl extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -23,8 +22,7 @@ class RankCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,13 +32,12 @@ class RankCtrl extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         // sauvegarder un nouveau rang
         $rankName = $request->category;
         $validRankName = Rank::isValid($rankName);
 
-        if($validRankName != false){
+        if ($validRankName != false) {
             //transaction
             DB::transaction(function () use ($rankName) {
                 // création du ranl
@@ -52,7 +49,6 @@ class RankCtrl extends Controller
         } else {
             dd('non valide le rang');
         }
-
     }
 
     /**
@@ -61,8 +57,7 @@ class RankCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -72,8 +67,7 @@ class RankCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -84,8 +78,7 @@ class RankCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -95,8 +88,8 @@ class RankCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        Rank::destroyWithReferencies($id);
     }
+
 }
