@@ -2,9 +2,9 @@
  * Created by Carla on 08.06.17.
  */
 
-var SERVER = "http://localhost:8000";
+ var SERVER = "http://pingouin.heig-vd.ch/hydromel";
 
-$(function () {
+ $(function () {
     switchPage($(".section_default").attr("id"));
     $(".mdl-navigation__link, .bouton_table, bouton_validerE").on("click", function () {
         switchPage($(this).attr("id").substr(4));
@@ -69,7 +69,7 @@ $(function () {
 });
 
 
-function switchPage(pageId) {
+ function switchPage(pageId) {
     $(".aCacher").hide();
     $("#" + pageId).show();
 }
@@ -94,10 +94,13 @@ function deleteMember() {
         error: function (error) {
             alert(error.responseText);
         }
-    });
 
-    function modifMembre() {
-        var membre_id = $(this).parent().prev().prev().prev().prev().prev('#id').text();
+    });
+}
+
+
+function modifMembre() {
+    var membre_id = $(this).parent().prev().prev().prev().prev().prev('#id').text();
         //Obliger diviser!!!!
         var membre_nom = $(this).parent().prev().prev().prev('.membre_nom').text();
         var membre_mail = $(this).parent().prev().prev('.membre_mail').text();
@@ -105,7 +108,8 @@ function deleteMember() {
         console.log(membre_id, membre_nom);
 
 
-    }
+        
+}
 
 
 

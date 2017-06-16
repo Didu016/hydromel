@@ -247,7 +247,7 @@ color: #333333;
     margin: 20px;
     padding: 10px;
      color:#fff;
-     transition: width 280px;
+     transition: width 300px;
      transition: all 0.3s;
 }
 .sectionMembre article p{
@@ -260,8 +260,7 @@ color: #333333;
 .sectionMembre article:hover
 {
     color: #999999;
-    transition: all 0.3s;
-    width: 300px;
+    transition: all 0.3s;    
 
 }
 /* ACTUALITE */

@@ -60,7 +60,7 @@
                                                 -
                                                 @endif
                                             </td>
-                                            <td class="membre_nom">{{$member['firstname']}} {{$member['name']}}</td>
+                                            <td class="membre_nom">{{$member['firstname']}} {{substr($member['name'],0,2)}}...</td>
                                             <td class="membre_mail">{{substr($member['email'],0,17)}}...</td>
                                             <td class="membre_respo">{{$member['responsibility_name']}}</td>
                                             <td>
