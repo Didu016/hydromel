@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Article extends Model {
 
@@ -60,4 +61,16 @@ class Article extends Model {
         return $articles;
     }
 
+<<<<<<< HEAD
+=======
+    public static function isValid($data) {
+        // REGLES DE VALIDATION
+        return Validator::make($data, [
+                    'title' => 'string|between:1,100|required', // on vérifie pas les chiffres et autres caractères
+                    'description' => 'string|between:1,20000|nullable', // on vérifie pas les chiffres et autres caractères
+                    'link' => 'URL|between:1,101|nullable',
+                ])->passes();
+    }
+
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 }

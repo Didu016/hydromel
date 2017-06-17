@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Sponsor extends Model {
 
@@ -50,4 +51,16 @@ class Sponsor extends Model {
         return $sponsors;
     }
 
+<<<<<<< HEAD
+=======
+    public static function isValid($data) {
+        return Validator::make($data, [
+                    'society' => 'string|between:1,50|required', // on vérifie pas les chiffres et autres caractères
+                    'mail_contact' => 'string|between:1,2000|required', // on vérifie pas les chiffres et autres caractères
+                    'link' => 'URL|between:1,101|nullable',
+                    'amount' => 'numeric|required'
+                ])->passes();
+    }
+
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 }

@@ -1,45 +1,111 @@
 .article{
+<<<<<<< HEAD
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
 .articleNews{
 	width: 100%;
 	height: fit-content;
+=======
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.imageArticle{
+	background-position:50% 50%;
+	background-size: 100%;
+	width: 50%;
+	height: 100%;
+}
+.articleNews:nth-child(odd) .imageArticle{
+	float: left;
+	/*background-image: url("../img/joncoel.jpg");*/
+}
+.articleNews:nth-child(even) .imageArticle{
+	float: right;
+
+}
+.articleNews{
+	width: 100%;
+	height:  200px;
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 	float: left;
 	margin-right: auto;
 	margin-left: auto;
 }
+<<<<<<< HEAD
+=======
+.articleNews:nth-child(even){
+	background-color: #f9f9f9;
+}
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 .articleNews:nth-child(even) img{
 	float: left;
 	width: 50%;
 	height: auto;
+<<<<<<< HEAD
+=======
+
+}
+.articleNews:nth-child(odd) img{
+	float: right;
+	width: 40%;
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 }
 .blocArticleNewsTexte{
 	float: left;
 	width: 40%;
+<<<<<<< HEAD
 	margin: 30px;
+=======
+	margin-left: 20px;
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 	height: fit-content;
 }
 .articleNews p{
 
 }
+<<<<<<< HEAD
 .articleNews:nth-child(odd) img{
 	float: right;
 	width: 40%;
 }
 
 .articlePresse{
+=======
+
+.articlePresse:nth-child(even){
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 	width: 100%;
 	height: fit-content;
 	float: left;
 	margin-right: auto;
 	margin-left: auto;
+<<<<<<< HEAD
 	color: #333333;
+=======
+	color: #7e859c;
+	border-style: solid;
+border-width: 3px 0px 0px 0px;
+}
+.articlePresse:nth-child(odd){
+	width: 100%;
+	height: fit-content;
+	float: left;
+	margin-right: auto;
+	margin-left: auto;
+	color: #7e859c;
+	border-style: solid;
+  border-width: 3px 0px 0px 0px;
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 }
 .blocArticlePresseTexte{
 	float: left;
 	width: 80%;
+<<<<<<< HEAD
 	margin: 30px;
+=======
+	margin-left: 20px;
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 	height: fit-content;
 }
 
@@ -79,3 +145,46 @@ button a:hover
     transition: background 0.3s;
     border: 2px solid #fff;
 }
+<<<<<<< HEAD
+=======
+
+button a[selected=selected] {
+	background-color: #333333;
+  color: #fff;
+	border: 2px solid #fff;
+	text-decoration : underline;
+}
+.sectionImageArticle{
+  float: left;
+  width:  100%;
+
+}
+.imageArticleComplet{
+	background-position:50% 50%;
+	background-size: 100%;
+	width: 60%;
+	height: 350px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#titrePageArticle h1{
+		font-size: 2em;
+		width: 80%;
+		height: fit-content;
+		text-align: center;
+}
+#sectionDescriptionArticle{
+	width: 60%;
+	height: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+#sectionImageArticle
+{
+	text-align: center;
+}
+#retourActu{
+	margin-bottom: 20px;
+}
+>>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028

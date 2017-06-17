@@ -17,6 +17,7 @@ class CreateEditionsTable extends Migration {
             $table->string('team', 50);
             $table->integer('year');
             $table->text('description');
+            $table->text('team_description')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->text('place')->nullable();
