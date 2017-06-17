@@ -5,10 +5,8 @@
         <li><a href="#equipe">L'équipe</a></li>
         <li><a href="#actualite">Actualités</a></li>
         <li><a href="#sponsor">Sponsors</a></li>
-<<<<<<< HEAD
-        <li><a href="#editionprecedente">Edition précédentes</a></li>
+        <li><a href="#edition">Editions précédentes</a></li>
     </ul>
-=======
         <li><a href="#edition">Editions précédentes</a></li>
     </ul>
     <div id="contactMenu">
@@ -27,5 +25,4 @@
 
 
   </div>
->>>>>>> 792c8c4c38a097dc028dd64e12ae05ff1368c028
 </nav>
